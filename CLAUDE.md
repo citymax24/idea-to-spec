@@ -33,7 +33,7 @@ Never edit the installed copies directly. Spec language is English; inputs may b
 
 ## Installing elsewhere
 
-A clone works as is: `.specify/` and `.claude/skills/` are committed and the registries hold no absolute paths. Only the tools below must exist. Rebuild steps and checks: `docs/guides/install.md`.
+A clone works as is: `.specify/` and `.claude/skills/` are committed and the registries hold no absolute paths. `bash scripts/setup.sh` installs the missing tools and repairs the registrations; `.devcontainer/` runs it automatically. Needs Claude Code, not a Claude-app project. Details: `docs/guides/install.md`.
 
 ## Tools
 

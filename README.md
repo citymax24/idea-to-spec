@@ -18,20 +18,14 @@ From a heap of mixed inputs (spreadsheets, slides, meeting notes, call transcrip
 The clone already carries its installed state (`.specify/`, `.claude/skills/`), so only the tools are needed:
 
 ```bash
-uv tool install specify-cli            # Spec Kit CLI (1.0.4 or newer)
-uv tool install "markitdown[all]"      # converts xlsx, pptx, docx, pdf
 git clone https://github.com/citymax24/idea-to-spec.git
 cd idea-to-spec
-specify extension list                 # should show "Idea to Spec Loop", 8 commands
+bash scripts/setup.sh
 ```
 
-`docs/guides/install.md` has the full list, the checks and what to do if a registry is out of step. To rebuild the installed state from the sources in this repository:
+The script installs `uv`, the Spec Kit CLI and markitdown if they are missing, repairs the registered preset, extension and workflow if needed, and prints what it found. `--check` verifies without changing anything. In a devcontainer or a cloud session it runs on its own after the container is created.
 
-```bash
-specify preset remove idea-to-spec && specify preset add --dev ./presets/idea-to-spec --priority 5
-specify extension add --dev ./extensions/idea --force
-specify workflow add ./workflows/idea-to-spec
-```
+This needs Claude Code (terminal, desktop app, IDE extension or a cloud session). A project in the Claude app has no shell and cannot run the loop. See `docs/guides/install.md`.
 
 Then, inside Claude Code in this directory:
 

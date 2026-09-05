@@ -17,12 +17,17 @@ Both `uv tool install` commands put their executables in `~/.local/bin`, so that
 
 Optional: a local transcriber (`whisper` or `mlx_whisper`) if audio files should be transcribed automatically. Without one, intake asks for a transcript instead of inventing content.
 
-## 2 Clone
+## 2 Clone and set up in one go
 
 ```bash
 git clone https://github.com/citymax24/idea-to-spec.git
 cd idea-to-spec
+bash scripts/setup.sh
 ```
+
+The script installs what is missing (`uv`, the Spec Kit CLI, markitdown), repairs the registered preset, extension and workflow if they are out of step, and prints what it found. It is idempotent, so running it again is harmless. `bash scripts/setup.sh --check` verifies without changing anything.
+
+Everything below is what the script does and checks, for when you would rather do it by hand or something failed.
 
 ## 3 Verify
 
@@ -48,7 +53,22 @@ specify workflow add ./workflows/idea-to-spec
 
 This rewrites `.specify/presets/`, `.specify/extensions/idea/`, `.specify/workflows/idea-to-spec/` and the eight skills under `.claude/skills/`. The three registry files change as a side effect; committing them is optional and harmless.
 
-## 5 Starting a project of your own
+## 5 Automatic setup in a container or a cloud session
+
+`.devcontainer/devcontainer.json` runs `scripts/setup.sh` after the container is created. Anything that reads devcontainers (VS Code "Reopen in Container", GitHub Codespaces, a Claude Code cloud session on a container image) therefore arrives with the tools installed and the project registered. Nothing has to be typed.
+
+## 6 Where this can and cannot run
+
+| Place | Works | Why |
+|-------|-------|-----|
+| Claude Code in the terminal | yes | shell, git and the Spec Kit CLI are available |
+| Claude Code desktop app, VS Code and JetBrains extensions | yes | same environment |
+| Claude Code on the web (cloud sessions) | yes | clones the repository and runs the setup script |
+| Projects in the Claude app (claude.ai) | no | a project there is a knowledge base for chats: no shell, no git, no CLI, so the commands cannot run and no version can be tagged |
+
+A project in the Claude app can still hold the repository as reading material through the GitHub connector, which is useful for discussing the process. Running the loop needs Claude Code.
+
+## 7 Starting a project of your own
 
 The clone contains the dry-run idea under `specs/001-quote-tracker/`. To keep the tooling but drop the example:
 
