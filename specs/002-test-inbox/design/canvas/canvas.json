@@ -281,7 +281,7 @@
     },
     {
       "file": "Scr08Hinzufuegen.dc.html",
-      "x": 0,
+      "x": 470,
       "y": 6090,
       "w": 390,
       "h": 844,
@@ -290,16 +290,16 @@
     },
     {
       "file": "Scr08Entfernen.dc.html",
-      "x": 470,
+      "x": 940,
       "y": 6090,
       "w": 390,
       "h": 844,
-      "title": "SCR-08 Benutzer · letzter Chef",
+      "title": "SCR-08 Benutzer · vorletzter Administrator",
       "page": "page-2"
     },
     {
       "file": "Scr08Fehler.dc.html",
-      "x": 940,
+      "x": 1410,
       "y": 6090,
       "w": 390,
       "h": 844,
@@ -308,11 +308,20 @@
     },
     {
       "file": "Scr08Offline.dc.html",
-      "x": 1410,
+      "x": 1880,
       "y": 6090,
       "w": 390,
       "h": 844,
       "title": "SCR-08 Benutzer · offline",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr08Einrichtung.dc.html",
+      "x": 0,
+      "y": 6090,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-08 Benutzer · Einrichtung",
       "page": "page-2"
     }
   ],
@@ -337,7 +346,7 @@
       "y": 0,
       "w": 420,
       "page": "page-3",
-      "text": "Ein Artboard, alle Bildschirme darin — nur so ist Navigation möglich, denn Artboards teilen keinen Zustand.\n\nZum Bedienen oben am Artboard-Titel auf ▶ tippen. Im normalen Canvas-Modus greift der Editor die Klicks ab.\n\nAlles ist per Klick erreichbar, Tippen ist nirgends nötig — die Felder sind vorbelegt:\n1. Anmelden\n2. 14 Angebote übernehmen, oder überspringen und leer starten\n3. In der Liste filtern und ein Angebot antippen\n4. Im Detail einen Status setzen — zugesagt, abgesagt oder verlaufen nimmt es aus der offenen Liste; abgesagt zeigt zusätzlich den Absagegrund\n5. Neues Angebot: Foto antippen, dann Speichern — es steht danach in der Liste\n6. Personen-Symbol oben rechts: Benutzer; der letzte Chef lässt sich nicht entfernen\n\nSCR-04 Montagsliste und SCR-05 Trefferquote fehlen hier: laut Brief Desktop-Bildschirme, sie liegen als eigene Artboards auf der Seite Ablauf."
+      "text": "Ein Artboard, alle Bildschirme darin — nur so ist Navigation möglich, denn Artboards teilen keinen Zustand.\n\nZum Bedienen oben am Artboard-Titel auf ▶ tippen. Im normalen Canvas-Modus greift der Editor die Klicks ab.\n\nAlles ist per Klick erreichbar, Tippen ist nirgends nötig — die Felder sind vorbelegt:\n1. Anmelden\n2. 14 Angebote übernehmen, oder überspringen und leer starten\n3. Einrichtung: jemanden zum Administrator machen — erst mit zwei Administratoren geht es weiter (FR-032, FR-033)\n4. In der Liste filtern und ein Angebot antippen\n5. Im Detail einen Status setzen — zugesagt, abgesagt oder verlaufen nimmt es aus der offenen Liste; abgesagt zeigt zusätzlich den Absagegrund\n6. Neues Angebot: Foto antippen, dann Speichern — es steht danach in der Liste\n7. Personen-Symbol oben rechts: Benutzer; Rechte vergeben und entziehen; unter zwei Administratoren wird beides verweigert\n\nSCR-04 Montagsliste und SCR-05 Trefferquote fehlen hier: laut Brief Desktop-Bildschirme, sie liegen als eigene Artboards auf der Seite Ablauf."
     },
     {
       "id": "ablauf",

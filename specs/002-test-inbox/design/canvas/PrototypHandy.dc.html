@@ -218,34 +218,43 @@
   <!-- BENUTZER -->
   <sc-if value="{{istBenutzer}}" hint-placeholder-val="{{false}}">
     <div style="display: flex; flex-direction: column; height: 100%; box-sizing: border-box">
-      <div style="padding: 20px 18px 12px; display: flex; flex-direction: column; gap: 3px">
-        <div onClick="{{zurListe}}" style="font-size: 13px; color: #8b8173; display: flex; align-items: center; gap: 6px; cursor: pointer">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8b8173" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Offene Angebote
-        </div>
-        <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 25px; font-weight: 700; margin-top: 4px">Benutzer</div>
-        <div style="font-size: 14px; color: #6b6154; line-height: 1.45">Wer hier steht, sieht alle Angebote von Grünwerk GmbH.</div>
+      <div style="padding: 20px 18px 10px; display: flex; flex-direction: column; gap: 3px">
+        <sc-if value="{{nichtEinrichtung}}" hint-placeholder-val="{{true}}">
+          <div onClick="{{zurListe}}" style="font-size: 13px; color: #8b8173; display: flex; align-items: center; gap: 6px; cursor: pointer">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8b8173" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Offene Angebote
+          </div>
+        </sc-if>
+        <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 25px; font-weight: 700; margin-top: 4px">{{benutzerTitel}}</div>
+        <div style="font-size: 14px; color: #6b6154; line-height: 1.45">{{benutzerUnter}}</div>
+        <div style="font-size: 13px; font-weight: 600; color: {{zahlFarbe}}; margin-top: 5px">{{adminZeile}}</div>
       </div>
-      <div style="padding: 10px 18px 0; display: flex; flex-direction: column; gap: 9px">
+      <div style="padding: 8px 18px 0; display: flex; flex-direction: column; gap: 9px">
         <sc-for list="{{leute}}" as="p" hint-placeholder-count="4">
-          <div style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 4px; padding: 13px 15px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
-            <div style="display: flex; flex-direction: column; gap: 3px">
-              <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-weight: 700">{{p.name}}</div>
-              <div style="font-size: 13px; color: #8b8173">{{p.rolle}}</div>
+          <div style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 4px; padding: 13px 15px; display: flex; flex-direction: column; gap: 9px">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+              <div style="display: flex; flex-direction: column; gap: 2px">
+                <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-weight: 700">{{p.name}}</div>
+                <div style="font-size: 12px; color: #8b8173">{{p.rolle}}</div>
+              </div>
+              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 9px; border-radius: 3px; background: {{p.badgeBg}}; color: {{p.badgeFg}}">{{p.badge}}</div>
             </div>
-            <div onClick="{{p.entfernen}}" style="font-size: 14px; font-weight: 600; padding: 9px 13px; border-radius: 3px; cursor: pointer; color: {{p.fg}}; border: 1px solid {{p.bd}}">Entfernen</div>
+            <div style="display: flex; gap: 7px">
+              <div onClick="{{p.rechtWechseln}}" style="font-size: 13px; font-weight: 600; padding: 8px 11px; border-radius: 3px; cursor: pointer; color: {{p.rechtFg}}; border: 1px solid {{p.rechtBd}}">{{p.rechtText}}</div>
+              <div onClick="{{p.entfernen}}" style="font-size: 13px; font-weight: 600; padding: 8px 11px; border-radius: 3px; cursor: pointer; color: {{p.wegFg}}; border: 1px solid {{p.wegBd}}">Entfernen</div>
+            </div>
           </div>
         </sc-for>
       </div>
       <sc-if value="{{hatMeldung}}" hint-placeholder-val="{{false}}">
-        <div style="padding: 14px 18px 0">
-          <div style="background: #f7ede2; border: 1px solid #d8b79a; border-radius: 4px; padding: 14px 15px; display: flex; flex-direction: column; gap: 4px">
+        <div style="padding: 13px 18px 0">
+          <div style="background: #f7ede2; border: 1px solid #d8b79a; border-radius: 4px; padding: 13px 15px; display: flex; flex-direction: column; gap: 4px">
             <div style="font-size: 14px; font-weight: 700; color: #8a3d10">{{meldungTitel}}</div>
             <div style="font-size: 13px; color: #6b5340; line-height: 1.45">{{meldungText}}</div>
           </div>
         </div>
       </sc-if>
-      <div style="margin-top: auto; padding: 14px 18px 24px">
-        <div onClick="{{benutzerHinzu}}" style="background: #2b2620; color: #efe9dd; text-align: center; padding: 17px; font-size: 17px; font-weight: 600; border-radius: 4px; cursor: pointer">Benutzer hinzufügen</div>
+      <div style="margin-top: auto; padding: 13px 18px 24px">
+        <div onClick="{{benutzerKnopf}}" style="background: {{benutzerKnopfBg}}; color: #efe9dd; text-align: center; padding: 17px; font-size: 17px; font-weight: 600; border-radius: 4px; cursor: pointer">{{benutzerKnopfText}}</div>
       </div>
     </div>
   </sc-if>
@@ -260,11 +269,12 @@ class Component extends DCLogic {
       view: 'anmelden', mail: 'jonas@gruenwerk.de', pw: 'geheim123', q: '', filter: 'Alle',
       offenId: null, anhang: false, nKunde: '', nBetrag: '', nDatum: '', naechsteNr: 130,
       meldung: null, zaehler: 0,
+      einrichtung: true,
       leute: [
-        { name: 'Max Grünwerk', rolle: 'Chef' },
-        { name: 'Jonas Reiter', rolle: 'Bauleiter' },
-        { name: 'Timo Sandner', rolle: 'Bauleiter' },
-        { name: 'Petra Grünwerk', rolle: 'Büro' }
+        { name: 'Max Grünwerk', rolle: 'Chef', admin: true },
+        { name: 'Petra Grünwerk', rolle: 'Büro', admin: false },
+        { name: 'Jonas Reiter', rolle: 'Bauleiter', admin: false },
+        { name: 'Timo Sandner', rolle: 'Bauleiter', admin: false }
       ],
       angebote: []
     };
@@ -291,7 +301,7 @@ class Component extends DCLogic {
     const d = st.angebote.filter((a) => a.id === st.offenId)[0] || null;
     const werte = ['verschickt', 'nachgefasst', 'zugesagt', 'abgesagt', 'verlaufen'];
     const raus = d ? (d.status === 'zugesagt' || d.status === 'abgesagt' || d.status === 'verlaufen') : false;
-    const chefs = st.leute.filter((p) => p.rolle === 'Chef').length;
+    const adminZahl = st.leute.filter((p) => p.admin).length;
     const namen = ['Sara Weiland', 'Nils Brandt', 'Anke Rösch'];
 
     return {
@@ -304,8 +314,8 @@ class Component extends DCLogic {
       anmeldenBg: '#2b2620',
       anmelden: () => this.setState({ view: 'import' }),
 
-      importieren: () => this.setState({ view: 'liste', angebote: this.bestand() }),
-      ueberspringen: () => this.setState({ view: 'liste', angebote: [] }),
+      importieren: () => this.setState({ view: 'benutzer', angebote: this.bestand() }),
+      ueberspringen: () => this.setState({ view: 'benutzer', angebote: [] }),
 
       q: st.q,
       onSearch: (e) => this.setState({ q: e.target.value }),
@@ -385,26 +395,54 @@ class Component extends DCLogic {
       hatMeldung: st.meldung !== null,
       meldungTitel: st.meldung ? st.meldung.titel : '',
       meldungText: st.meldung ? st.meldung.text : '',
-      benutzerHinzu: () => {
+      nichtEinrichtung: !st.einrichtung,
+      benutzerTitel: st.einrichtung ? 'Zweiten Administrator benennen' : 'Benutzer',
+      benutzerUnter: st.einrichtung
+        ? 'Bevor der Betrieb loslegt, braucht er einen zweiten Administrator. Sonst kann sich der Betrieb aussperren.'
+        : 'Wer hier steht, sieht alle Angebote von Grünwerk GmbH.',
+      adminZeile: adminZahl === 1 ? '1 Administrator · ein zweiter fehlt noch' : adminZahl + ' Administratoren · mindestens zwei nötig',
+      zahlFarbe: adminZahl > 2 ? '#4a5a30' : '#8a3d10',
+      benutzerKnopfText: st.einrichtung ? 'Weiter zu den Angeboten' : 'Benutzer hinzufügen',
+      benutzerKnopfBg: st.einrichtung ? (adminZahl >= 2 ? '#2b2620' : '#c3bbab') : '#2b2620',
+      benutzerKnopf: () => {
+        if (st.einrichtung) {
+          if (adminZahl >= 2) this.setState({ einrichtung: false, view: 'liste', meldung: null });
+          return;
+        }
         const n = namen[st.zaehler % namen.length];
         this.setState({
-          leute: st.leute.concat([{ name: n, rolle: 'Bauleiter' }]),
+          leute: st.leute.concat([{ name: n, rolle: 'Bauleiter', admin: false }]),
           zaehler: st.zaehler + 1,
-          meldung: { titel: n + ' hinzugefügt', text: 'Die Einladung geht an die hinterlegte E-Mail-Adresse.' }
+          meldung: { titel: n + ' hinzugefügt', text: 'Die Einladung geht an die hinterlegte E-Mail-Adresse. Ohne Administratorrecht.' }
         });
       },
       leute: st.leute.map((p, i) => {
-        const letzterChef = p.rolle === 'Chef' && chefs === 1;
+        const letzte = p.admin && adminZahl <= 2;
+        const sperre = { titel: 'Nicht möglich', text: 'Ein Betrieb hält mindestens zwei Administratoren. Machen Sie erst jemand anderen zum Administrator.' };
         return {
           name: p.name, rolle: p.rolle,
-          fg: letzterChef ? '#b3a68e' : '#a8421f',
-          bd: letzterChef ? '#ddd3c0' : '#d8ab9a',
+          badge: p.admin ? 'Administrator' : p.rolle,
+          badgeBg: p.admin ? '#2b2620' : '#e6ddcb',
+          badgeFg: p.admin ? '#efe9dd' : '#4d453a',
+          rechtText: p.admin ? 'Recht entziehen' : 'Zum Administrator',
+          rechtFg: letzte ? '#b3a68e' : '#5b5348',
+          rechtBd: letzte ? '#ddd3c0' : '#cdc3b0',
+          wegFg: letzte ? '#b3a68e' : '#a8421f',
+          wegBd: letzte ? '#ddd3c0' : '#d8ab9a',
+          rechtWechseln: () => {
+            if (letzte) { this.setState({ meldung: sperre }); return; }
+            this.setState({
+              leute: st.leute.map((x, j) => j === i ? { ...x, admin: !x.admin } : x),
+              meldung: { titel: p.admin ? p.name + ' ist kein Administrator mehr' : p.name + ' ist jetzt Administrator',
+                         text: p.admin ? 'Kann keine Benutzer mehr verwalten, sieht aber weiter alle Angebote.' : 'Kann ab sofort Benutzer hinzufügen, entfernen und Rechte vergeben.' }
+            });
+          },
           entfernen: () => {
-            if (letzterChef) {
-              this.setState({ meldung: { titel: 'Nicht möglich', text: 'Der letzte Chef eines Betriebs kann nicht entfernt werden — sonst kann niemand mehr Benutzer verwalten.' } });
-            } else {
-              this.setState({ leute: st.leute.filter((x, j) => j !== i), meldung: { titel: p.name + ' entfernt', text: 'Der Zugang ist sofort gesperrt. Erfasste Angebote bleiben erhalten.' } });
-            }
+            if (letzte) { this.setState({ meldung: sperre }); return; }
+            this.setState({
+              leute: st.leute.filter((x, j) => j !== i),
+              meldung: { titel: p.name + ' entfernt', text: 'Der Zugang ist sofort gesperrt. Erfasste Angebote bleiben erhalten.' }
+            });
           }
         };
       })

@@ -1,6 +1,6 @@
 # Design Brief: Quote Follow-Up Tracker
 
-Derived from `spec.md` v1.0 (git tag `spec-test-inbox-v1.0`) on 2026-09-05.
+Derived from `spec.md` v1.2 (git tag `spec-test-inbox-v1.2`) on 2026-09-05.
 
 This brief is a re-arrangement of the spec, not a second spec. If something here is wrong, the spec is wrong: open a feedback round, do not edit the brief.
 
@@ -14,7 +14,9 @@ Three roles in companies with 5 to 50 employees:
 
 - **Bauleiter** (site manager) — writes the quotes, is out on site, uses a **phone daily**, often with dirty hands or gloves. Two taps and it has to be done, otherwise it gets put off to the evening and forgotten. He is the hardest case and the one the phone screens are designed for.
 - **Büro** (office) — uses a **desktop daily**. Works the Monday call list, keeps the notes, phones after.
-- **Chef** (owner) — uses **phone and desktop, weekly**. Wants the overview and the win rate; he is the only one who administers users.
+- **Chef** (owner) — uses **phone and desktop, weekly**. Wants the overview and the win rate.
+
+The **administrator right** sits beside these three roles: any user can hold it, and a company holds at least two, so nobody can lock the company out.
 
 Every screen has to work on a phone; SCR-04 and SCR-05 are used mainly on a desktop.
 
@@ -24,7 +26,7 @@ No brand assets and no tone of voice exist yet (assumption A-03; no source state
 
 ## Screens in flow order
 
-FLOW-01: SCR-06 → SCR-07 → SCR-01. FLOW-02: SCR-01 → SCR-02 → SCR-01. FLOW-03 and FLOW-04: SCR-01 → SCR-03 → SCR-01. FLOW-05: SCR-01 → SCR-04 → SCR-03 → SCR-04. FLOW-06: SCR-01 → SCR-05 → SCR-01. FLOW-07: SCR-01 → SCR-08 → SCR-01. Every screen sits in a flow; none is left over.
+FLOW-01: SCR-06 → SCR-07 → SCR-08 → SCR-01. FLOW-02: SCR-01 → SCR-02 → SCR-01. FLOW-03 and FLOW-04: SCR-01 → SCR-03 → SCR-01. FLOW-05: SCR-01 → SCR-04 → SCR-03 → SCR-04. FLOW-06: SCR-01 → SCR-05 → SCR-01. FLOW-07: SCR-01 → SCR-08 → SCR-01. Every screen sits in a flow; none is left over.
 
 ### SCR-06 · Sign in
 
@@ -44,7 +46,7 @@ FLOW-01: SCR-06 → SCR-07 → SCR-01. FLOW-02: SCR-01 → SCR-02 → SCR-01. FL
 - **Content**: File picker for the old Excel list, preview of the rows that were recognised, report of rows that could not be read, "skip" option.
 - **States to show**: empty / preview / importing / partial error / done.
 - **Satisfies**: FR-026
-- **Leads to**: SCR-01
+- **Leads to**: SCR-08
 
 **Design prompt**: A screen seen exactly once, when a company starts. The eye lands on the file picker; the primary action is running the import. The preview of recognised rows is what earns trust, so give it room and show real quote rows, not a count. The partial-error state matters more than the happy path: some rows will not be readable, and the screen has to say which ones without making the whole import feel failed. "Skip" is always available and never the loudest thing on the screen — a company may prefer to start empty.
 
@@ -105,14 +107,14 @@ FLOW-01: SCR-06 → SCR-07 → SCR-01. FLOW-02: SCR-01 → SCR-02 → SCR-01. FL
 
 ### SCR-08 · User management
 
-- **Purpose**: Administer the per-user accounts of one company.
+- **Purpose**: Administer the per-user accounts of one company and who may administer them.
 - **Primary action**: Add a user to the company.
-- **Content**: List of the company's users with name and role, "add user" action, "remove user" action per row, note that a removed user keeps no access.
-- **States to show**: loaded / adding / removing / error / offline (blocked, with a reason).
-- **Satisfies**: FR-027, FR-028, FR-029
+- **Content**: List of the company's users with name, role and whether they hold the administrator right; "add user" action; "remove user" action per row; a control per row to grant or withdraw the administrator right; a count of the company's administrators; note that a removed user keeps no access.
+- **States to show**: loaded / adding / removing / setup (a second administrator is still missing) / error / offline (blocked, with a reason).
+- **Satisfies**: FR-027, FR-028, FR-029, FR-031, FR-032, FR-033
 - **Leads to**: SCR-01
 
-**Design prompt**: Reached only by the Chef, and rarely — when someone joins or leaves. A short list of the company's users with name and role; the eye lands on the list, and adding a user is the primary action. Removal sits per row and states plainly that a removed user keeps no access. Removing the last remaining Chef of a company is refused, so draw that refusal. Nothing here needs to be quick; it needs to be unambiguous about who can currently see the company's quotes.
+**Design prompt**: Reached by any administrator, and rarely — when someone joins or leaves, or when the right moves. The eye lands on the list of the company's users; each row says plainly whether that person may administer. Adding a user is the primary action. Two things must be unmissable. First, the company's administrator count, because the rule is a minimum of two: show it, and show it as a warning while it stands at exactly two. Second, the refusal — with only two administrators left, neither removing one nor withdrawing the right is possible, and the screen has to say why rather than just disabling a control silently. Draw the setup state as its own screen: a fresh company has one administrator, the list invites naming a second, and nothing continues to the quote list until that is done. Nothing here needs to be quick; it needs to be unambiguous about who can currently see and administer the company's quotes.
 
 ## Constraints
 
@@ -139,9 +141,8 @@ From §4 "Out of scope" — a mockup must not resurrect any of these:
 
 ## Open points a designer will hit
 
-These are assumptions in the spec, not settled facts. Draw them as written; if the mockup makes one look wrong, that is a feedback round, not a brief edit.
+These are assumptions in the spec, not settled facts. Draw them as written; if the mockup makes one look wrong, that is a feedback round, not a brief edit. One assumption that used to stand here — "only the Chef administers users" — was found wrong exactly that way, by a reviewer using the prototype, and is now a decided requirement (FR-029, FR-031 to FR-033).
 
-- **SCR-08 is Chef-only** (FR-029, assumption A-06) — round R1 asked for the screen but named no role.
 - **Who receives the seven-day reminder** is still open (Q-10). No screen shows the reminder itself; it arrives as a push notification or an email (FR-013) and drops the user on SCR-01.
 - **"abgesagt" and "verlaufen" also remove a quote from the open list** (FR-008, assumption A-02) — only "zugesagt" is stated in the sources.
 

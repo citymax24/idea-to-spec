@@ -3,12 +3,12 @@
 | Field | Value |
 |-------|-------|
 | **Version** | 1.2 |
-| **Status** | in-review |
+| **Status** | accepted |
 | **Created** | 2026-09-05 |
 | **Sources** | S1–S4 (see `inputs/INVENTORY.md`) |
-| **Reviewed sections** | accepted without section-by-section coverage (v0.2 and v1.1, knowingly) |
-| **Approved by** | yana (v1.0, v1.1) |
-| **Approved on** | 2026-09-05 (v1.0, v1.1) |
+| **Reviewed sections** | accepted without section-by-section coverage (v0.2, v1.1 and v1.2, knowingly) |
+| **Approved by** | yana (v1.0, v1.1, v1.2) |
+| **Approved on** | 2026-09-05 (v1.0, v1.1, v1.2) |
 
 **Drafted from**: kickoff notes of 2026-08-12 (S1), the feature list (S2), the customer interview with Weber Gartenbau of 2026-09-02 (S3) and the market overview of 2026-08-20 (S4), drafted on 2026-09-05 from 65 extracted facts with all three conflicts and all nine open questions resolved by the human.
 

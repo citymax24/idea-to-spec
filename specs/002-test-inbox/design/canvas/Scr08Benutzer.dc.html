@@ -13,43 +13,49 @@
     a { color: #7a5a1e; } a:hover { color: #574012; }
   </style>
 </helmet>
-<div style="width: 390px; height: 844px; box-sizing: border-box; background: #efe9dd; color: #2b2620; display: flex; flex-direction: column">
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #efe9dd; color: #2b2620; display: flex; flex-direction: column; overflow: hidden">
 
-  <div style="padding: 20px 18px 12px; display: flex; flex-direction: column; gap: 3px">
-    <div style="font-size: 13px; color: #8b8173; display: flex; align-items: center; gap: 6px; cursor: pointer">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8b8173" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
-      Offene Angebote
+  <div style="padding: 20px 18px 10px; display: flex; flex-direction: column; gap: 3px">
+    <div style="font-size: 13px; color: #8b8173; display: flex; align-items: center; gap: 6px">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8b8173" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Offene Angebote
     </div>
     <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 25px; font-weight: 700; margin-top: 4px">Benutzer</div>
     <div style="font-size: 14px; color: #6b6154; line-height: 1.45">Wer hier steht, sieht alle Angebote von Grünwerk GmbH.</div>
+    <div style="font-size: 13px; font-weight: 600; color: {{zahlFarbe}}; margin-top: 5px">{{adminZeile}}</div>
   </div>
 
-  <div style="padding: 10px 18px 0; display: flex; flex-direction: column; gap: 9px">
+  <div style="padding: 8px 18px 0; display: flex; flex-direction: column; gap: 9px">
     <sc-for list="{{leute}}" as="p" hint-placeholder-count="4">
-      <div style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 4px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
-        <div style="display: flex; flex-direction: column; gap: 3px">
-          <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 700">{{p.name}}</div>
-          <div style="font-size: 13px; color: #8b8173">{{p.rolle}}</div>
+      <div style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 4px; padding: 13px 15px; display: flex; flex-direction: column; gap: 9px">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+          <div style="display: flex; flex-direction: column; gap: 2px">
+            <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-weight: 700">{{p.name}}</div>
+            <div style="font-size: 12px; color: #8b8173">{{p.rolle}}</div>
+          </div>
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 9px; border-radius: 3px; background: {{p.badgeBg}}; color: {{p.badgeFg}}">{{p.badge}}</div>
         </div>
-        <div onClick="{{p.entfernen}}" style="font-size: 14px; font-weight: 600; padding: 9px 13px; border-radius: 3px; cursor: pointer; color: {{p.knopfFg}}; border: 1px solid {{p.knopfBd}}">Entfernen</div>
+        <div style="display: flex; gap: 7px">
+          <div onClick="{{p.rechtWechseln}}" style="font-size: 13px; font-weight: 600; padding: 8px 11px; border-radius: 3px; cursor: pointer; color: {{p.rechtFg}}; border: 1px solid {{p.rechtBd}}">{{p.rechtText}}</div>
+          <div onClick="{{p.entfernen}}" style="font-size: 13px; font-weight: 600; padding: 8px 11px; border-radius: 3px; cursor: pointer; color: {{p.wegFg}}; border: 1px solid {{p.wegBd}}">Entfernen</div>
+        </div>
       </div>
     </sc-for>
   </div>
 
-  <sc-if value="{{warnung}}" hint-placeholder-val="{{true}}">
-    <div style="padding: 14px 18px 0">
-      <div style="background: #f7ede2; border: 1px solid #d8b79a; border-radius: 4px; padding: 14px 15px; display: flex; flex-direction: column; gap: 4px">
-        <div style="font-size: 14px; font-weight: 700; color: #8a3d10">{{warnungTitel}}</div>
-        <div style="font-size: 13px; color: #6b5340; line-height: 1.45">{{warnungText}}</div>
+  <sc-if value="{{hatMeldung}}" hint-placeholder-val="{{true}}">
+    <div style="padding: 13px 18px 0">
+      <div style="background: #f7ede2; border: 1px solid #d8b79a; border-radius: 4px; padding: 13px 15px; display: flex; flex-direction: column; gap: 4px">
+        <div style="font-size: 14px; font-weight: 700; color: #8a3d10">{{meldungTitel}}</div>
+        <div style="font-size: 13px; color: #6b5340; line-height: 1.45">{{meldungText}}</div>
       </div>
     </div>
   </sc-if>
 
-  <div style="padding: 16px 18px 0">
-    <div style="background: #e6ddcb; border-radius: 3px; padding: 13px 14px; font-size: 13px; color: #5b5348; line-height: 1.45">Ein entfernter Benutzer hat sofort keinen Zugang mehr. Angebote, die er erfasst hat, bleiben erhalten.</div>
+  <div style="padding: 13px 18px 0">
+    <div style="background: #e6ddcb; border-radius: 3px; padding: 12px 14px; font-size: 13px; color: #5b5348; line-height: 1.45">Ein Betrieb braucht immer zwei Administratoren, damit sich niemand aussperrt. Ein entfernter Benutzer hat sofort keinen Zugang mehr; erfasste Angebote bleiben erhalten.</div>
   </div>
 
-  <div style="margin-top: auto; padding: 14px 18px 24px">
+  <div style="margin-top: auto; padding: 13px 18px 24px">
     <div onClick="{{hinzufuegen}}" style="background: #2b2620; color: #efe9dd; text-align: center; padding: 17px; font-size: 17px; font-weight: 600; border-radius: 4px; cursor: pointer">Benutzer hinzufügen</div>
   </div>
 
@@ -61,43 +67,59 @@ class Component extends DCLogic {
     super(props);
     this.state = {
       leute: [
-        { name: 'Max Grünwerk', rolle: 'Chef' },
-        { name: 'Jonas Reiter', rolle: 'Bauleiter' },
-        { name: 'Timo Sandner', rolle: 'Bauleiter' },
-        { name: 'Petra Grünwerk', rolle: 'Büro' }
+        { name: 'Max Grünwerk', rolle: 'Chef', admin: true },
+        { name: 'Petra Grünwerk', rolle: 'Büro', admin: true },
+        { name: 'Jonas Reiter', rolle: 'Bauleiter', admin: false },
+        { name: 'Timo Sandner', rolle: 'Bauleiter', admin: false }
       ],
-      meldung: null,
-      zaehler: 0
+      meldung: null, zaehler: 0
     };
   }
   renderVals() {
-    const chefs = this.state.leute.filter((p) => p.rolle === 'Chef').length;
+    const st = this.state;
+    const zahl = st.leute.filter((p) => p.admin).length;
     const namen = ['Sara Weiland', 'Nils Brandt', 'Anke Rösch'];
+    const sperre = { titel: 'Nicht möglich', text: 'Ein Betrieb hält mindestens zwei Administratoren. Machen Sie erst jemand anderen zum Administrator.' };
     return {
-      warnung: this.state.meldung !== null,
-      warnungTitel: this.state.meldung ? this.state.meldung.titel : '',
-      warnungText: this.state.meldung ? this.state.meldung.text : '',
+      adminZeile: zahl + ' Administratoren · mindestens zwei nötig',
+      zahlFarbe: zahl > 2 ? '#4a5a30' : '#8a3d10',
+      hatMeldung: st.meldung !== null,
+      meldungTitel: st.meldung ? st.meldung.titel : '',
+      meldungText: st.meldung ? st.meldung.text : '',
       hinzufuegen: () => {
-        const n = namen[this.state.zaehler % namen.length];
+        const n = namen[st.zaehler % namen.length];
         this.setState({
-          leute: this.state.leute.concat([{ name: n, rolle: 'Bauleiter' }]),
-          zaehler: this.state.zaehler + 1,
-          meldung: { titel: n + ' hinzugefügt', text: 'Die Einladung geht an die hinterlegte E-Mail-Adresse.' }
+          leute: st.leute.concat([{ name: n, rolle: 'Bauleiter', admin: false }]),
+          zaehler: st.zaehler + 1,
+          meldung: { titel: n + ' hinzugefügt', text: 'Die Einladung geht an die hinterlegte E-Mail-Adresse. Ohne Administratorrecht.' }
         });
       },
-      leute: this.state.leute.map((p, i) => {
-        const letzterChef = p.rolle === 'Chef' && chefs === 1;
+      leute: st.leute.map((p, i) => {
+        const letzte = p.admin && zahl <= 2;
         return {
-          name: p.name,
-          rolle: p.rolle,
-          knopfFg: letzterChef ? '#b3a68e' : '#a8421f',
-          knopfBd: letzterChef ? '#ddd3c0' : '#d8ab9a',
+          name: p.name, rolle: p.rolle,
+          badge: p.admin ? 'Administrator' : p.rolle,
+          badgeBg: p.admin ? '#2b2620' : '#e6ddcb',
+          badgeFg: p.admin ? '#efe9dd' : '#4d453a',
+          rechtText: p.admin ? 'Recht entziehen' : 'Zum Administrator',
+          rechtFg: letzte ? '#b3a68e' : '#5b5348',
+          rechtBd: letzte ? '#ddd3c0' : '#cdc3b0',
+          wegFg: letzte ? '#b3a68e' : '#a8421f',
+          wegBd: letzte ? '#ddd3c0' : '#d8ab9a',
+          rechtWechseln: () => {
+            if (letzte) { this.setState({ meldung: sperre }); return; }
+            this.setState({
+              leute: st.leute.map((x, j) => j === i ? { ...x, admin: !x.admin } : x),
+              meldung: { titel: p.admin ? p.name + ' ist kein Administrator mehr' : p.name + ' ist jetzt Administrator',
+                         text: p.admin ? 'Kann keine Benutzer mehr verwalten, sieht aber weiter alle Angebote.' : 'Kann ab sofort Benutzer hinzufügen, entfernen und Rechte vergeben.' }
+            });
+          },
           entfernen: () => {
-            if (letzterChef) {
-              this.setState({ meldung: { titel: 'Nicht möglich', text: 'Der letzte Chef eines Betriebs kann nicht entfernt werden — sonst kann niemand mehr Benutzer verwalten.' } });
-            } else {
-              this.setState({ leute: this.state.leute.filter((x, j) => j !== i), meldung: { titel: p.name + ' entfernt', text: 'Der Zugang ist sofort gesperrt. Erfasste Angebote bleiben erhalten.' } });
-            }
+            if (letzte) { this.setState({ meldung: sperre }); return; }
+            this.setState({
+              leute: st.leute.filter((x, j) => j !== i),
+              meldung: { titel: p.name + ' entfernt', text: 'Der Zugang ist sofort gesperrt. Erfasste Angebote bleiben erhalten.' }
+            });
           }
         };
       })
