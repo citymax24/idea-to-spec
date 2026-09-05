@@ -19,6 +19,10 @@ provides:
       file: "templates/spec-template.md"
       description: "Specification template for the idea-to-spec loop (replaces the core spec template)"
       replaces: "spec-template"
+    - type: "template"
+      name: "standard-spec-template"
+      file: "templates/standard-spec-template.md"
+      description: "Specification template for a standards module (standards/<id>/spec.md). Provided additionally: it replaces nothing, so spec-template for ideas is untouched"
 
 tags:
   - "design"

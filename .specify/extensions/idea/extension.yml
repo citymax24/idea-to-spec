@@ -29,7 +29,7 @@ provides:
       description: "Break every source into atomic cited claims; list conflicts and open questions for the human"
     - name: "speckit.idea.draft"
       file: "commands/speckit.idea.draft.md"
-      description: "Write spec.md v0.1 from the cited facts; every line carries a provenance tag"
+      description: "Write spec.md v0.1 from the cited facts; every line carries a provenance tag. --template standard-spec-template drafts a standards module instead of an idea"
     - name: "speckit.idea.publish"
       file: "commands/speckit.idea.publish.md"
       description: "Publish the current spec version as a private web page for reading and commenting"

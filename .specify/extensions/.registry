@@ -4,7 +4,7 @@
     "idea": {
       "version": "0.1.0",
       "source": "local",
-      "manifest_hash": "sha256:4af0074d7b1a35bd513b01f605c0fa31b498d1ec417eb8a6be14d8429451695e",
+      "manifest_hash": "sha256:91ba25c3f228401c1bbc565a19ed2546b16d28e28421a60c960c973c0e18208b",
       "enabled": true,
       "priority": 10,
       "registered_commands": {
@@ -21,7 +21,7 @@
         ]
       },
       "registered_skills": [],
-      "installed_at": "2026-09-05T16:24:20.741240+00:00"
+      "installed_at": "2026-09-05T16:28:54.462120+00:00"
     }
   }
 }

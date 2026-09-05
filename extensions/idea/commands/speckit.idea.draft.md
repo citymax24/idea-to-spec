@@ -1,5 +1,5 @@
 ---
-description: Write spec.md v0.1 from the cited facts using the idea-to-spec template; every line carries a provenance tag. Creates CHANGELOG.md, the readiness checklist and the first git tag.
+description: Write spec.md v0.1 from the cited facts; every line carries a provenance tag. Creates CHANGELOG.md, the readiness checklist and the first git tag. With --template standard-spec-template it drafts a standards module instead of an idea.
 ---
 
 ## User Input
@@ -8,7 +8,9 @@ description: Write spec.md v0.1 from the cited facts using the idea-to-spec temp
 $ARGUMENTS
 ```
 
-Optional: `--feature <specs/NNN-dir>`, `--name "<Idea name>"` for the spec title, `--headless`.
+Optional: `--feature <dir>`, `--name "<Idea name>"` for the spec title, `--template <name>`, `--headless`.
+
+`--template` selects the skeleton. Without it the idea template is used and everything below reads as written. With `--template standard-spec-template` this command drafts a **standards module** instead of an idea — see "Drafting a standards module" at the end.
 
 ## Interactive or headless
 
@@ -24,7 +26,7 @@ Phase 3 of the idea-to-spec loop. A first complete draft that a reviewer can rea
 
 2. **Load context.** `inputs/INVENTORY.md`, `analysis/facts.md`, `analysis/conflicts.md`, `analysis/open-questions.md`, every `decisions/*.md`, `.specify/memory/constitution.md` if it exists, and the standards registry `standards/` if it exists.
 
-3. **Resolve the template.** Run `.specify/scripts/bash/resolve-template.sh spec-template` and use its output as the skeleton (this returns the idea-to-spec template when the preset is installed). Keep section order and headings exactly. Read the HTML comments in the template; they are the rules.
+3. **Resolve the template.** Run `.specify/scripts/bash/resolve-template.sh <name>` — `spec-template` unless `--template` names another — and use its output as the skeleton. Keep section order and headings exactly. Read the HTML comments in the template; they are the rules. If the resolver exits non-zero, stop and say which template could not be resolved; do not fall back to a different one.
 
 4. **Fill every section from the facts.**
    - Every JOB, FLOW, SCR, FR, SC and constraint line ends with a provenance tag: `[F-012 · S3 row 12]`, `[C-02 resolved]`, `[Q-03 resolved]`, or `[ASSUMPTION: derived from …]`. A line without a tag is a defect.
@@ -47,8 +49,23 @@ Phase 3 of the idea-to-spec loop. A first complete draft that a reviewer can rea
 
 9. **Report.** Spec path, counts (JOB, FLOW, SCR, FR, SC, assumptions, open questions, clarification markers), checklist result, the standards bound with their versions (or that there is no registry), next command `/speckit-idea-publish`.
 
+## Drafting a standards module
+
+With `--template standard-spec-template` the subject is a law, a norm or an internal manual, not an idea. `--feature` points at the module — `standards/accessibility-eaa`, not `specs/NNN-slug`. Steps 1, 2 and 3 hold as written; these replace steps 4 to 9.
+
+- **Do not touch `.specify/feature.json`.** It points at the active idea. A module is drafted by explicit `--feature` and never becomes the active feature.
+- **Sources are the module's own namespace.** `inputs/INVENTORY.md` here holds `EAA1…EAA5` or `CD1…CD9`, never `S1…Sn`. A tag citing `S3` in a module spec is a defect: it would resolve against whatever idea happens to be active.
+- **Fill the module template**: §1 purpose and legal basis, §2 applicability including any relief the source itself grants, §3 one block per requirement with Severity, Bites, Shapes the spec, Check and Source, §4 success criteria, §5 assumptions, §6 open questions, §7 tombstones. Requirement IDs are `STD-<PREFIX>-001` upward, with 101 upward for anything above the bound conformance level.
+- **A requirement must be judgeable at the stage this loop reaches.** "The product is accessible" is not a requirement. If a rule can only be decided in built software, keep it and set `Bites: build`, so nobody later reads a green prototype as proof of it.
+- **Header**: Version `0.1`, Status `draft`, Prefix, Authority, Source version, Sources, "Derived from" sentence. Status stays `draft`; only a human sets `active`.
+- **Do not write `checklists/requirements.md`.** That checklist asks about screens and flows, which a module does not have. A module's readiness is decided at its own acceptance.
+- **`CHANGELOG.md`**: create it, or add the `v0.1` block if the module already has one from being set up by hand.
+- **Git**: commit `std(<module-id>): v0.1 initial draft`, tag `std-<module-id>-v0.1` — a namespace parallel to the `spec-<slug>-v<x.y>` tags of ideas, so module versions and idea versions never collide.
+- **Report**: module path, requirement count by severity, how many carry `Bites: build`, assumptions, open questions, and that the module stays `draft` until a human accepts it.
+
 ## Rules
 
 - Do not invent users, features or numbers. If a section has no facts, write the assumption and the open question, not a plausible story.
 - Do not include technology, architecture or implementation.
+- Never let a standards module cite an idea's sources, or an idea cite a module's. The namespaces exist to keep that impossible.
 - Do not ask the reviewer questions here beyond the 3 clarification markers; the review round is the place for that.

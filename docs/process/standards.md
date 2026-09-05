@@ -31,6 +31,22 @@ standards/
 
 This document explains why the mechanism has the shape it has. `standards/README.md` is the operational reference next to the files themselves: what a module must contain, and the steps to add one.
 
+### A module is drafted, not hand-written
+
+A module is a spec like an idea is a spec — cited claims, stable IDs, tombstones, human acceptance — only about a law or a manual instead of a product. It is produced the same way:
+
+```bash
+/speckit-idea-intake <folder> --feature standards/<id> --prefix <PFX>
+/speckit-idea-facts  --feature standards/<id>
+/speckit-idea-draft  --feature standards/<id> --template standard-spec-template
+```
+
+Three things keep the two kinds apart. Sources use the module's own ID namespace (`EAA1…`, `CD1…`), so a tag can never resolve against whatever idea happens to be active. Requirements are `STD-<PREFIX>-<nnn>`, so they can never collide with an idea's `FR-###`. Git tags are `std-<module-id>-v<x.y>`, parallel to the ideas' `spec-<slug>-v<x.y>`.
+
+The module template is registered by the preset **additionally** — it declares no `replaces`, so `spec-template` for ideas is untouched. It has no user jobs, flows or screens, because a law has none; it has purpose and legal basis, applicability, requirements, success criteria, assumptions, open questions and tombstones.
+
+> **Migration note, 2026-09-05.** `accessibility-eaa` still carries its rules as a hand-written `rules.md` from before this was possible, and its sources (`EAA1…EAA5`) are collected but not yet turned into facts. Re-deriving those rules as a drafted, cited module `spec.md` is the next step. Until then the rule text is an engineering reading, not a set of cited claims.
+
 ### What a module declares
 
 | Field | What it decides |

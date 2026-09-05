@@ -4,12 +4,12 @@
     "idea-to-spec": {
       "version": "0.1.0",
       "source": "local",
-      "manifest_hash": "sha256:198f805103b46a679ecaf0d2b565d9f9ce165803870c5be3f2ed5fc67bac8fd3",
+      "manifest_hash": "sha256:608c6b1c54e0be957fd6005115314568dc155f62db173c2a0bb5f6e40d4e902c",
       "enabled": true,
       "priority": 5,
       "registered_commands": {},
       "registered_skills": {},
-      "installed_at": "2026-09-05T15:15:51.532142+00:00"
+      "installed_at": "2026-09-05T16:27:51.022403+00:00"
     }
   }
 }
