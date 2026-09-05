@@ -2,8 +2,8 @@
 
 | Field | Value |
 |-------|-------|
-| **Version** | 0.1 |
-| **Status** | draft |
+| **Version** | 0.2 |
+| **Status** | in-review |
 | **Created** | 2026-09-05 |
 | **Sources** | S1–S4 (see `inputs/INVENTORY.md`) |
 | **Reviewed sections** | — |
@@ -99,6 +99,10 @@ SCR-01 → SCR-04 → SCR-03 → SCR-04 → done. The office opens the call list
 
 SCR-01 → SCR-05 → SCR-01 → done. The Chef opens the win rate for a month and sees the share of quotes that became jobs, by count and in euros. A month without quotes shows an empty state, not a zero rate.
 
+### FLOW-07 · Manage the users of a company — [R1-01]
+
+SCR-01 → SCR-08 → SCR-01 → done. The Chef opens user management, adds a new site manager or removes someone who has left, and returns to the list. Removing the last remaining Chef of a company is refused, so a company cannot lock itself out.
+
 ## 6 Screen Catalog *(mandatory)*
 
 One block per screen. This section becomes the design brief.
@@ -110,7 +114,7 @@ One block per screen. This section becomes the design brief.
 - **Content**: Table (customer, quote number, amount, sent date, follow-up date, status), status filter, search field, button "new quote", marker on quotes whose follow-up date has passed.
 - **States**: empty / loaded / error / offline (readable, not editable).
 - **Satisfies**: FR-004, FR-006, FR-007, FR-008, FR-016, FR-017, FR-024
-- **Comes from**: SCR-06, SCR-07, SCR-02, SCR-03, SCR-05 · **Leads to**: SCR-02, SCR-03, SCR-04, SCR-05
+- **Comes from**: SCR-06, SCR-07, SCR-02, SCR-03, SCR-05, SCR-08 · **Leads to**: SCR-02, SCR-03, SCR-04, SCR-05, SCR-08 ⟲ v0.2 · R1-01
 
 ### SCR-02 · New quote — [F-025 · S2 row 7]
 
@@ -166,6 +170,15 @@ One block per screen. This section becomes the design brief.
 - **Satisfies**: FR-026
 - **Comes from**: SCR-06 · **Leads to**: SCR-01
 
+### SCR-08 · User management — [R1-01]
+
+- **Purpose**: Administer the per-user accounts of one company.
+- **Primary action**: Add a user to the company.
+- **Content**: List of the company's users with name and role, "add user" action, "remove user" action per row, note that a removed user keeps no access.
+- **States**: loaded / adding / removing / error / offline (blocked, with a reason).
+- **Satisfies**: FR-027, FR-028, FR-029
+- **Comes from**: SCR-01 · **Leads to**: SCR-01
+
 ## 7 Functional Requirements *(mandatory)*
 
 Each requirement is testable and ends with a provenance tag.
@@ -196,6 +209,9 @@ Each requirement is testable and ends with a provenance tag.
 - **FR-024**: The open quote list can be read without a network connection. — [F-033 · S2 row 15]
 - **FR-025**: Registering a quote and changing a status require a network connection; offline the affected control is disabled and says why. — [Q-07 resolved]
 - **FR-026**: When a company starts, the quotes from its old Excel list can be imported once. — [Q-02 resolved]
+- **FR-027**: A user can be added to a company. — [R1-01]
+- **FR-028**: A user of a company can be removed. — [R1-01]
+- **FR-029**: Only the Chef can add or remove users of his company. — [ASSUMPTION: derived from F-007 · S1 §2; R1-01 named no role]
 
 ## 8 Constraints
 
@@ -230,15 +246,15 @@ Everything the AI filled in without a source. Each item names what it was derive
 - **A-03**: No brand assets or tone of voice exist yet — derived from the absence of any statement in S1–S4; used in §8
 - **A-04**: "No quote fizzles without a follow-up" is the measurable form of the spring loss — derived from F-004; used in SC-003
 - **A-05**: The reminder goes to the user who registered the quote and to the office, since the source names both as callers — derived from F-014 (S1 §4: "Bauleiter oder Büro ruft an"); used in FR-013, carries Q-10
+- **A-06**: Only the Chef administers users, since he is the role described as deciding — derived from F-007 (S1 §2); used in FR-029, SCR-08; R1-01 named no role ⟲ v0.2 · R1-01
 
 ## 11 Open Questions
 
 Questions no source answers. Each names the section that carries an assumption until answered.
 
 - **Q-10**: Who receives the seven-day reminder — the user who registered the quote, the office, or everyone in the company? — affects FR-013, FLOW-03; carried by A-05 until answered
-- **Q-11**: Does version 1 need user management, and who creates and removes the per-user accounts of a company? The per-user login from C-02 implies accounts that somebody has to administer, and no source covers this. [NEEDS CLARIFICATION: user management is a screen and a set of requirements that scope depends on] — affects §6, §7
 
-Q-01 to Q-09 and C-01 to C-03 were resolved by the human on 2026-09-05 and are cited in place; see `analysis/open-questions.md` and `analysis/conflicts.md`.
+Q-01 to Q-09 and C-01 to C-03 were resolved by the human on 2026-09-05 and are cited in place; see `analysis/open-questions.md` and `analysis/conflicts.md`. Q-11 (user management) was answered in round R1 and applied in v0.2 as SCR-08, FR-027 to FR-029. ⟲ v0.2 · R1-01
 
 ## 12 Clarifications
 

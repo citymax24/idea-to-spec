@@ -2,6 +2,22 @@
 
 One block per spec version. Every change names the feedback item that triggered it. Read newest first.
 
+## v0.2 · 2026-09-05 · from round R1
+
+| Change | Affects | Trigger | Type |
+|--------|---------|---------|------|
+| Q-11 answered: version 1 administers its own user accounts. Screen SCR-08 · User management added | §6 SCR-08, §5 FLOW-07 | R1-01 | ADD |
+| FR-027 (add a user to a company) and FR-028 (remove a user of a company) added | §7 | R1-01 | ADD |
+| FR-029 added: only the Chef administers users. No source names a role, so this carries an ASSUMPTION tag derived from F-007 (S1 §2) and assumption A-06 | §7, §10 | R1-01 | ADD |
+| FLOW-07 added so SCR-08 is reached by a flow; SCR-01 "Leads to" and "Comes from" extended by SCR-08 | §5, §6 SCR-01 | R1-01 | ADD |
+| Q-11 and its `[NEEDS CLARIFICATION]` marker removed from §11; the spec now carries no clarification marker | §11 | R1-01 | REMOVE |
+| Version 0.1 → 0.2, status draft → in-review | header | R1 | CHANGE |
+
+Not changed: nothing answered as a question in R1. Deferred: none. Dropped: none.
+Still open: Q-10 (who receives the seven-day reminder), carried by assumption A-05.
+
+Facts: 65 · Conflicts: 3 (0 unresolved) · Open questions: 1 open (Q-10), 10 answered · Assumptions: 6
+
 ## v0.1 · 2026-09-05 · initial draft
 
 | Change | Affects | Trigger | Type |

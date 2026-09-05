@@ -1,12 +1,12 @@
 # Readiness Checklist: Quote Follow-Up Tracker
 
 **Purpose**: Decide whether the spec is ready for design. The AI evaluates, the human accepts.
-**Spec version**: 0.1 · **Evaluated**: 2026-09-05
+**Spec version**: 0.2 · **Evaluated**: 2026-09-05
 
 ## Provenance
 
 - [x] Every JOB, FLOW, SCR, FR, SC and constraint line ends with a provenance tag (source `S#`, fact `F-###`, resolved `C-##`/`Q-##`, feedback `R#-##`, or `ASSUMPTION`)
-- [ ] No `[NEEDS CLARIFICATION]` markers remain
+- [x] No `[NEEDS CLARIFICATION]` markers remain
 - [x] No assumption contradicts a decision record in `decisions/`
 
 ## Screens and flows
@@ -25,7 +25,10 @@
 
 ## Notes
 
-- **`[NEEDS CLARIFICATION]` remains — 1 marker, on Q-11 (§11)**: the resolution of C-02 puts a per-user login into version 1, which implies accounts that somebody creates and removes. No source covers user management, and guessing it would either invent a screen or silently drop one, so it stays a marker. It is fixed by one answer: does version 1 administer users, and who does it.
-- **Reviewed sections empty**: no review round has run yet. This is expected at v0.1 and is cleared by `/speckit-idea-publish` followed by `/speckit-idea-feedback`.
-- **Deferred feedback items**: none exist yet; the box holds because §11 carries no deferred item, not because a review has happened.
-- **Watch in review**: FR-021 (per-user login) stands against F-044 (S3 09:10), where the pilot customer says he will not use the tool if he has to sign in every time. The conflict was resolved in favour of the login, so the constraint is recorded in §8 rather than dropped, but it is the most likely thing a reviewer will push back on.
+- **`[NEEDS CLARIFICATION]` cleared in v0.2**: Q-11 (user management) was answered in round R1 and applied as SCR-08, FR-027 to FR-029. No clarification marker remains.
+- **Reviewed sections still empty**: R1 produced no `OK` item, so no section is recorded as reviewed. This is cleared when a reviewer approves sections in a later round, or explicitly accepts without full coverage at `/speckit-idea-accept`.
+- **Deferred feedback items**: none in R1.
+- **Open assumptions a reviewer should look at**:
+  - **A-06 / FR-029** — only the Chef administers users. R1-01 asked for the screen but named no role, and no source covers user administration; this is derived from F-007 (S1 §2). It is the weakest line in v0.2.
+  - **A-05 / Q-10** — who receives the seven-day reminder. Still open, derived from F-014 (S1 §4 "Bauleiter oder Büro ruft an").
+  - **FR-021 vs F-044** — the per-user login stands against the pilot customer's "twelve passwords already, then I won't use it" (S3 09:10). Resolved in favour of the login by C-02; the constraint stays recorded in §8.
