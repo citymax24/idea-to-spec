@@ -1,7 +1,7 @@
 # Readiness Checklist: Quote Follow-Up Tracker
 
 **Purpose**: Decide whether the spec is ready for design. The AI evaluates, the human accepts.
-**Spec version**: 1.1 · **Evaluated**: 2026-09-05
+**Spec version**: 1.2 · **Evaluated**: 2026-09-05
 
 ## Provenance
 
@@ -21,14 +21,16 @@
 - [x] §4 "Out of scope" is not empty
 - [x] No feedback item is `proposed` or `confirmed` without being applied
 - [x] Deferred feedback items are listed in §11 with a reason
-- [x] Reviewed sections cover the whole spec, or the reviewer accepts explicitly without full coverage
+- [ ] Reviewed sections cover the whole spec, or the reviewer accepts explicitly without full coverage
 
 ## Notes
 
-Re-evaluated against v1.1 after round R2: 0 untagged lines, 0 clarification markers, 8 screens complete, 7 flows anchored, all 30 FRs mapped to a screen (25) or marked as a background rule (5), 8 entries under "Out of scope", both rounds fully applied (R1-01 → v0.2, R2-01 → v1.1), and §11 now carries no open question at all.
+Re-evaluated against v1.2 after round R3: 0 untagged lines, 0 clarification markers, 8 screens complete, 7 flows anchored, all 33 FRs mapped to a screen or marked as a background rule, 8 entries under "Out of scope", all three rounds applied (R1-01 → v0.2, R2-01 → v1.1, R3-01 → v1.2), no open questions.
 
-**Review coverage — closed by acceptance, not by coverage.** yana accepted v1.1 on 2026-09-05 without a section-by-section review pass, knowingly and after being shown the assumptions below. The v1.0 acceptance covered v1.0. R2 changed FR-013, added FR-030 and rewrote A-05 after that acceptance, so the spec is back at `in-review` and the box reopens until yana accepts v1.1.
+**Review coverage is open again.** The v1.1 acceptance covered v1.1; R3 changed FR-029 and added FR-031 to FR-033 after it. The spec is back at `in-review` until yana accepts v1.2.
 
-**The one line a re-acceptance should look at.** FR-013 / FR-030 / A-05 rest on a decision the reviewer delegated to Claude rather than made. The sources point both ways and the assumption says so: F-037 and F-043 argue for a single recipient, F-014 (S1 §4 "Bauleiter oder Büro ruft an") names both roles as callers. If that trade-off deserves a human's judgement, this is the moment.
+**One assumption fewer.** A-06 ("only the Chef administers users") is retired. It was never backed by a source, and the reviewer found it by using the prototype: the refusal "the last Chef cannot be removed" showed that a single administrator locks a company out. FR-029 and SCR-08 now carry [R3-01], a human decision, instead of [ASSUMPTION].
 
-**Other assumptions unchanged from v1.0**: A-06/FR-029 (only the Chef administers users, no source names a role) and A-02/FR-008 ("abgesagt" and "verlaufen" also leave the open list, where only "zugesagt" is stated). FR-021 still stands against F-044 by the resolution of C-02.
+**Assumptions still riding along**: A-05/FR-013/FR-030 (single recipient of the reminder — delegated to Claude, sources point both ways), A-02/FR-008 ("abgesagt" and "verlaufen" also leave the open list), A-01, A-03, A-04. FR-021 still stands against F-044 by the resolution of C-02.
+
+**Design is behind the spec.** SCR-08 in the canvas and the Benutzer screen of the clickable prototype still show the v1.1 rule (Chef only, last Chef cannot be removed). They need rebuilding against FR-031 to FR-033 before the design matches again.

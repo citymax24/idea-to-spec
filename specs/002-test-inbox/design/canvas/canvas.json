@@ -1,6 +1,16 @@
 {
   "artboards": [
     {
+      "file": "PrototypHandy.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Prototyp Handy · durchklickbar",
+      "page": "page-3",
+      "is_interactive": true
+    },
+    {
       "file": "Scr06Anmelden.dc.html",
       "x": 0,
       "y": 0,
@@ -55,7 +65,7 @@
       "x": 2350,
       "y": 0,
       "w": 1120,
-      "h": 760,
+      "h": 560,
       "title": "SCR-04 Montagsliste",
       "page": "page-1",
       "is_interactive": true
@@ -65,7 +75,7 @@
       "x": 3550,
       "y": 0,
       "w": 1120,
-      "h": 760,
+      "h": 470,
       "title": "SCR-05 Trefferquote",
       "page": "page-1",
       "is_interactive": true
@@ -238,7 +248,7 @@
       "x": 0,
       "y": 4820,
       "w": 1120,
-      "h": 760,
+      "h": 560,
       "title": "SCR-04 Montagsliste · leer",
       "page": "page-2"
     },
@@ -247,32 +257,32 @@
       "x": 1200,
       "y": 4820,
       "w": 1120,
-      "h": 760,
+      "h": 560,
       "title": "SCR-04 Montagsliste · Fehler",
       "page": "page-2"
     },
     {
       "file": "Scr05Leer.dc.html",
       "x": 0,
-      "y": 5700,
+      "y": 5500,
       "w": 1120,
-      "h": 760,
+      "h": 470,
       "title": "SCR-05 Trefferquote · leer",
       "page": "page-2"
     },
     {
       "file": "Scr05Fehler.dc.html",
       "x": 1200,
-      "y": 5700,
+      "y": 5500,
       "w": 1120,
-      "h": 760,
+      "h": 470,
       "title": "SCR-05 Trefferquote · Fehler",
       "page": "page-2"
     },
     {
       "file": "Scr08Hinzufuegen.dc.html",
       "x": 0,
-      "y": 6580,
+      "y": 6090,
       "w": 390,
       "h": 844,
       "title": "SCR-08 Benutzer · hinzufügen",
@@ -281,7 +291,7 @@
     {
       "file": "Scr08Entfernen.dc.html",
       "x": 470,
-      "y": 6580,
+      "y": 6090,
       "w": 390,
       "h": 844,
       "title": "SCR-08 Benutzer · letzter Chef",
@@ -290,7 +300,7 @@
     {
       "file": "Scr08Fehler.dc.html",
       "x": 940,
-      "y": 6580,
+      "y": 6090,
       "w": 390,
       "h": 844,
       "title": "SCR-08 Benutzer · Fehler",
@@ -299,7 +309,7 @@
     {
       "file": "Scr08Offline.dc.html",
       "x": 1410,
-      "y": 6580,
+      "y": 6090,
       "w": 390,
       "h": 844,
       "title": "SCR-08 Benutzer · offline",
@@ -307,6 +317,10 @@
     }
   ],
   "pages": [
+    {
+      "id": "page-3",
+      "name": "Prototyp"
+    },
     {
       "id": "page-1",
       "name": "Ablauf"
@@ -318,9 +332,17 @@
   ],
   "annotations": [
     {
+      "id": "prototyp",
+      "x": 470,
+      "y": 0,
+      "w": 420,
+      "page": "page-3",
+      "text": "Ein Artboard, alle Bildschirme darin — nur so ist Navigation möglich, denn Artboards teilen keinen Zustand.\n\nZum Bedienen oben am Artboard-Titel auf ▶ tippen. Im normalen Canvas-Modus greift der Editor die Klicks ab.\n\nAlles ist per Klick erreichbar, Tippen ist nirgends nötig — die Felder sind vorbelegt:\n1. Anmelden\n2. 14 Angebote übernehmen, oder überspringen und leer starten\n3. In der Liste filtern und ein Angebot antippen\n4. Im Detail einen Status setzen — zugesagt, abgesagt oder verlaufen nimmt es aus der offenen Liste; abgesagt zeigt zusätzlich den Absagegrund\n5. Neues Angebot: Foto antippen, dann Speichern — es steht danach in der Liste\n6. Personen-Symbol oben rechts: Benutzer; der letzte Chef lässt sich nicht entfernen\n\nSCR-04 Montagsliste und SCR-05 Trefferquote fehlen hier: laut Brief Desktop-Bildschirme, sie liegen als eigene Artboards auf der Seite Ablauf."
+    },
+    {
       "id": "ablauf",
       "x": 0,
-      "y": -170,
+      "y": -400,
       "w": 900,
       "page": "page-1",
       "text": "Ablauf von links nach rechts: SCR-06 → SCR-07 → SCR-01 → SCR-02 → SCR-03 → SCR-04 → SCR-05 → SCR-08.\nJedes Artboard ist bedienbar: Filter, Suche, Statuswahl, Monatswechsel, Benutzer entfernen. Die Artboards teilen keinen Zustand — jeder Bildschirm reagiert für sich."
@@ -328,7 +350,7 @@
     {
       "id": "zustaende",
       "x": 0,
-      "y": -170,
+      "y": -400,
       "w": 900,
       "page": "page-2",
       "text": "Ein Artboard je Zustand aus dem Brief, zeilenweise nach Bildschirm.\nOffline heißt überall: lesbar, nicht änderbar. Fehler nennen immer, was mit den Eingaben passiert ist."
@@ -336,6 +358,6 @@
   ],
   "launch": {
     "view": "canvas",
-    "page": "page-1"
+    "page": "page-3"
   }
 }

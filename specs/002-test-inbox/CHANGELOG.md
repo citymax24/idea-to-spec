@@ -2,6 +2,27 @@
 
 One block per spec version. Every change names the feedback item that triggered it. Read newest first.
 
+## v1.2 · 2026-09-05 · from round R3
+
+| Change | Affects | Trigger | Type |
+|--------|---------|---------|------|
+| FR-029 no longer ties administration to the Chef: a user holding the administrator right adds and removes users | §7 FR-029 | R3-01 | CHANGE |
+| FR-031 added: an administrator can grant the administrator right to another user and withdraw it | §7 | R3-01 | ADD |
+| FR-032 added: a company holds at least two administrators; removal or withdrawal is refused when it would leave fewer than two. Replaces the last-Chef rule | §7 | R3-01 | ADD |
+| FR-033 added: a second administrator is named before a company starts working with the list | §7 | R3-01 | ADD |
+| SCR-08 extended: the administrator right per user, a control to grant or withdraw it, an administrator count, and a setup state | §6 SCR-08 | R3-01 | CHANGE |
+| FLOW-01 now runs SCR-06 → SCR-07 → SCR-08 → SCR-01; SCR-07 leads into SCR-08 | §5, §6 SCR-07 | R3-01 | CHANGE |
+| §2 states that the administrator right is separate from the three roles | §2 | R3-01 | ADD |
+| A-06 retired: "only the Chef administers users" was an assumption from R1-01 with no source behind it. A human has now decided, so the lines carry [R3-01] instead of [ASSUMPTION] | §10, §7 FR-029 | R3-01 | REMOVE |
+| Version 1.1 → 1.2, status accepted → in-review; Approved fields kept with the note (v1.0, v1.1) | header | R3 | CHANGE |
+
+Not changed: no QUESTION item in R3. Deferred: none. Dropped: none.
+The reviewer found this by using the clickable prototype: the refusal "the last Chef cannot be removed" showed that a single administrator is a dead end. At confirmation "notwendig" was settled as *require*, not *allow* — hence FR-032 and FR-033.
+Design follow-up: SCR-08 and the Benutzer screen of the prototype need rebuilding. The other seven screens are untouched.
+Needs `/speckit-idea-accept` again to return to `accepted`.
+
+Facts: 65 · Conflicts: 3 (0 unresolved) · Open questions: 0 · Assumptions: 5 (A-06 retired)
+
 ## v1.1 · 2026-09-05 · accepted by yana
 
 | Change | Affects | Trigger | Type |

@@ -2,8 +2,8 @@
 
 | Field | Value |
 |-------|-------|
-| **Version** | 1.1 |
-| **Status** | accepted |
+| **Version** | 1.2 |
+| **Status** | in-review |
 | **Created** | 2026-09-05 |
 | **Sources** | S1–S4 (see `inputs/INVENTORY.md`) |
 | **Reviewed sections** | accepted without section-by-section coverage (v0.2 and v1.1, knowingly) |
@@ -23,6 +23,7 @@ The goal is a single list of open quotes, sorted by the date follow-up is due, t
 ## 2 Target Users and Roles *(mandatory)*
 
 Version 1 targets garden and landscaping companies with 5 to 50 employees. One-person businesses and corporations are not the target group; the wider craft segment named in the market overview stays context, not scope. — [C-01 resolved]
+The administrator right is separate from these three roles: any user of a company can hold it, and a company holds at least two. — [R3-01] ⟲ v1.2 · R3-01
 
 | Role | Who they are | What they need from this | Provenance |
 |------|--------------|--------------------------|------------|
@@ -77,7 +78,7 @@ Every flow starts and ends at a screen from §6.
 
 ### FLOW-01 · First run: sign in and take over the old list — [Q-02 resolved]
 
-SCR-06 → SCR-07 → SCR-01 → done. The user signs in, points the import at the existing Excel list, and lands on a list that already holds the open quotes. If the import fails, SCR-07 stays and reports which rows could not be read; the user can continue with an empty list.
+SCR-06 → SCR-07 → SCR-08 → SCR-01 → done. The user signs in, points the import at the existing Excel list, then names a second administrator before the company starts working, and lands on a list that already holds the open quotes. If the import fails, SCR-07 stays and reports which rows could not be read; the user can continue with an empty list. ⟲ v1.2 · R3-01
 
 ### FLOW-02 · Register a sent quote — [F-042 · S3 04:20]
 
@@ -168,16 +169,16 @@ One block per screen. This section becomes the design brief.
 - **Content**: File picker for the old Excel list, preview of the rows that were recognised, report of rows that could not be read, "skip" option.
 - **States**: empty / preview / importing / partial error / done.
 - **Satisfies**: FR-026
-- **Comes from**: SCR-06 · **Leads to**: SCR-01
+- **Comes from**: SCR-06 · **Leads to**: SCR-08 ⟲ v1.2 · R3-01
 
 ### SCR-08 · User management — [R1-01]
 
-- **Purpose**: Administer the per-user accounts of one company.
+- **Purpose**: Administer the per-user accounts of one company and who may administer them. ⟲ v1.2 · R3-01
 - **Primary action**: Add a user to the company.
-- **Content**: List of the company's users with name and role, "add user" action, "remove user" action per row, note that a removed user keeps no access.
-- **States**: loaded / adding / removing / error / offline (blocked, with a reason).
-- **Satisfies**: FR-027, FR-028, FR-029
-- **Comes from**: SCR-01 · **Leads to**: SCR-01
+- **Content**: List of the company's users with name, role and whether they hold the administrator right; "add user" action; "remove user" action per row; a control per row to grant or withdraw the administrator right; a count of the company's administrators; note that a removed user keeps no access. ⟲ v1.2 · R3-01
+- **States**: loaded / adding / removing / setup (a second administrator is still missing) / error / offline (blocked, with a reason). ⟲ v1.2 · R3-01
+- **Satisfies**: FR-027, FR-028, FR-029, FR-031, FR-032, FR-033 ⟲ v1.2 · R3-01
+- **Comes from**: SCR-01, SCR-07 · **Leads to**: SCR-01 ⟲ v1.2 · R3-01
 
 ## 7 Functional Requirements *(mandatory)*
 
@@ -211,8 +212,11 @@ Each requirement is testable and ends with a provenance tag.
 - **FR-026**: When a company starts, the quotes from its old Excel list can be imported once. — [Q-02 resolved]
 - **FR-027**: A user can be added to a company. — [R1-01]
 - **FR-028**: A user of a company can be removed. — [R1-01]
-- **FR-029**: Only the Chef can add or remove users of his company. — [ASSUMPTION: derived from F-007 · S1 §2; R1-01 named no role]
+- **FR-029**: A user holding the administrator right can add or remove users of his company. — [R3-01] ⟲ v1.2 · R3-01
 - **FR-030**: The office is not notified per quote; quotes due for follow-up reach the office through the Monday call list. — [ASSUMPTION: derived from F-024 · S2 row 6 and F-043 · S3 07:40; R2-01] ⟲ v1.1 · R2-01
+- **FR-031**: A user holding the administrator right can grant it to another user of the company and withdraw it again. — [R3-01]
+- **FR-032**: A company holds at least two administrators; removing a user or withdrawing the administrator right is refused when it would leave fewer than two. — [R3-01]
+- **FR-033**: Before a company starts working with the list, a second administrator is named. — [R3-01]
 
 ## 8 Constraints
 
@@ -247,7 +251,6 @@ Everything the AI filled in without a source. Each item names what it was derive
 - **A-03**: No brand assets or tone of voice exist yet — derived from the absence of any statement in S1–S4; used in §8
 - **A-04**: "No quote fizzles without a follow-up" is the measurable form of the spring loss — derived from F-004; used in SC-003
 - **A-05**: The seven-day reminder goes to exactly one person, the user who registered the quote; the office is not notified per quote — derived from F-037 (the Bauleiter's daily task is working through reminders) and F-043 ("einen Stups. Nicht drei."), against F-014 (S1 §4 "Bauleiter oder Büro ruft an", which settles who calls, not who is notified); used in FR-013, FR-030; the decision was delegated to Claude in R2-01 and was not weighed by a human ⟲ v1.1 · R2-01
-- **A-06**: Only the Chef administers users, since he is the role described as deciding — derived from F-007 (S1 §2); used in FR-029, SCR-08; R1-01 named no role ⟲ v0.2 · R1-01
 
 ## 11 Open Questions
 
