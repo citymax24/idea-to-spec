@@ -2,6 +2,12 @@
 
 **Status**: PROPOSAL — nothing here is implemented · 2026-09-05 · Owner: Max Bollich
 
+> **Editor's note, 2026-09-05.** This document is kept as the record of how the standards mechanism was argued for. Three things about it are now out of date, and none of them is corrected in the text below:
+>
+> - **The mechanism has been built**, and differs from this design in several places — where module provenance comes from, where a conflict is recorded, and how tightly a version is pinned. `docs/process/standards.md` describes what actually runs; this page is the origin of the idea, not a description of it.
+> - **The design-brief step this document builds on no longer exists.** `/speckit-idea-brief`, `brief-template.md` and the Claude Design canvas were removed and replaced by `/speckit-idea-prototype`. §4.6 and two rows of §5 therefore target files that are gone; their intent maps onto the prototype step.
+> - **`specs/002-test-inbox/design/` was deleted** — it was 5.1 MB of canvas output from that removed step. §1 and §7 still refer to it. What the test run produced is unchanged as a matter of history; the folder is simply no longer in the repository, and the `spec-test-inbox-*` tags still reach it.
+
 This document is a handoff from a test-environment session to the main project, where the described mechanism would actually be built. It describes a design, not current behaviour. Nothing in `presets/`, `extensions/`, `.specify/memory/constitution.md` or `CLAUDE.md` has changed because of it. A reader who wants the process as it actually runs today should read `docs/process/idea-to-spec-process.md` and `docs/process/spec-kit-mapping.md`; this page is not part of that process description.
 
 ## 1 What the test environment validated
