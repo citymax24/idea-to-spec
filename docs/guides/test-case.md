@@ -37,6 +37,10 @@ A tool for small landscaping firms to keep track of sent quotes: which are open,
 | apply R2 | ~7 min | v0.3, tombstones for FR-026, FR-027, FLOW-05, SC-005, SCR-07 in §13, `decisions/DEC-001.md` with the reviewer's words and how the sources are read from now on, facts file updated ("Superseded by decisions"), tag `spec-quote-tracker-v0.3` |
 | brief `--draft` | ~5 min | `design/brief.md` (DRAFT) with 9 screens in flow order, one design prompt each, "Do not show" from §4 and §13, and the gaps a designer would hit (Q-01, Q-09); `design/README.md` with the two-lane rule |
 
+This run also predates the `standards/` registry. `specs/001-quote-tracker/` has never been bound: it carries no `standards/BOUND.md` and no `[STD-…]` tags, and it is still v0.3 `in-review`. Running `/speckit-idea-accept` on it today would meet the standards bullet of the readiness checklist for the first time and stop, because a `law` module that was never bound blocks. Binding it with `/speckit-idea-standards --bind` would produce v0.4 — which is a fine way to exercise the mechanism, and the reason it has not been done here is that nothing in this dry run is a human decision to begin with.
+
+The brief step was removed from the loop after this run and replaced by `/speckit-idea-prototype`, which builds a clickable HTML prototype from the accepted spec instead of a document for a designer. `specs/001-quote-tracker/design/` was deleted with it; the run above is kept as the record of what the step produced. The prototype step has not been dry-run yet.
+
 Three things worth knowing from this run:
 
 - The "export" trap was already defused at draft time: the draft read the ambiguous row as an import, put the export under "Out of scope" and carried the ambiguity as Q-11. The reviewer's REMOVE therefore became a MISREAD item that resolves Q-11 rather than a tombstone. The round file documents what the spec said and where it was read from.
@@ -47,4 +51,4 @@ Three things worth knowing from this run:
 
 - Converter: real spreadsheet row numbers via openpyxl (re-executed under `uv run` when the system Python lacks it), stable S-IDs on a rerun, transcripts detected by name or timestamps.
 - Commands: an explicit "interactive or headless" rule (`--headless`), the `--inbox` lane for workflow runs, `defer` during confirmation, version rules for re-acceptance, DEC numbering, Q-ID namespace, duplicate-safe re-intake.
-- Workflow: `reviewer` is required, every step passes `--headless`, the round file is shown at the confirmation gate, the brief only runs when the spec is actually `accepted`.
+- Workflow: `reviewer` is required, every step passes `--headless`, the round file is shown at the confirmation gate, the step after acceptance only runs when the spec is actually `accepted`.

@@ -35,16 +35,18 @@ Phase 4, step 1 and 2 of the idea-to-spec loop. Feedback becomes data: one row p
 4. **Split into atomic items.** One item = one intended change or one question. A sentence like "target group is wrong, onboarding is missing, and drop the export" is three items. Keep the reviewer's exact words in the Verbatim column, in the original language, quoted.
 
 5. **Classify each item.**
-   - Type: `ADD` · `CHANGE` · `REMOVE` · `MISREAD` · `QUESTION` · `OK`.
+   - Type: `ADD` · `CHANGE` · `REMOVE` · `MISREAD` · `QUESTION` · `OK` · `VISUAL`.
    - Target: a section (`§2`), an ID (`FR-014`, `SCR-03`, `JOB-02`, `FLOW-01`), or `whole spec`. If the reviewer did not name one, find the section their words refer to and say so.
    - "Understood as": one precise English sentence describing the change you would make, naming the IDs that would be added, changed or removed.
    - `QUESTION`: answer it right there with provenance ("FR-009 comes from S3 row 14, priority 1"). Status `answered`. If the answer reveals a real problem, add a second item of the right type.
    - `MISREAD`: also write in the Notes what the spec currently says and which source location it was read from, so the reviewer sees the misreading.
    - `OK`: list the sections covered.
+   - `VISUAL`: feedback on how the prototype looks rather than on what it holds - size, colour, density, spacing, wording of a label the spec does not fix. Target is the SCR-ID or `whole prototype`, status `prototype-only`; the next `/speckit-idea-prototype` run picks it up and the spec never changes for it. If one sentence carries both lanes ("this table is too dense and the customer name is missing"), split it into a `VISUAL` item and a spec item.
+   - **Collides with a standard**: if an item would drop or weaken a line tagged `[STD-…]`, keep the item and its type, and write into "Understood as" that it collides with that rule and cannot be applied as a spec change. Name the two ways out: meet the rule differently, or a signed exemption via `/speckit-idea-standards --exempt`. Do not silently reclassify it and do not promise the change.
    - Status for everything else: `proposed`.
 
 6. **Confirm.**
-   - Interactive: show the table and ask: "Did I understand each item correctly? Reply `confirm`, correct by ID (`R1-02: also the detail screen`), `drop R1-05`, or `defer R1-03: <reason>`." Apply corrections to the round file. Dropped items stay with status `dropped` and the reason; deferred items get status `deferred` and the reason in Notes. Repeat until the reviewer says `confirm`. Then set all remaining `proposed` items to `confirmed`, set the header `Confirmation` to `confirmed by <reviewer> on <date>`, and tell the reviewer: "Run `/speckit-idea-apply R<n>`."
+   - Interactive: show the table, say which items are the prototype lane (`VISUAL`) and which are the spec lane, and ask: "Did I understand each item correctly? Reply `confirm`, correct by ID (`R1-02: also the detail screen`), `drop R1-05`, or `defer R1-03: <reason>`." Apply corrections to the round file. Dropped items stay with status `dropped` and the reason; deferred items get status `deferred` and the reason in Notes. Repeat until the reviewer says `confirm`. Then set all remaining `proposed` items to `confirmed`, set the header `Confirmation` to `confirmed by <reviewer> on <date>`, and tell the reviewer: "Run `/speckit-idea-apply R<n>`."
    - Headless: leave every item `proposed`, print the table, do not ask, and stop. The workflow shows the file at a human gate; `/speckit-idea-apply --gate-confirmed <run_id>` then records that approval.
 
 7. **Report.** Round file path, counts per type, whether confirmation is done, next command.

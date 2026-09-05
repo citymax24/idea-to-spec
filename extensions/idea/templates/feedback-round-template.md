@@ -5,12 +5,12 @@
 | **Spec version reviewed** | [0.x] |
 | **Date** | [YYYY-MM-DD] |
 | **Reviewer** | [name] |
-| **Channel** | chat / voice transcript / file / page comments |
+| **Channel** | chat / voice transcript / file / page comments / prototype |
 | **Confirmation** | pending |
 
-Types: `ADD` something is missing · `CHANGE` different from what is written · `REMOVE` out entirely · `MISREAD` the source was misunderstood · `QUESTION` why is this here · `OK` section approved as is
+Types: `ADD` something is missing · `CHANGE` different from what is written · `REMOVE` out entirely · `MISREAD` the source was misunderstood · `QUESTION` why is this here · `OK` section approved as is · `VISUAL` how the prototype looks, not what it says
 
-Statuses: `proposed` → `confirmed` | `dropped` | `deferred` → `applied (v0.x)` | `answered`
+Statuses: `proposed` → `confirmed` | `dropped` | `deferred` → `applied (v0.x)` | `answered` | `prototype-only` (VISUAL items; the spec never changes for them)
 
 | ID | Type | Target | Verbatim (reviewer's words) | Understood as / answer | Status |
 |----|------|--------|-----------------------------|------------------------|--------|

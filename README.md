@@ -1,15 +1,16 @@
 # idea-to-spec
 
-From a heap of mixed inputs (spreadsheets, slides, meeting notes, call transcripts) to an accepted, fully cited specification, then to a design brief for Claude Design. Built on [GitHub Spec Kit](https://github.com/github/spec-kit) 1.0 with one preset and one extension.
+From a heap of mixed inputs (spreadsheets, slides, meeting notes, call transcripts) to an accepted, fully cited specification that is bound to the project's standards, and from there to a clickable prototype built straight out of that spec. Built on [GitHub Spec Kit](https://github.com/github/spec-kit) 1.0 with one preset and one extension.
 
 ## What is in this repository
 
 | Path | What it is |
 |------|------------|
 | `presets/idea-to-spec/` | Spec Kit preset: the spec template (screen catalog, provenance tags, tombstones, acceptance header) |
-| `extensions/idea/` | Spec Kit extension: eight `/speckit-idea-*` commands, artifact templates, converter/renderer/status-check scripts |
+| `extensions/idea/` | Spec Kit extension: nine `/speckit-idea-*` commands, artifact templates, converter/renderer/status-check scripts |
+| `standards/` | Project-wide rules every idea is bound to: accessibility (EAA/BFSG) and corporate design today, data protection or security later. One versioned module per directory |
 | `workflows/idea-to-spec/` | Spec Kit workflow that chains the commands with human gates and the review loop |
-| `specs/<NNN>-<slug>/` | One directory per idea: inputs, analysis, `spec.md`, feedback rounds, decisions, design brief |
+| `specs/<NNN>-<slug>/` | One directory per idea: inputs, analysis, `spec.md`, feedback rounds, decisions, standards binding, prototype |
 | `examples/quote-tracker/` | Synthetic test inputs used for the first dry run |
 | `docs/` | Process description, Spec Kit mapping, how-to guides |
 
@@ -36,9 +37,13 @@ Then, inside Claude Code in this directory:
 /speckit-idea-publish
 /speckit-idea-feedback "<what the reviewer said>"      # or --from-comments
 /speckit-idea-apply
+/speckit-idea-standards                                # where this idea stands against the standards
 /speckit-idea-accept
-/speckit-idea-brief
+/speckit-idea-prototype                                # then click through it and comment
+/speckit-idea-accept --prototype                       # when the prototype stands
 ```
+
+The prototype is optional: the accepted `spec.md` is a finished hand-off on its own, and you can take it into Claude Design yourself instead.
 
 Or let the workflow drive it: `specify workflow run idea-to-spec -i inbox=examples/quote-tracker/inbox -i name=quote-tracker -i reviewer=Max`.
 

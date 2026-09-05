@@ -1,0 +1,51 @@
+schema_version: "1.0"
+
+standard:
+  id: "accessibility-eaa"
+  prefix: "STD-A11Y"
+  name: "Accessibility (European Accessibility Act)"
+  version: "1.0"                # version of THIS module; bump on every rules.md change
+  status: "active"              # draft | active | retired
+  kind: "external"              # the rules come from outside and are versioned outside
+  authority: "law"              # law > contract > internal
+  precedence: 10                # tiebreaker inside the "law" band; lower wins
+  owner: "Max Bollich"
+  updated: "2026-09-05"
+  review_by: "2027-03-31"       # re-check the source version by this date
+
+source:
+  name: "Directive (EU) 2019/882 (European Accessibility Act)"
+  national: "Germany: BFSG (Barrierefreiheitsstärkungsgesetz) with BFSGV"
+  conformance: "EN 301 549 -> WCAG 2.1 level AA"
+  source_version: "EN 301 549 v3.2.1"
+  applicable_since: "2025-06-28"
+  url: "https://eur-lex.europa.eu/eli/dir/2019/882/oj"
+  legal_review: "ASSUMED — see standards/README.md, 'Assumed legal review'"
+  legal_review_status: >-
+    ASSUMED, NOT PERFORMED. Decision of Max Bollich on 2026-09-05: this MVP does not run a legal
+    review, and the module is treated as cleared so the loop can be used. The rules remain an
+    engineering reading of the conformance level, not legal advice, and this assumption is not a
+    conformance claim. Four questions were never asked and are still open: (a) whether a given
+    product is in scope at all, (b) the current EN 301 549 version and the WCAG level it
+    references - a newer EN 301 549 exists that points at WCAG 2.2, which would add rules and is
+    exactly the drift this registry is built to surface, (c) the national transposition and its
+    information duties, (d) whether the micro-enterprise relief applies. Revisit before this is
+    relied on commercially.
+
+applies_to: "all"
+scope_note: >-
+  The EAA covers products and services placed on the market from 2025-06-28, e-commerce and
+  consumer-facing digital services among them. Micro-enterprises providing services (under 10
+  people and at most EUR 2m turnover or balance sheet total) are relieved for services, not for
+  products. If an idea in this repository is clearly out of scope, that is an exemption with a
+  reason, decided by a human - not an assumption made while drafting.
+
+conformance_level: "WCAG 2.1 AA"
+coverage_note: >-
+  WCAG 2.1 AA has around fifty success criteria. This module carries the subset that can be
+  decided while there is only an idea, a spec and a clickable prototype. Passing all fifteen
+  rules here is not a conformance claim; it means nothing was designed in that would have to be
+  undone later. The full norm is checked on built software.
+
+assets:
+  dir: null

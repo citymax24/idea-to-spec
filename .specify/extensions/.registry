@@ -4,7 +4,7 @@
     "idea": {
       "version": "0.1.0",
       "source": "local",
-      "manifest_hash": "sha256:22c2cbb6ca2f99ba031849eae1cd01ffc19e37f1fc296939a6d0508764105a56",
+      "manifest_hash": "sha256:ebdadb4e1b31d2925ece910723d18c8931417cc9f40cdb111584e6827093e830",
       "enabled": true,
       "priority": 10,
       "registered_commands": {
@@ -16,11 +16,12 @@
           "speckit.idea.feedback",
           "speckit.idea.apply",
           "speckit.idea.accept",
-          "speckit.idea.brief"
+          "speckit.idea.standards",
+          "speckit.idea.prototype"
         ]
       },
       "registered_skills": [],
-      "installed_at": "2026-09-05T11:10:08.227811+00:00"
+      "installed_at": "2026-09-05T15:23:54.885585+00:00"
     }
   }
 }

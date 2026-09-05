@@ -1,6 +1,6 @@
 # Installing on another machine
 
-The repository carries its own installed state under `.specify/` and `.claude/skills/`, and the registries hold no absolute paths. A plain clone is therefore already a working project: the preset, the extension and the workflow are registered, and the eight `/speckit-idea-*` skills are present. Only the command-line tools have to exist on the machine.
+The repository carries its own installed state under `.specify/` and `.claude/skills/`, and the registries hold no absolute paths. A plain clone is therefore already a working project: the preset, the extension and the workflow are registered, and the nine `/speckit-idea-*` skills are present. Only the command-line tools have to exist on the machine.
 
 ## 1 Tools
 
@@ -33,9 +33,9 @@ Everything below is what the script does and checks, for when you would rather d
 
 ```bash
 specify preset resolve spec-template   # must point at .specify/presets/idea-to-spec/…
-specify extension list                 # Idea to Spec Loop, Commands: 8, Enabled
+specify extension list                 # Idea to Spec Loop, Commands: 9, Enabled
 specify workflow list                  # Idea to Spec (idea-to-spec)
-ls .claude/skills | grep idea          # eight speckit-idea-* skills
+ls .claude/skills | grep idea          # nine speckit-idea-* skills
 ```
 
 If all four answer as described, open Claude Code in the directory and start with `/speckit-idea-intake`. See `running-the-loop.md`.
@@ -51,7 +51,7 @@ specify extension add --dev ./extensions/idea --force
 specify workflow add ./workflows/idea-to-spec
 ```
 
-This rewrites `.specify/presets/`, `.specify/extensions/idea/`, `.specify/workflows/idea-to-spec/` and the eight skills under `.claude/skills/`. The three registry files change as a side effect; committing them is optional and harmless.
+This rewrites `.specify/presets/`, `.specify/extensions/idea/`, `.specify/workflows/idea-to-spec/` and the nine skills under `.claude/skills/`. The three registry files change as a side effect; committing them is optional and harmless.
 
 ## 5 Automatic setup in a container or a cloud session
 

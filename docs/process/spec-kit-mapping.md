@@ -9,8 +9,9 @@ Spec Kit 1.0.0 shipped on 2026-08-21; this project was built against 1.0.4. The 
 | Draft | `/speckit-specify`, `spec-template.md` with FR-###, SC-###, P1–P3 stories | — | Preset `idea-to-spec`: template with JOB/FLOW/SCR sections, provenance tags, tombstones, acceptance header. `speckit.idea.draft` fills it from facts |
 | Review: capture | `/speckit-clarify` (AI asks human, records Q→A under `## Clarifications`) | `taco` (offline HTML with anchored comments, no rounds or IDs) | `speckit.idea.publish` (HTML with anchors per ID, artifact page for comments) and `speckit.idea.feedback` (rounds, item IDs, types, confirmation step) |
 | Review: apply | — | `changelog` (what changed per requirement from git, not why); `intent` (append-only decisions.md) | `speckit.idea.apply`: one version per round, change markers, tombstones, decision records, changelog rows naming the trigger |
-| Accept | `/speckit-analyze` (read-only findings), `/speckit-checklist`, workflow `gate` | — | `speckit.idea.accept`: readiness checklist, human name and date, v1.0 tag |
-| Design | — | `wireframe` (SVG from spec, sign-off into `## UI Mockup`); `figma` (Figma → spec only) | `speckit.idea.brief` → `design` skill; two-lane rule for mockup feedback |
+| Standards | `.specify/memory/constitution.md` (one prose file, unversioned, no per-feature binding) | — | `standards/` registry: versioned modules with authority bands, stable rule IDs, per-idea binding with drift detection, signed exemptions. `speckit.idea.standards` |
+| Accept | `/speckit-analyze` (read-only findings), `/speckit-checklist`, workflow `gate` | — | `speckit.idea.accept`: readiness checklist, standards gate (law blocks, internal warns), human name and date, v1.0 tag |
+| Prototype | — | `wireframe` (SVG from spec, sign-off into `## UI Mockup`); `figma` (Figma → spec only) | `speckit.idea.prototype`: a clickable HTML prototype built from §6, published for comments, with the two-lane rule (`VISUAL` items never reach the spec) and `speckit.idea.accept --prototype` as its own checklist and gate |
 | Whole loop | Workflow engine: `gate`, `do-while`, `if`, `command`, run log under `.specify/workflows/runs/` | — | `workflows/idea-to-spec/workflow.yml` |
 
 ## Where the pieces are installed

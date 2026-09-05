@@ -1,6 +1,6 @@
 # Readiness Checklist: [IDEA NAME]
 
-**Purpose**: Decide whether the spec is ready for design. The AI evaluates, the human accepts.
+**Purpose**: Decide whether the spec is ready to be accepted and built into a prototype. The AI evaluates, the human accepts.
 **Spec version**: [0.x] · **Evaluated**: [YYYY-MM-DD]
 
 ## Provenance
@@ -16,6 +16,17 @@
 - [ ] Every SCR is reached by at least one FLOW
 - [ ] Every FR maps to at least one SCR or is marked "no screen (background rule)"
 
+## Standards
+
+Skip this block when the project has no `standards/` registry.
+
+- [ ] The spec is bound to every module that applies, at that module's current version (`standards/BOUND.md`)
+- [ ] No `law` module has moved since the bind
+- [ ] Every `required` rule of a `law` module is `pass` or carries a signed exemption (`decisions/EXM-*.md`)
+- [ ] Conflicts between modules are recorded with a resolution, not left open
+- [ ] Warnings from internal modules are listed below and the reviewer accepts them knowingly
+- [ ] Rules reported `not verifiable` are named, with what would make them verifiable
+
 ## Scope and review
 
 - [ ] §4 "Out of scope" is not empty
@@ -26,3 +37,4 @@
 ## Notes
 
 - [Failing items and what would fix them]
+- [Standards warnings the reviewer is accepting knowingly, one line each]

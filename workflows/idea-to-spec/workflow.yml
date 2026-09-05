@@ -4,7 +4,7 @@ workflow:
   name: "Idea to Spec"
   version: "0.1.0"
   author: "Max Bollich"
-  description: "Mixed inputs → cited facts → spec draft → human review rounds → acceptance → design brief"
+  description: "Mixed inputs → cited facts → spec draft bound to the project standards → human review rounds → acceptance → clickable prototype"
 
 requires:
   speckit_version: ">=1.0.0"
@@ -120,6 +120,18 @@ steps:
     type: if
     condition: "{{ steps.review.output.choice == 'accept' }}"
     then:
+      - id: standards-drift
+        type: shell
+        run: "python3 .specify/extensions/idea/scripts/python/standards_status.py --strict"
+        continue_on_error: true
+
+      - id: standards-check
+        command: speckit.idea.standards
+        integration: "{{ inputs.integration }}"
+        input:
+          args: "--check --headless"
+        continue_on_error: true
+
       - id: accept
         command: speckit.idea.accept
         integration: "{{ inputs.integration }}"
@@ -131,15 +143,112 @@ steps:
         run: "python3 .specify/extensions/idea/scripts/python/spec_status.py --expect accepted"
         continue_on_error: true
 
-      - id: brief-if-accepted
+      - id: prototype-if-accepted
         type: if
         condition: "{{ steps.accepted-check.output.exit_code == 0 }}"
         then:
-          - id: brief
-            command: speckit.idea.brief
-            integration: "{{ inputs.integration }}"
-            input:
-              args: "--headless"
+          - id: want-prototype
+            type: gate
+            message: "The spec is accepted. Choose 'prototype' to have a clickable prototype built from it, or 'done' to stop here and take spec.md into Claude Design yourself."
+            options: [prototype, done]
+            on_reject: skip
+
+          - id: prototype-branch
+            type: if
+            condition: "{{ steps.want-prototype.output.choice == 'prototype' }}"
+            then:
+              - id: build
+                command: speckit.idea.prototype
+                integration: "{{ inputs.integration }}"
+                input:
+                  args: "--headless"
+
+              - id: prototype-loop
+                type: do-while
+                max_iterations: 4
+                condition: "{{ steps.proto-review.output.choice == 'revise' }}"
+                steps:
+                  - id: proto-path
+                    type: shell
+                    run: "python3 -c \"import json;d=json.load(open('.specify/feature.json'))['feature_directory'];print(d+'/prototype/PUBLISHED.md',end='')\""
+
+                  - id: proto-review
+                    type: gate
+                    message: "Click through the prototype (prototype/prototype.html, or the URL in prototype/PUBLISHED.md). Looks stay in the prototype; anything missing, wrong or in the wrong order is a spec change. Write that into <feature-dir>/feedback/inbox.txt, or comment on the published page. Choose 'revise' to run a feedback round and rebuild, 'accept' when the prototype stands."
+                    show_file: "{{ steps.proto-path.output.stdout }}"
+                    options: [revise, accept]
+                    on_reject: skip
+
+                  - id: proto-round
+                    type: if
+                    condition: "{{ steps.proto-review.output.choice == 'revise' }}"
+                    then:
+                      - id: proto-capture
+                        command: speckit.idea.feedback
+                        integration: "{{ inputs.integration }}"
+                        input:
+                          args: "--from-comments --inbox --reviewer {{ inputs.reviewer }} --headless"
+
+                      - id: proto-latest-round
+                        type: shell
+                        run: "python3 -c \"import json,glob;d=json.load(open('.specify/feature.json'))['feature_directory'];f=sorted(glob.glob(d+'/feedback/R*.md'),key=lambda p:int(p.rsplit('/R',1)[1][:-3]));print(f[-1] if f else '',end='')\""
+
+                      - id: proto-confirm
+                        type: gate
+                        message: "Check the normalised feedback below. Edit the round file if a line is misunderstood (Understood as / Status), then approve. Approving confirms every 'proposed' item."
+                        show_file: "{{ steps.proto-latest-round.output.stdout }}"
+                        options: [approve, abort]
+                        on_reject: abort
+
+                      - id: proto-apply
+                        command: speckit.idea.apply
+                        integration: "{{ inputs.integration }}"
+                        input:
+                          args: "--gate-confirmed {{ context.run_id }} --headless"
+
+                      - id: proto-republish
+                        command: speckit.idea.publish
+                        integration: "{{ inputs.integration }}"
+                        input:
+                          args: "--headless"
+
+                      - id: proto-reaccept
+                        command: speckit.idea.accept
+                        integration: "{{ inputs.integration }}"
+                        input:
+                          args: "--approved-by {{ inputs.reviewer }} --headless"
+                        continue_on_error: true
+
+                      - id: rebuild
+                        command: speckit.idea.prototype
+                        integration: "{{ inputs.integration }}"
+                        input:
+                          args: "--draft --headless"
+
+              - id: proto-accept-if
+                type: if
+                condition: "{{ steps.proto-review.output.choice == 'accept' }}"
+                then:
+                  - id: proto-standards-check
+                    command: speckit.idea.standards
+                    integration: "{{ inputs.integration }}"
+                    input:
+                      args: "--check --headless"
+                    continue_on_error: true
+
+                  - id: proto-accept
+                    command: speckit.idea.accept
+                    integration: "{{ inputs.integration }}"
+                    input:
+                      args: "--prototype --approved-by {{ inputs.reviewer }} --headless"
+                else:
+                  - id: proto-not-accepted
+                    type: shell
+                    run: "echo 'Prototype loop ended without acceptance (max rounds reached). Run /speckit-idea-prototype and /speckit-idea-accept --prototype interactively.'"
+            else:
+              - id: stopped-at-spec
+                type: shell
+                run: "echo 'Stopped at the accepted spec. Run /speckit-idea-prototype when you want a clickable prototype, or take spec.md into Claude Design.'"
         else:
           - id: not-ready
             type: shell

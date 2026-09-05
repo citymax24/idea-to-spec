@@ -1,0 +1,37 @@
+schema_version: "1.0"
+
+standard:
+  id: "branding-cd"
+  prefix: "STD-CD"
+  name: "Corporate Design"
+  version: "0.1"                # version of THIS module; bump on every rules.md or assets change
+  status: "draft"               # draft until the real CD manual has been transferred in
+  kind: "internal"              # written and versioned here, by us
+  authority: "internal"         # loses against law and contract standards
+  precedence: 50
+  owner: "[FILL: who owns the CD manual]"
+  updated: "2026-09-05"
+  review_by: "[FILL: date]"
+
+source:
+  name: "[FILL: CD manual name and its own version, e.g. 'CD-Manual v4.1']"
+  national: null
+  conformance: null
+  source_version: null          # internal standards are self-versioned; the module version is the version
+  applicable_since: "[FILL: date]"
+  url: "[FILL: where the manual lives]"
+  legal_review: >-
+    Not applicable as law. Font and image licences ARE a legal question: before a typeface or a
+    stock image is embedded in a published prototype, the licence must permit web embedding and
+    redistribution. Recorded per asset in assets/README.md.
+
+applies_to: "all"
+scope_note: >-
+  DRAFT MODULE. The structure, the rule IDs and the mechanism are real; the values are
+  placeholders marked [FILL: ...]. A prototype built while this module is in status "draft"
+  reports every CD rule as "not verifiable - module is a draft" rather than passing it silently.
+  Fill the values from the CD manual, set status to "active", bump the version, and rebind.
+
+assets:
+  dir: "assets/"
+  inline: true                  # the prototype is one self-contained file; assets are embedded, never linked

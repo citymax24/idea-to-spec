@@ -1,0 +1,34 @@
+schema_version: "1.0"
+
+standard:
+  id: "[kebab-case-id, same as the directory name]"
+  prefix: "STD-[SHORT]"         # rule IDs become STD-[SHORT]-001; never reuse a prefix
+  name: "[what this standard is, in one noun phrase]"
+  version: "0.1"                # version of THIS module; bump on every rules.md or assets change
+  status: "draft"               # draft | active | retired — draft never reports a rule as passed
+  kind: "internal"              # external (versioned outside, by a law or a norm) | internal
+  authority: "internal"         # law | contract | internal — decides conflicts and blocking
+  precedence: 50                # tiebreaker inside the authority band; lower wins
+  owner: "[name]"
+  updated: "[YYYY-MM-DD]"
+  review_by: "[YYYY-MM-DD]"     # when someone must check whether the source moved
+
+source:
+  name: "[the law, norm or manual this comes from]"
+  national: "[national transposition, or null]"
+  conformance: "[the testable norm and level, or null]"
+  source_version: "[the version of the source this module was written against, or null for internal]"
+  applicable_since: "[YYYY-MM-DD]"
+  url: "[where the source lives]"
+  legal_review: >-
+    [Whether a lawyer has looked at this, and what specifically is still unverified.
+     Say "NOT DONE" plainly when it has not been done.]
+
+applies_to: "all"               # all | one line naming which ideas this binds
+scope_note: >-
+  [Who and what is in scope, and what an idea would have to be for this module not to apply.
+   Out of scope is an exemption a human signs, never an assumption made while drafting.]
+
+assets:
+  dir: null                     # or "assets/" — the prototype embeds these, it cannot link them
+  inline: true

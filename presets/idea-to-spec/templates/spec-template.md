@@ -9,10 +9,14 @@
 | **Reviewed sections** | — |
 | **Approved by** | — |
 | **Approved on** | — |
+| **Prototype** | — |
 
 <!--
   STATUS is one of: draft | in-review | accepted.
   Only a human sets "accepted" (via /speckit-idea-accept). The AI never does.
+  PROTOTYPE stays "—" until a human accepts the built prototype
+  (via /speckit-idea-accept --prototype); then it reads
+  "accepted by <name> on <date> (spec v<x.y>)".
 
   PROVENANCE RULE: every JOB, FLOW, SCR, FR, SC and constraint line ends with
   a provenance tag. Allowed tags:
@@ -22,6 +26,10 @@
     [C-02 resolved]       a conflict the human resolved in analysis/conflicts.md
     [Q-03 resolved]       an open question the human answered in analysis/
     [R1-02]               a confirmed feedback item from feedback/R1.md
+    [STD-A11Y-007 · v1.0] a project standard rule at the module version it was
+                          bound at; see standards/ and the idea's
+                          standards/BOUND.md. Not the reviewer's to remove:
+                          dropping one needs a signed exemption, not a round.
     [ASSUMPTION: derived from S3 row 30]   the AI filled a gap; say from what
   A line without a tag is a defect.
 
@@ -73,7 +81,7 @@ SCR-01 → SCR-03 → SCR-04 → done. [One sentence on the happy path and the o
 
 ## 6 Screen Catalog *(mandatory)*
 
-One block per screen. This section becomes the design brief.
+One block per screen. This section is what the prototype is built from: one screen per SCR.
 
 ### SCR-01 · [Screen name] — [S1 §4]
 
@@ -94,6 +102,7 @@ Each requirement is testable and ends with a provenance tag.
 
 ## 8 Constraints
 
+- **Standards bound**: [STD-A11Y v1.0 · STD-CD v0.1 (draft), or "none — no standards registry"] — [STD-BINDING]
 - **Devices / context**: [phone on site, desktop in office …] — [S1 §2]
 - **Language**: [UI language(s)] — [S1]
 - **Brand / tone**: [tone of voice, existing brand assets] — [S2 slide 2]

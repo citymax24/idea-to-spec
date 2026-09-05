@@ -122,10 +122,10 @@ if command -v specify >/dev/null 2>&1; then
 fi
 
 skills=$(ls .claude/skills 2>/dev/null | grep -c '^speckit-idea-' || true)
-if [[ "$skills" == "8" ]]; then
-  ok "8 idea skills installed"
+if [[ "$skills" == "9" ]]; then
+  ok "9 idea skills installed"
 else
-  warn "$skills of 8 idea skills present"; missing=1
+  warn "$skills of 9 idea skills present"; missing=1
 fi
 
 if git rev-parse --git-dir >/dev/null 2>&1; then

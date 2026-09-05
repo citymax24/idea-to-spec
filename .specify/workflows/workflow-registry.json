@@ -12,10 +12,10 @@
     "idea-to-spec": {
       "name": "Idea to Spec",
       "version": "0.1.0",
-      "description": "Mixed inputs \u2192 cited facts \u2192 spec draft \u2192 human review rounds \u2192 acceptance \u2192 design brief",
+      "description": "Mixed inputs \u2192 cited facts \u2192 spec draft bound to the project standards \u2192 human review rounds \u2192 acceptance \u2192 clickable prototype",
       "source": "workflows/idea-to-spec",
       "installed_at": "2026-09-05T10:17:43.732763+00:00",
-      "updated_at": "2026-09-05T10:46:17.661807+00:00"
+      "updated_at": "2026-09-05T15:15:51.737635+00:00"
     }
   }
 }
