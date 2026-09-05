@@ -2,6 +2,17 @@
 
 One block per spec version. Every change names the feedback item that triggered it. Read newest first.
 
+## v1.0 · 2026-09-05 · accepted by yana
+
+| Change | Affects | Trigger | Type |
+|--------|---------|---------|------|
+| Version 0.2 → 1.0, status in-review → accepted | header | acceptance by yana | CHANGE |
+| Reviewed sections recorded as accepted without section-by-section coverage, knowingly | header | acceptance by yana | CHANGE |
+
+Rounds this spec went through: v0.1 initial draft from S1–S4 · R1 (user management) → v0.2 · accepted as v1.0.
+Checklist at acceptance: 11 of 12 items passed mechanically; "Reviewed sections cover the whole spec" was closed by the reviewer accepting without full coverage.
+Accepted with these assumptions unread: A-06/FR-029 (only the Chef administers users), A-05/Q-10 (recipient of the seven-day reminder, still open), A-02/FR-008 ("abgesagt" and "verlaufen" also leave the open list). FR-021 (per-user login) stands against F-044 by the resolution of C-02.
+
 ## v0.2 · 2026-09-05 · from round R1
 
 | Change | Affects | Trigger | Type |
