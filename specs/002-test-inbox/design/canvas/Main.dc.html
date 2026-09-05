@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;family=Public+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: "Public Sans", "Helvetica Neue", sans-serif; }
+    a { color: #7a5a1e; } a:hover { color: #574012; }
+    input { font-family: inherit; }
+    input:focus { outline: 2px solid #2b2620; outline-offset: 1px; }
+  </style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #efe9dd; color: #2b2620; display: flex; flex-direction: column">
+
+  <div style="padding: 24px 18px 14px; display: flex; flex-direction: column; gap: 12px">
+    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 26px; font-weight: 700; letter-spacing: -0.01em">Offene Angebote</div>
+    <div style="font-size: 14px; color: #6b6154">{{kopfzeile}}</div>
+    <div style="display: flex; align-items: center; gap: 9px; background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 3px; padding: 10px 13px">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9a8f7d" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input value="{{q}}" onInput="{{onSearch}}" placeholder="Kunde oder Nummer" style="border: 0; background: transparent; font-size: 15px; color: #2b2620; width: 100%; padding: 0" />
+    </div>
+    <div style="display: flex; gap: 7px">
+      <sc-for list="{{chips}}" as="chip" hint-placeholder-count="3">
+        <div onClick="{{chip.pick}}" style="font-size: 13px; font-weight: 600; padding: 8px 13px; border-radius: 999px; cursor: pointer; background: {{chip.bg}}; color: {{chip.fg}}; border: 1px solid {{chip.bd}}">{{chip.label}}</div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="padding: 4px 18px 18px; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+    <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+      <div style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 4px; display: flex; overflow: hidden; cursor: pointer">
+        <div style="width: 6px; background: {{r.streifen}}"></div>
+        <div style="padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; flex-grow: 1">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+            <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 700">{{r.kunde}}</div>
+            <div style="font-size: 16px; font-weight: 700; white-space: nowrap">{{r.betrag}}</div>
+          </div>
+          <div style="font-size: 12px; color: #8b8173">{{r.nr}} · verschickt {{r.versendet}}</div>
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px">
+            <div style="font-size: 14px; font-weight: {{r.gewicht}}; color: {{r.nachfassFarbe}}">{{r.nachfass}}</div>
+            <div style="font-size: 12px; font-weight: 600; padding: 4px 9px; background: #e6ddcb; border-radius: 3px; color: #4d453a">{{r.status}}</div>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+    <sc-if value="{{leer}}" hint-placeholder-val="{{false}}">
+      <div style="background: #fdfbf6; border: 1px dashed #cdc3b0; border-radius: 4px; padding: 28px 20px; text-align: center; display: flex; flex-direction: column; gap: 6px">
+        <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 700">Nichts gefunden</div>
+        <div style="font-size: 14px; color: #6b6154; line-height: 1.45">Kein offenes Angebot passt zu Suche und Filter.</div>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="margin-top: auto; padding: 14px 18px 24px">
+    <div style="background: #2b2620; color: #efe9dd; text-align: center; padding: 17px; font-size: 17px; font-weight: 600; border-radius: 4px; cursor: pointer">Neues Angebot</div>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { filter: 'Alle', q: '' };
+  }
+  renderVals() {
+    const alle = [
+      { kunde: 'Fam. Bergmann', nr: 'A-2026-114', betrag: '4.820 €', versendet: '21.08.', nachfass: 'Nachfassen seit 3 Tagen', tage: -3, status: 'verschickt' },
+      { kunde: 'Stadtwerke Griesheim', nr: 'A-2026-109', betrag: '12.400 €', versendet: '18.08.', nachfass: 'Nachfassen heute', tage: 0, status: 'verschickt' },
+      { kunde: 'Hotel Sonnenhof', nr: 'A-2026-121', betrag: '7.150 €', versendet: '27.08.', nachfass: 'Nachfassen in 2 Tagen', tage: 2, status: 'nachgefasst' },
+      { kunde: 'Fam. Ott', nr: 'A-2026-123', betrag: '2.390 €', versendet: '29.08.', nachfass: 'Nachfassen in 4 Tagen', tage: 4, status: 'verschickt' },
+      { kunde: 'Autohaus Keller', nr: 'A-2026-118', betrag: '18.900 €', versendet: '25.08.', nachfass: 'Nachfassen in 6 Tagen', tage: 6, status: 'nachgefasst' }
+    ];
+    const q = (this.state.q || '').toLowerCase();
+    const rows = alle
+      .filter((r) => this.state.filter === 'Alle' || r.status === this.state.filter)
+      .filter((r) => q === '' || r.kunde.toLowerCase().indexOf(q) >= 0 || r.nr.toLowerCase().indexOf(q) >= 0)
+      .map((r) => ({
+        ...r,
+        streifen: r.tage <= 0 ? '#a8421f' : (r.status === 'nachgefasst' ? '#7a8b5a' : '#cdc3b0'),
+        nachfassFarbe: r.tage <= 0 ? '#a8421f' : '#6b6154',
+        gewicht: r.tage <= 0 ? '700' : '400'
+      }));
+    const offen = rows.length;
+    const faellig = rows.filter((r) => r.tage <= 0).length;
+    return {
+      rows,
+      leer: offen === 0,
+      q: this.state.q,
+      kopfzeile: offen === 0 ? 'nichts gefunden' : offen + ' offen, davon ' + faellig + ' überfällig',
+      onSearch: (e) => this.setState({ q: e.target.value }),
+      chips: ['Alle', 'verschickt', 'nachgefasst'].map((c) => ({
+        label: c,
+        bg: c === this.state.filter ? '#2b2620' : '#fdfbf6',
+        fg: c === this.state.filter ? '#efe9dd' : '#5b5348',
+        bd: c === this.state.filter ? '#2b2620' : '#cdc3b0',
+        pick: () => this.setState({ filter: c })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

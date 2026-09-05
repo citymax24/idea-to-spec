@@ -1,0 +1,454 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;family=Public+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: "Public Sans", "Helvetica Neue", sans-serif; }
+    a { color: #7a5a1e; } a:hover { color: #574012; }
+    input, textarea { font-family: inherit; }
+    input:focus, textarea:focus { outline: 2px solid #2b2620; outline-offset: 1px; }
+  </style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #efe9dd; color: #2b2620; display: flex; flex-direction: column; overflow: hidden">
+
+  <!-- ANMELDEN -->
+  <sc-if value="{{istAnmelden}}" hint-placeholder-val="{{true}}">
+    <div style="padding: 0 22px; display: flex; flex-direction: column; height: 100%; box-sizing: border-box">
+      <div style="margin-top: 150px; display: flex; flex-direction: column; gap: 6px">
+        <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 700">Anmelden</div>
+        <div style="font-size: 15px; color: #6b6154; line-height: 1.45">Einmal anmelden, dann bleiben Sie auf diesem Gerät angemeldet.</div>
+      </div>
+      <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <div style="font-size: 13px; font-weight: 600; color: #5b5348">E-Mail</div>
+          <input value="{{mail}}" onInput="{{onMail}}" placeholder="name@betrieb.de" style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 3px; padding: 15px 14px; font-size: 16px; color: #2b2620" />
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <div style="font-size: 13px; font-weight: 600; color: #5b5348">Passwort</div>
+          <input type="password" value="{{pw}}" onInput="{{onPw}}" placeholder="••••••••" style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 3px; padding: 15px 14px; font-size: 16px; color: #2b2620" />
+        </div>
+      </div>
+      <div onClick="{{anmelden}}" style="margin-top: 22px; background: {{anmeldenBg}}; color: #efe9dd; text-align: center; padding: 18px; font-size: 17px; font-weight: 600; border-radius: 4px; cursor: pointer">Anmelden</div>
+      <div style="margin-top: 14px; font-size: 13px; color: #8b8173; text-align: center">Felder sind vorbelegt — Anmelden tippen, um weiterzugehen.</div>
+    </div>
+  </sc-if>
+
+  <!-- IMPORT -->
+  <sc-if value="{{istImport}}" hint-placeholder-val="{{false}}">
+    <div style="display: flex; flex-direction: column; height: 100%; box-sizing: border-box">
+      <div style="padding: 26px 18px 12px; display: flex; flex-direction: column; gap: 6px">
+        <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 25px; font-weight: 700">Alte Excel-Liste übernehmen</div>
+        <div style="font-size: 14px; color: #6b6154; line-height: 1.45">Einmalig beim Start. Danach werden Angebote direkt hier erfasst.</div>
+      </div>
+      <div style="padding: 8px 18px 0">
+        <div style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 4px; padding: 20px; display: flex; align-items: center; gap: 13px">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7a6a4a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a1 1 0 00-1 1v16a1 1 0 001 1h10a1 1 0 001-1V7z"/><path d="M14 3v4h4"/></svg>
+          <div style="display: flex; flex-direction: column; gap: 2px">
+            <div style="font-size: 15px; font-weight: 600">Angebote_2026.xlsx</div>
+            <div style="font-size: 12px; color: #8b8173">16 Zeilen gelesen</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding: 16px 18px 0; display: flex; flex-direction: column; gap: 10px">
+        <div style="background: #f7ede2; border: 1px solid #d8b79a; border-radius: 4px; padding: 14px 15px; display: flex; flex-direction: column; gap: 4px">
+          <div style="font-size: 14px; font-weight: 700; color: #8a3d10">2 von 16 Zeilen nicht lesbar</div>
+          <div style="font-size: 13px; color: #6b5340; line-height: 1.45">Zeile 9 und 14 haben keinen Betrag. Sie werden nicht übernommen.</div>
+        </div>
+      </div>
+      <div style="margin-top: auto; padding: 14px 18px 24px; display: flex; flex-direction: column; gap: 10px">
+        <div onClick="{{importieren}}" style="background: #2b2620; color: #efe9dd; text-align: center; padding: 17px; font-size: 17px; font-weight: 600; border-radius: 4px; cursor: pointer">14 Angebote übernehmen</div>
+        <div onClick="{{ueberspringen}}" style="text-align: center; padding: 6px; font-size: 15px; color: #6b6154; cursor: pointer">Überspringen und leer starten</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- LISTE -->
+  <sc-if value="{{istListe}}" hint-placeholder-val="{{false}}">
+    <div style="display: flex; flex-direction: column; height: 100%; box-sizing: border-box">
+      <div style="padding: 22px 18px 12px; display: flex; flex-direction: column; gap: 11px">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+          <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 25px; font-weight: 700">Offene Angebote</div>
+          <div onClick="{{zuBenutzer}}" style="padding: 6px; cursor: pointer; display: flex">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6b6154" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.4 3.1-5.6 7-5.6s7 2.2 7 5.6"/></svg>
+          </div>
+        </div>
+        <div style="font-size: 14px; color: #6b6154">{{kopfzeile}}</div>
+        <div style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 3px; display: flex; align-items: center; gap: 9px; padding: 10px 13px">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9a8f7d" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input value="{{q}}" onInput="{{onSearch}}" placeholder="Kunde oder Nummer" style="border: 0; background: transparent; font-size: 15px; color: #2b2620; width: 100%; padding: 0" />
+        </div>
+        <div style="display: flex; gap: 7px">
+          <sc-for list="{{chips}}" as="chip" hint-placeholder-count="3">
+            <div onClick="{{chip.pick}}" style="font-size: 13px; font-weight: 600; padding: 8px 13px; border-radius: 999px; cursor: pointer; background: {{chip.bg}}; color: {{chip.fg}}; border: 1px solid {{chip.bd}}">{{chip.label}}</div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="padding: 4px 18px 0; display: flex; flex-direction: column; gap: 11px; overflow: hidden">
+        <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+          <div onClick="{{r.oeffnen}}" style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 4px; display: flex; overflow: hidden; cursor: pointer">
+            <div style="width: 6px; background: {{r.streifen}}"></div>
+            <div style="padding: 13px 15px; display: flex; flex-direction: column; gap: 5px; flex-grow: 1">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+                <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 700">{{r.kunde}}</div>
+                <div style="font-size: 15px; font-weight: 700; white-space: nowrap">{{r.betrag}}</div>
+              </div>
+              <div style="font-size: 12px; color: #8b8173">{{r.nr}} · verschickt {{r.versendet}}</div>
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px">
+                <div style="font-size: 13px; font-weight: {{r.gewicht}}; color: {{r.nachfassFarbe}}">{{r.nachfass}}</div>
+                <div style="font-size: 12px; font-weight: 600; padding: 4px 9px; background: #e6ddcb; border-radius: 3px; color: #4d453a">{{r.status}}</div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+        <sc-if value="{{leer}}" hint-placeholder-val="{{false}}">
+          <div style="background: #fdfbf6; border: 1px dashed #cdc3b0; border-radius: 4px; padding: 34px 22px; text-align: center; display: flex; flex-direction: column; gap: 8px">
+            <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 700">{{leerTitel}}</div>
+            <div style="font-size: 14px; color: #6b6154; line-height: 1.5">{{leerText}}</div>
+          </div>
+        </sc-if>
+      </div>
+      <div style="margin-top: auto; padding: 14px 18px 24px">
+        <div onClick="{{zuNeu}}" style="background: #2b2620; color: #efe9dd; text-align: center; padding: 17px; font-size: 17px; font-weight: 600; border-radius: 4px; cursor: pointer">Neues Angebot</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- NEUES ANGEBOT -->
+  <sc-if value="{{istNeu}}" hint-placeholder-val="{{false}}">
+    <div style="display: flex; flex-direction: column; height: 100%; box-sizing: border-box">
+      <div style="padding: 20px 18px 12px; display: flex; flex-direction: column; gap: 3px">
+        <div onClick="{{zurListe}}" style="font-size: 13px; color: #8b8173; display: flex; align-items: center; gap: 6px; cursor: pointer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8b8173" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Offene Angebote
+        </div>
+        <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 25px; font-weight: 700; margin-top: 4px">Neues Angebot</div>
+      </div>
+      <div style="padding: 6px 18px 0">
+        <div onClick="{{anhaengen}}" style="background: {{anhangBg}}; border: {{anhangBorder}}; border-radius: 4px; padding: 20px 18px; display: flex; align-items: center; gap: 14px; cursor: pointer">
+          <div style="width: 44px; height: 44px; border-radius: 3px; background: #e6ddcb; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#7a6a4a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a1 1 0 011-1h3l1.4-2h5.2L16 5h3a1 1 0 011 1v12a1 1 0 01-1 1H5a1 1 0 01-1-1v-4"/><circle cx="12" cy="12" r="3.4"/></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 3px">
+            <div style="font-size: 16px; font-weight: 700">{{anhangTitel}}</div>
+            <div style="font-size: 13px; color: #6b6154">{{anhangHinweis}}</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding: 12px 18px 0; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; flex-direction: column; gap: 5px">
+          <div style="font-size: 13px; font-weight: 600; color: #5b5348">Kunde</div>
+          <input value="{{nKunde}}" onInput="{{onKunde}}" placeholder="Name des Kunden" style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 3px; padding: 13px; font-size: 16px; color: #2b2620" />
+        </div>
+        <div style="display: flex; gap: 10px">
+          <div style="display: flex; flex-direction: column; gap: 5px; flex-grow: 1">
+            <div style="font-size: 13px; font-weight: 600; color: #5b5348">Betrag</div>
+            <input value="{{nBetrag}}" onInput="{{onBetrag}}" placeholder="0,00 €" style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 3px; padding: 13px; font-size: 16px; color: #2b2620; width: 100%; box-sizing: border-box" />
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 5px; flex-grow: 1">
+            <div style="font-size: 13px; font-weight: 600; color: #5b5348">Verschickt am</div>
+            <input value="{{nDatum}}" onInput="{{onDatum}}" placeholder="TT.MM." style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 3px; padding: 13px; font-size: 16px; color: #2b2620; width: 100%; box-sizing: border-box" />
+          </div>
+        </div>
+      </div>
+      <div style="padding: 14px 18px 0">
+        <div style="background: #e6ddcb; border-radius: 3px; padding: 12px 14px; font-size: 13px; color: #5b5348; line-height: 1.4">Nachfassen <span style="font-weight: 700; color: #2b2620">{{nNachfass}}</span> — 7 Tage nach dem Versand. {{speichernHinweis}}</div>
+      </div>
+      <div style="margin-top: auto; padding: 14px 18px 24px">
+        <div onClick="{{speichern}}" style="background: {{speichernBg}}; color: #efe9dd; text-align: center; padding: 17px; font-size: 17px; font-weight: 600; border-radius: 4px; cursor: pointer">Speichern</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- DETAIL -->
+  <sc-if value="{{istDetail}}" hint-placeholder-val="{{false}}">
+    <div style="display: flex; flex-direction: column; height: 100%; box-sizing: border-box">
+      <div style="padding: 20px 18px 10px; display: flex; flex-direction: column; gap: 3px">
+        <div onClick="{{zurListe}}" style="font-size: 13px; color: #8b8173; display: flex; align-items: center; gap: 6px; cursor: pointer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8b8173" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Offene Angebote
+        </div>
+        <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; font-weight: 700; margin-top: 4px">{{dKunde}}</div>
+        <div style="font-size: 13px; color: #6b6154">{{dNr}} · {{dBetrag}} · verschickt {{dVersendet}}</div>
+        <div style="font-size: 14px; font-weight: 700; color: {{dNachfassFarbe}}; margin-top: 3px">{{dNachfass}}</div>
+      </div>
+      <div style="padding: 6px 18px 0; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: #8b8173">Status</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 7px">
+          <sc-for list="{{stati}}" as="s" hint-placeholder-count="5">
+            <div onClick="{{s.pick}}" style="font-size: 15px; font-weight: 600; padding: 13px 15px; border-radius: 4px; cursor: pointer; background: {{s.bg}}; color: {{s.fg}}; border: 1px solid {{s.bd}}">{{s.label}}</div>
+          </sc-for>
+        </div>
+      </div>
+      <sc-if value="{{istAbgesagt}}" hint-placeholder-val="{{false}}">
+        <div style="padding: 14px 18px 0; display: flex; flex-direction: column; gap: 8px">
+          <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: #8b8173">Absagegrund</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px">
+            <sc-for list="{{gruende}}" as="g" hint-placeholder-count="4">
+              <div onClick="{{g.pick}}" style="font-size: 14px; padding: 10px 13px; border-radius: 999px; cursor: pointer; background: {{g.bg}}; color: {{g.fg}}; border: 1px solid {{g.bd}}">{{g.label}}</div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <div style="padding: 14px 18px 0; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: #8b8173">Notiz</div>
+        <textarea value="{{dNotiz}}" onInput="{{onNotiz}}" style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 3px; padding: 12px 13px; font-size: 15px; line-height: 1.45; color: #2b2620; min-height: 58px; resize: none">{{dNotiz}}</textarea>
+      </div>
+      <div style="padding: 14px 18px 0">
+        <div style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 3px; padding: 12px; display: flex; align-items: center; gap: 12px">
+          <div style="width: 40px; height: 50px; background: #e6ddcb; border: 1px solid #cdc3b0; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b8173" stroke-width="1.8" stroke-linejoin="round"><path d="M14 3H7a1 1 0 00-1 1v16a1 1 0 001 1h10a1 1 0 001-1V7z"/><path d="M14 3v4h4"/></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 3px">
+            <div style="font-size: 14px; font-weight: 600">{{dDatei}}</div>
+            <div style="font-size: 12px; color: #8b8173">Angehängt am {{dVersendet}}</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: auto; padding: 14px 18px 24px">
+        <div onClick="{{uebernehmen}}" style="background: #2b2620; color: #efe9dd; text-align: center; padding: 16px; font-size: 16px; font-weight: 600; border-radius: 4px; cursor: pointer">{{dKnopf}}</div>
+        <div style="font-size: 13px; color: #6b6154; text-align: center; margin-top: 10px">{{dHinweis}}</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- BENUTZER -->
+  <sc-if value="{{istBenutzer}}" hint-placeholder-val="{{false}}">
+    <div style="display: flex; flex-direction: column; height: 100%; box-sizing: border-box">
+      <div style="padding: 20px 18px 10px; display: flex; flex-direction: column; gap: 3px">
+        <sc-if value="{{nichtEinrichtung}}" hint-placeholder-val="{{true}}">
+          <div onClick="{{zurListe}}" style="font-size: 13px; color: #8b8173; display: flex; align-items: center; gap: 6px; cursor: pointer">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8b8173" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Offene Angebote
+          </div>
+        </sc-if>
+        <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 25px; font-weight: 700; margin-top: 4px">{{benutzerTitel}}</div>
+        <div style="font-size: 14px; color: #6b6154; line-height: 1.45">{{benutzerUnter}}</div>
+        <div style="font-size: 13px; font-weight: 600; color: {{zahlFarbe}}; margin-top: 5px">{{adminZeile}}</div>
+      </div>
+      <div style="padding: 8px 18px 0; display: flex; flex-direction: column; gap: 9px">
+        <sc-for list="{{leute}}" as="p" hint-placeholder-count="4">
+          <div style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 4px; padding: 13px 15px; display: flex; flex-direction: column; gap: 9px">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+              <div style="display: flex; flex-direction: column; gap: 2px">
+                <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-weight: 700">{{p.name}}</div>
+                <div style="font-size: 12px; color: #8b8173">{{p.rolle}}</div>
+              </div>
+              <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 9px; border-radius: 3px; background: {{p.badgeBg}}; color: {{p.badgeFg}}">{{p.badge}}</div>
+            </div>
+            <div style="display: flex; gap: 7px">
+              <div onClick="{{p.rechtWechseln}}" style="font-size: 13px; font-weight: 600; padding: 8px 11px; border-radius: 3px; cursor: pointer; color: {{p.rechtFg}}; border: 1px solid {{p.rechtBd}}">{{p.rechtText}}</div>
+              <div onClick="{{p.entfernen}}" style="font-size: 13px; font-weight: 600; padding: 8px 11px; border-radius: 3px; cursor: pointer; color: {{p.wegFg}}; border: 1px solid {{p.wegBd}}">Entfernen</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{hatMeldung}}" hint-placeholder-val="{{false}}">
+        <div style="padding: 13px 18px 0">
+          <div style="background: #f7ede2; border: 1px solid #d8b79a; border-radius: 4px; padding: 13px 15px; display: flex; flex-direction: column; gap: 4px">
+            <div style="font-size: 14px; font-weight: 700; color: #8a3d10">{{meldungTitel}}</div>
+            <div style="font-size: 13px; color: #6b5340; line-height: 1.45">{{meldungText}}</div>
+          </div>
+        </div>
+      </sc-if>
+      <div style="margin-top: auto; padding: 13px 18px 24px">
+        <div onClick="{{benutzerKnopf}}" style="background: {{benutzerKnopfBg}}; color: #efe9dd; text-align: center; padding: 17px; font-size: 17px; font-weight: 600; border-radius: 4px; cursor: pointer">{{benutzerKnopfText}}</div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      view: 'anmelden', mail: 'jonas@gruenwerk.de', pw: 'geheim123', q: '', filter: 'Alle',
+      offenId: null, anhang: false, nKunde: '', nBetrag: '', nDatum: '', naechsteNr: 130,
+      meldung: null, zaehler: 0,
+      einrichtung: true,
+      leute: [
+        { name: 'Max Grünwerk', rolle: 'Chef', admin: true },
+        { name: 'Petra Grünwerk', rolle: 'Büro', admin: false },
+        { name: 'Jonas Reiter', rolle: 'Bauleiter', admin: false },
+        { name: 'Timo Sandner', rolle: 'Bauleiter', admin: false }
+      ],
+      angebote: []
+    };
+  }
+  bestand() {
+    return [
+      { id: 1, kunde: 'Fam. Bergmann', nr: 'A-2026-114', betrag: '4.820 €', versendet: '21.08.', tage: -3, status: 'verschickt', notiz: 'Will erst nach dem Urlaub entscheiden, ab 15.09. erreichbar.', datei: 'Angebot_Bergmann.pdf' },
+      { id: 2, kunde: 'Stadtwerke Griesheim', nr: 'A-2026-109', betrag: '12.400 €', versendet: '18.08.', tage: 0, status: 'verschickt', notiz: 'Vergabe läuft über den Bauhof, Rückruf zugesagt.', datei: 'Angebot_Stadtwerke.pdf' },
+      { id: 3, kunde: 'Hotel Sonnenhof', nr: 'A-2026-121', betrag: '7.150 €', versendet: '27.08.', tage: 2, status: 'nachgefasst', notiz: 'Termin für Ortsbegehung steht noch aus.', datei: 'Foto_Sonnenhof.jpg' },
+      { id: 4, kunde: 'Fam. Ott', nr: 'A-2026-123', betrag: '2.390 €', versendet: '29.08.', tage: 4, status: 'verschickt', notiz: '', datei: 'Angebot_Ott.pdf' },
+      { id: 5, kunde: 'Autohaus Keller', nr: 'A-2026-118', betrag: '18.900 €', versendet: '25.08.', tage: 6, status: 'nachgefasst', notiz: 'Zweiter Anlauf, erster Kontakt war positiv.', datei: 'Angebot_Keller.pdf' }
+    ];
+  }
+  setStatus(id, w) {
+    this.setState({ angebote: this.state.angebote.map((a) => a.id === id ? { ...a, status: w, grund: w === 'abgesagt' ? a.grund : null } : a) });
+  }
+  renderVals() {
+    const st = this.state;
+    const offen = st.angebote.filter((a) => a.status === 'verschickt' || a.status === 'nachgefasst');
+    const q = (st.q || '').toLowerCase();
+    const sichtbar = offen
+      .filter((a) => st.filter === 'Alle' || a.status === st.filter)
+      .filter((a) => q === '' || a.kunde.toLowerCase().indexOf(q) >= 0 || a.nr.toLowerCase().indexOf(q) >= 0);
+    const d = st.angebote.filter((a) => a.id === st.offenId)[0] || null;
+    const werte = ['verschickt', 'nachgefasst', 'zugesagt', 'abgesagt', 'verlaufen'];
+    const raus = d ? (d.status === 'zugesagt' || d.status === 'abgesagt' || d.status === 'verlaufen') : false;
+    const adminZahl = st.leute.filter((p) => p.admin).length;
+    const namen = ['Sara Weiland', 'Nils Brandt', 'Anke Rösch'];
+
+    return {
+      istAnmelden: st.view === 'anmelden', istImport: st.view === 'import', istListe: st.view === 'liste',
+      istNeu: st.view === 'neu', istDetail: st.view === 'detail' && d !== null, istBenutzer: st.view === 'benutzer',
+
+      mail: st.mail, pw: st.pw,
+      onMail: (e) => this.setState({ mail: e.target.value }),
+      onPw: (e) => this.setState({ pw: e.target.value }),
+      anmeldenBg: '#2b2620',
+      anmelden: () => this.setState({ view: 'import' }),
+
+      importieren: () => this.setState({ view: 'benutzer', angebote: this.bestand() }),
+      ueberspringen: () => this.setState({ view: 'benutzer', angebote: [] }),
+
+      q: st.q,
+      onSearch: (e) => this.setState({ q: e.target.value }),
+      kopfzeile: offen.length === 0 ? 'nichts offen' : offen.length + ' offen, davon ' + offen.filter((a) => a.tage <= 0).length + ' überfällig',
+      leer: sichtbar.length === 0,
+      leerTitel: offen.length === 0 ? 'Noch nichts offen' : 'Nichts gefunden',
+      leerText: offen.length === 0
+        ? 'Sobald Sie ein verschicktes Angebot anhängen, steht es hier — sortiert nach dem Tag, an dem nachgefasst werden sollte.'
+        : 'Kein offenes Angebot passt zu Suche und Filter.',
+      chips: ['Alle', 'verschickt', 'nachgefasst'].map((c) => ({
+        label: c,
+        bg: c === st.filter ? '#2b2620' : '#fdfbf6',
+        fg: c === st.filter ? '#efe9dd' : '#5b5348',
+        bd: c === st.filter ? '#2b2620' : '#cdc3b0',
+        pick: () => this.setState({ filter: c })
+      })),
+      rows: sichtbar.map((a) => ({
+        kunde: a.kunde, nr: a.nr, betrag: a.betrag, versendet: a.versendet, status: a.status,
+        nachfass: a.tage < 0 ? 'Nachfassen seit ' + (-a.tage) + ' Tagen' : (a.tage === 0 ? 'Nachfassen heute' : 'Nachfassen in ' + a.tage + ' Tagen'),
+        streifen: a.tage <= 0 ? '#a8421f' : (a.status === 'nachgefasst' ? '#7a8b5a' : '#cdc3b0'),
+        nachfassFarbe: a.tage <= 0 ? '#a8421f' : '#6b6154',
+        gewicht: a.tage <= 0 ? '700' : '400',
+        oeffnen: () => this.setState({ view: 'detail', offenId: a.id })
+      })),
+      zuNeu: () => this.setState({ view: 'neu', anhang: false, nKunde: 'Fam. Lindner', nBetrag: '3.640 €', nDatum: '05.09.' }),
+      zuBenutzer: () => this.setState({ view: 'benutzer', meldung: null }),
+      zurListe: () => this.setState({ view: 'liste' }),
+
+      nKunde: st.nKunde, nBetrag: st.nBetrag, nDatum: st.nDatum,
+      onKunde: (e) => this.setState({ nKunde: e.target.value }),
+      onBetrag: (e) => this.setState({ nBetrag: e.target.value }),
+      onDatum: (e) => this.setState({ nDatum: e.target.value }),
+      anhaengen: () => this.setState({ anhang: !st.anhang }),
+      anhangTitel: st.anhang ? 'Angebot_Foto.jpg' : 'Foto oder PDF anhängen',
+      anhangHinweis: st.anhang ? 'Angehängt · zum Ersetzen tippen' : 'Abfotografieren oder Datei wählen',
+      anhangBg: st.anhang ? '#fdfbf6' : '#f7ede2',
+      anhangBorder: st.anhang ? '1px solid #cdc3b0' : '1px dashed #b3a68e',
+      nNachfass: st.nDatum.length > 0 ? '7 Tage nach dem ' + st.nDatum : '—',
+      speichernBg: st.anhang ? '#2b2620' : '#c3bbab',
+      speichernHinweis: st.anhang ? 'Speichern ist frei.' : 'Erst Foto oder PDF antippen, dann wird Speichern aktiv.',
+      speichern: () => {
+        if (!st.anhang) return;
+        const neu = {
+          id: 1000 + st.zaehler, kunde: st.nKunde, nr: 'A-2026-' + st.naechsteNr,
+          betrag: st.nBetrag, versendet: st.nDatum, tage: 7, status: 'verschickt', notiz: '', datei: 'Angebot_Foto.jpg'
+        };
+        this.setState({ view: 'liste', angebote: st.angebote.concat([neu]), naechsteNr: st.naechsteNr + 1, zaehler: st.zaehler + 1 });
+      },
+
+      dKunde: d ? d.kunde : '', dNr: d ? d.nr : '', dBetrag: d ? d.betrag : '', dVersendet: d ? d.versendet : '',
+      dNotiz: d ? d.notiz : '', dDatei: d ? d.datei : '',
+      dNachfass: d ? (d.tage < 0 ? 'Nachfassen seit ' + (-d.tage) + ' Tagen' : (d.tage === 0 ? 'Nachfassen heute' : 'Nachfassen in ' + d.tage + ' Tagen')) : '',
+      dNachfassFarbe: d && d.tage <= 0 ? '#a8421f' : '#6b6154',
+      istAbgesagt: d ? d.status === 'abgesagt' : false,
+      dHinweis: raus ? 'Verlässt mit diesem Status die offene Liste.' : 'Bleibt in der offenen Liste.',
+      dKnopf: raus ? 'Fertig — zurück zur Liste' : 'Zurück zur Liste',
+      uebernehmen: () => this.setState({ view: 'liste' }),
+      onNotiz: (e) => {
+        const v = e.target.value;
+        this.setState({ angebote: st.angebote.map((a) => a.id === st.offenId ? { ...a, notiz: v } : a) });
+      },
+      stati: werte.map((w) => ({
+        label: w,
+        bg: d && w === d.status ? '#2b2620' : '#fdfbf6',
+        fg: d && w === d.status ? '#efe9dd' : '#3f3830',
+        bd: d && w === d.status ? '#2b2620' : '#cdc3b0',
+        pick: () => this.setStatus(st.offenId, w)
+      })),
+      gruende: ['Preis', 'Termin', 'Wettbewerber', 'sonstiges'].map((g) => ({
+        label: g,
+        bg: d && d.grund === g ? '#a8421f' : '#fdfbf6',
+        fg: d && d.grund === g ? '#fdfbf6' : '#5b5348',
+        bd: d && d.grund === g ? '#a8421f' : '#cdc3b0',
+        pick: () => this.setState({ angebote: st.angebote.map((a) => a.id === st.offenId ? { ...a, grund: g } : a) })
+      })),
+
+      hatMeldung: st.meldung !== null,
+      meldungTitel: st.meldung ? st.meldung.titel : '',
+      meldungText: st.meldung ? st.meldung.text : '',
+      nichtEinrichtung: !st.einrichtung,
+      benutzerTitel: st.einrichtung ? 'Zweiten Administrator benennen' : 'Benutzer',
+      benutzerUnter: st.einrichtung
+        ? 'Bevor der Betrieb loslegt, braucht er einen zweiten Administrator. Sonst kann sich der Betrieb aussperren.'
+        : 'Wer hier steht, sieht alle Angebote von Grünwerk GmbH.',
+      adminZeile: adminZahl === 1 ? '1 Administrator · ein zweiter fehlt noch' : adminZahl + ' Administratoren · mindestens zwei nötig',
+      zahlFarbe: adminZahl > 2 ? '#4a5a30' : '#8a3d10',
+      benutzerKnopfText: st.einrichtung ? 'Weiter zu den Angeboten' : 'Benutzer hinzufügen',
+      benutzerKnopfBg: st.einrichtung ? (adminZahl >= 2 ? '#2b2620' : '#c3bbab') : '#2b2620',
+      benutzerKnopf: () => {
+        if (st.einrichtung) {
+          if (adminZahl >= 2) this.setState({ einrichtung: false, view: 'liste', meldung: null });
+          return;
+        }
+        const n = namen[st.zaehler % namen.length];
+        this.setState({
+          leute: st.leute.concat([{ name: n, rolle: 'Bauleiter', admin: false }]),
+          zaehler: st.zaehler + 1,
+          meldung: { titel: n + ' hinzugefügt', text: 'Die Einladung geht an die hinterlegte E-Mail-Adresse. Ohne Administratorrecht.' }
+        });
+      },
+      leute: st.leute.map((p, i) => {
+        const letzte = p.admin && adminZahl <= 2;
+        const sperre = { titel: 'Nicht möglich', text: 'Ein Betrieb hält mindestens zwei Administratoren. Machen Sie erst jemand anderen zum Administrator.' };
+        return {
+          name: p.name, rolle: p.rolle,
+          badge: p.admin ? 'Administrator' : p.rolle,
+          badgeBg: p.admin ? '#2b2620' : '#e6ddcb',
+          badgeFg: p.admin ? '#efe9dd' : '#4d453a',
+          rechtText: p.admin ? 'Recht entziehen' : 'Zum Administrator',
+          rechtFg: letzte ? '#b3a68e' : '#5b5348',
+          rechtBd: letzte ? '#ddd3c0' : '#cdc3b0',
+          wegFg: letzte ? '#b3a68e' : '#a8421f',
+          wegBd: letzte ? '#ddd3c0' : '#d8ab9a',
+          rechtWechseln: () => {
+            if (letzte) { this.setState({ meldung: sperre }); return; }
+            this.setState({
+              leute: st.leute.map((x, j) => j === i ? { ...x, admin: !x.admin } : x),
+              meldung: { titel: p.admin ? p.name + ' ist kein Administrator mehr' : p.name + ' ist jetzt Administrator',
+                         text: p.admin ? 'Kann keine Benutzer mehr verwalten, sieht aber weiter alle Angebote.' : 'Kann ab sofort Benutzer hinzufügen, entfernen und Rechte vergeben.' }
+            });
+          },
+          entfernen: () => {
+            if (letzte) { this.setState({ meldung: sperre }); return; }
+            this.setState({
+              leute: st.leute.filter((x, j) => j !== i),
+              meldung: { titel: p.name + ' entfernt', text: 'Der Zugang ist sofort gesperrt. Erfasste Angebote bleiben erhalten.' }
+            });
+          }
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

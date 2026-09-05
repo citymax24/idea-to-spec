@@ -92,3 +92,5 @@ On approval the spec header row `Prototype` records name, date and the spec vers
 ## Why this shape
 
 Spec Kit gives the skeleton (template with stable IDs, clarify, analyze, checklist) and the mechanics (workflow engine with gates and loops, presets, extensions). It does not give heterogeneous intake with citations, feedback-as-data with a confirmation step, the trace from feedback to change, project standards that a review round cannot erode, or a prototype that cannot drift from the spec. Those five are what the preset and the extension add. See `spec-kit-mapping.md` and `standards.md`.
+
+`docs/proposals/standards-mechanism-proposal.md` is the handoff from the test environment that argued for the standards mechanism. It is a design document, written before the mechanism was built and describing it differently in several places — module provenance, where a conflict is recorded, pinning granularity — and parts of it target the design-brief step that no longer exists. Read it as the origin of the idea, `standards.md` for what actually runs.
