@@ -2,13 +2,13 @@
 
 | Field | Value |
 |-------|-------|
-| **Version** | 1.0 |
-| **Status** | accepted |
+| **Version** | 1.1 |
+| **Status** | in-review |
 | **Created** | 2026-09-05 |
 | **Sources** | S1–S4 (see `inputs/INVENTORY.md`) |
 | **Reviewed sections** | accepted without section-by-section coverage (v0.2, knowingly) |
-| **Approved by** | yana |
-| **Approved on** | 2026-09-05 |
+| **Approved by** | yana (v1.0) |
+| **Approved on** | 2026-09-05 (v1.0) |
 
 **Drafted from**: kickoff notes of 2026-08-12 (S1), the feature list (S2), the customer interview with Weber Gartenbau of 2026-09-02 (S3) and the market overview of 2026-08-20 (S4), drafted on 2026-09-05 from 65 extracted facts with all three conflicts and all nine open questions resolved by the human.
 
@@ -140,7 +140,7 @@ One block per screen. This section becomes the design brief.
 - **Primary action**: Open the next quote to be phoned.
 - **Content**: Quotes due for follow-up with customer, phone-relevant data, note and last status change; filter by Bauleiter.
 - **States**: empty (nothing due) / loaded / error.
-- **Satisfies**: FR-018
+- **Satisfies**: FR-018, FR-030 ⟲ v1.1 · R2-01
 - **Comes from**: SCR-01, SCR-03 · **Leads to**: SCR-03, SCR-01
 
 ### SCR-05 · Win rate — [F-062 · S4 slide 5]
@@ -195,7 +195,7 @@ Each requirement is testable and ends with a provenance tag.
 - **FR-010**: The system raises a follow-up reminder for a quote that has had no answer for 7 days. (no screen: background rule) — [F-011 · S1 §3]
 - **FR-011**: The seven-day interval is fixed and cannot be configured by a company. (no screen: background rule) — [Q-01 resolved]
 - **FR-012**: A quote produces exactly one reminder, not a repeating series. (no screen: background rule) — [F-043 · S3 07:40]
-- **FR-013**: The reminder reaches the user as a push notification on the phone or as an email. (no screen: background rule) — [F-030 · S2 row 12]
+- **FR-013**: The reminder reaches exactly one person, the user who registered the quote, as a push notification on the phone or as an email. (no screen: background rule) — [ASSUMPTION: recipient derived from F-037 · S2 row 3 (sheet Rollen) and F-043 · S3 07:40; channel from F-030 · S2 row 12] ⟲ v1.1 · R2-01
 - **FR-014**: A user can keep a free-text note on each quote. — [F-012 · S1 §3]
 - **FR-015**: On the status "abgesagt" a user can record a rejection reason: price, date, competitor or other. — [F-031 · S2 row 13]
 - **FR-016**: A user can filter the quote list by status. — [F-027 · S2 row 9]
@@ -212,6 +212,7 @@ Each requirement is testable and ends with a provenance tag.
 - **FR-027**: A user can be added to a company. — [R1-01]
 - **FR-028**: A user of a company can be removed. — [R1-01]
 - **FR-029**: Only the Chef can add or remove users of his company. — [ASSUMPTION: derived from F-007 · S1 §2; R1-01 named no role]
+- **FR-030**: The office is not notified per quote; quotes due for follow-up reach the office through the Monday call list. — [ASSUMPTION: derived from F-024 · S2 row 6 and F-043 · S3 07:40; R2-01] ⟲ v1.1 · R2-01
 
 ## 8 Constraints
 
@@ -245,14 +246,14 @@ Everything the AI filled in without a source. Each item names what it was derive
 - **A-02**: "abgesagt" and "verlaufen" also remove a quote from the open list; only "zugesagt" is stated — derived from F-009 and F-014; used in FR-008, SCR-01
 - **A-03**: No brand assets or tone of voice exist yet — derived from the absence of any statement in S1–S4; used in §8
 - **A-04**: "No quote fizzles without a follow-up" is the measurable form of the spring loss — derived from F-004; used in SC-003
-- **A-05**: The reminder goes to the user who registered the quote and to the office, since the source names both as callers — derived from F-014 (S1 §4: "Bauleiter oder Büro ruft an"); used in FR-013, carries Q-10
+- **A-05**: The seven-day reminder goes to exactly one person, the user who registered the quote; the office is not notified per quote — derived from F-037 (the Bauleiter's daily task is working through reminders) and F-043 ("einen Stups. Nicht drei."), against F-014 (S1 §4 "Bauleiter oder Büro ruft an", which settles who calls, not who is notified); used in FR-013, FR-030; the decision was delegated to Claude in R2-01 and was not weighed by a human ⟲ v1.1 · R2-01
 - **A-06**: Only the Chef administers users, since he is the role described as deciding — derived from F-007 (S1 §2); used in FR-029, SCR-08; R1-01 named no role ⟲ v0.2 · R1-01
 
 ## 11 Open Questions
 
 Questions no source answers. Each names the section that carries an assumption until answered.
 
-- **Q-10**: Who receives the seven-day reminder — the user who registered the quote, the office, or everyone in the company? — affects FR-013, FLOW-03; carried by A-05 until answered
+No open questions. Q-10 was answered in round R2 and applied in v1.1 as FR-013 and FR-030. ⟲ v1.1 · R2-01
 
 Q-01 to Q-09 and C-01 to C-03 were resolved by the human on 2026-09-05 and are cited in place; see `analysis/open-questions.md` and `analysis/conflicts.md`. Q-11 (user management) was answered in round R1 and applied in v0.2 as SCR-08, FR-027 to FR-029. ⟲ v0.2 · R1-01
 

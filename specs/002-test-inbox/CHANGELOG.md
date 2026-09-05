@@ -2,6 +2,22 @@
 
 One block per spec version. Every change names the feedback item that triggered it. Read newest first.
 
+## v1.1 · 2026-09-05 · from round R2
+
+| Change | Affects | Trigger | Type |
+|--------|---------|---------|------|
+| Q-10 answered: the seven-day reminder reaches exactly one person, the user who registered the quote. FR-013 now names the recipient | §7 FR-013 | R2-01 | CHANGE |
+| FR-030 added: the office is not notified per quote and reaches due quotes through the Monday call list; SCR-04 "Satisfies" extended | §7, §6 SCR-04 | R2-01 | ADD |
+| A-05 replaced: it assumed the registering user *and* the office. It now states the single recipient, names the evidence for and against, and records that the decision was delegated to Claude and never weighed by a human | §10 | R2-01 | CHANGE |
+| Q-10 removed from §11; the spec now carries no open question | §11 | R2-01 | REMOVE |
+| Version 1.0 → 1.1, status accepted → in-review; Approved fields kept with the note (v1.0) | header | R2 | CHANGE |
+
+Not changed: no question was answered as a QUESTION item in R2. Deferred: none. Dropped: none.
+No screens changed — the reminder is a background rule on no artboard, so the design canvas still matches.
+Needs `/speckit-idea-accept` again to return to `accepted`.
+
+Facts: 65 · Conflicts: 3 (0 unresolved) · Open questions: 0 open, 11 answered · Assumptions: 6
+
 ## v1.0 · 2026-09-05 · accepted by yana
 
 | Change | Affects | Trigger | Type |

@@ -1,0 +1,341 @@
+{
+  "artboards": [
+    {
+      "file": "Scr06Anmelden.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-06 Anmelden",
+      "page": "page-1",
+      "is_interactive": true
+    },
+    {
+      "file": "Scr07Uebernahme.dc.html",
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-07 Alte Excel-Liste übernehmen",
+      "page": "page-1",
+      "is_interactive": true
+    },
+    {
+      "file": "Main.dc.html",
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-01 Offene Angebote",
+      "page": "page-1",
+      "is_interactive": true
+    },
+    {
+      "file": "Scr02NeuesAngebot.dc.html",
+      "x": 1410,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-02 Neues Angebot",
+      "page": "page-1",
+      "is_interactive": true
+    },
+    {
+      "file": "Scr03Angebot.dc.html",
+      "x": 1880,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-03 Angebot",
+      "page": "page-1",
+      "is_interactive": true
+    },
+    {
+      "file": "Scr04Montagsliste.dc.html",
+      "x": 2350,
+      "y": 0,
+      "w": 1120,
+      "h": 760,
+      "title": "SCR-04 Montagsliste",
+      "page": "page-1",
+      "is_interactive": true
+    },
+    {
+      "file": "Scr05Trefferquote.dc.html",
+      "x": 3550,
+      "y": 0,
+      "w": 1120,
+      "h": 760,
+      "title": "SCR-05 Trefferquote",
+      "page": "page-1",
+      "is_interactive": true
+    },
+    {
+      "file": "Scr08Benutzer.dc.html",
+      "x": 4750,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-08 Benutzer",
+      "page": "page-1",
+      "is_interactive": true
+    },
+    {
+      "file": "Scr06Anmeldung.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-06 Anmelden · wird angemeldet",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr06Fehler.dc.html",
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-06 Anmelden · Fehler",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr06Offline.dc.html",
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-06 Anmelden · offline",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr07Leer.dc.html",
+      "x": 0,
+      "y": 964,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-07 Übernehmen · leer",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr07Laeuft.dc.html",
+      "x": 470,
+      "y": 964,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-07 Übernehmen · läuft",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr07Teilfehler.dc.html",
+      "x": 940,
+      "y": 964,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-07 Übernehmen · Teilfehler",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr07Fertig.dc.html",
+      "x": 1410,
+      "y": 964,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-07 Übernehmen · fertig",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr01Leer.dc.html",
+      "x": 0,
+      "y": 1928,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-01 Offene Angebote · leer",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr01Fehler.dc.html",
+      "x": 470,
+      "y": 1928,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-01 Offene Angebote · Fehler",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr01Offline.dc.html",
+      "x": 940,
+      "y": 1928,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-01 Offene Angebote · offline",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr02Ausgefuellt.dc.html",
+      "x": 0,
+      "y": 2892,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-02 Neues Angebot · ausgefüllt",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr02Speichert.dc.html",
+      "x": 470,
+      "y": 2892,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-02 Neues Angebot · speichert",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr02Fehler.dc.html",
+      "x": 940,
+      "y": 2892,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-02 Neues Angebot · Fehler",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr02Offline.dc.html",
+      "x": 1410,
+      "y": 2892,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-02 Neues Angebot · offline",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr03Speichert.dc.html",
+      "x": 0,
+      "y": 3856,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-03 Angebot · speichert",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr03Fehler.dc.html",
+      "x": 470,
+      "y": 3856,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-03 Angebot · Fehler",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr03Offline.dc.html",
+      "x": 940,
+      "y": 3856,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-03 Angebot · offline",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr04Leer.dc.html",
+      "x": 0,
+      "y": 4820,
+      "w": 1120,
+      "h": 760,
+      "title": "SCR-04 Montagsliste · leer",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr04Fehler.dc.html",
+      "x": 1200,
+      "y": 4820,
+      "w": 1120,
+      "h": 760,
+      "title": "SCR-04 Montagsliste · Fehler",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr05Leer.dc.html",
+      "x": 0,
+      "y": 5700,
+      "w": 1120,
+      "h": 760,
+      "title": "SCR-05 Trefferquote · leer",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr05Fehler.dc.html",
+      "x": 1200,
+      "y": 5700,
+      "w": 1120,
+      "h": 760,
+      "title": "SCR-05 Trefferquote · Fehler",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr08Hinzufuegen.dc.html",
+      "x": 0,
+      "y": 6580,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-08 Benutzer · hinzufügen",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr08Entfernen.dc.html",
+      "x": 470,
+      "y": 6580,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-08 Benutzer · letzter Chef",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr08Fehler.dc.html",
+      "x": 940,
+      "y": 6580,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-08 Benutzer · Fehler",
+      "page": "page-2"
+    },
+    {
+      "file": "Scr08Offline.dc.html",
+      "x": 1410,
+      "y": 6580,
+      "w": 390,
+      "h": 844,
+      "title": "SCR-08 Benutzer · offline",
+      "page": "page-2"
+    }
+  ],
+  "pages": [
+    {
+      "id": "page-1",
+      "name": "Ablauf"
+    },
+    {
+      "id": "page-2",
+      "name": "Zustände"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "ablauf",
+      "x": 0,
+      "y": -170,
+      "w": 900,
+      "page": "page-1",
+      "text": "Ablauf von links nach rechts: SCR-06 → SCR-07 → SCR-01 → SCR-02 → SCR-03 → SCR-04 → SCR-05 → SCR-08.\nJedes Artboard ist bedienbar: Filter, Suche, Statuswahl, Monatswechsel, Benutzer entfernen. Die Artboards teilen keinen Zustand — jeder Bildschirm reagiert für sich."
+    },
+    {
+      "id": "zustaende",
+      "x": 0,
+      "y": -170,
+      "w": 900,
+      "page": "page-2",
+      "text": "Ein Artboard je Zustand aus dem Brief, zeilenweise nach Bildschirm.\nOffline heißt überall: lesbar, nicht änderbar. Fehler nennen immer, was mit den Eingaben passiert ist."
+    }
+  ],
+  "launch": {
+    "view": "canvas",
+    "page": "page-1"
+  }
+}

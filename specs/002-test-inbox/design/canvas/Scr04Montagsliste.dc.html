@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;family=Public+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: "Public Sans", "Helvetica Neue", sans-serif; }
+    a { color: #7a5a1e; } a:hover { color: #574012; }
+  </style>
+</helmet>
+<div style="width: 1120px; height: 760px; box-sizing: border-box; background: #efe9dd; color: #2b2620; display: flex; flex-direction: column; padding: 30px 34px">
+
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; padding-bottom: 18px; border-bottom: 1px solid #cdc3b0">
+    <div style="display: flex; flex-direction: column; gap: 5px">
+      <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 700; letter-spacing: -0.01em">Montagsliste</div>
+      <div style="font-size: 14px; color: #6b6154">{{zeile}}</div>
+    </div>
+    <div style="display: flex; gap: 7px; align-items: center">
+      <div style="font-size: 13px; color: #8b8173; margin-right: 4px">Bauleiter</div>
+      <sc-for list="{{filter}}" as="f" hint-placeholder-count="3">
+        <div onClick="{{f.pick}}" style="font-size: 13px; font-weight: 600; padding: 8px 14px; border-radius: 999px; cursor: pointer; background: {{f.bg}}; color: {{f.fg}}; border: 1px solid {{f.bd}}">{{f.label}}</div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 18px">
+    <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+      <div style="background: #fdfbf6; border: 1px solid #cdc3b0; border-radius: 4px; display: flex; overflow: hidden; cursor: pointer">
+        <div style="width: 6px; background: {{r.streifen}}"></div>
+        <div style="padding: 16px 20px; display: flex; align-items: center; gap: 24px; flex-grow: 1">
+          <div style="display: flex; flex-direction: column; gap: 4px; width: 250px; flex-shrink: 0">
+            <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 700">{{r.kunde}}</div>
+            <div style="font-size: 12px; color: #8b8173">{{r.nr}} · {{r.betrag}} · {{r.bauleiter}}</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px; width: 190px; flex-shrink: 0">
+            <div style="font-size: 12px; color: #8b8173">Telefon</div>
+            <div style="font-size: 15px; font-weight: 600">{{r.telefon}}</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px; flex-grow: 1">
+            <div style="font-size: 12px; color: #8b8173">Notiz · zuletzt {{r.zuletzt}}</div>
+            <div style="font-size: 14px; line-height: 1.4; color: #3f3830">{{r.notiz}}</div>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: {{r.faelligFarbe}}; width: 150px; text-align: right; flex-shrink: 0">{{r.faellig}}</div>
+        </div>
+      </div>
+    </sc-for>
+    <sc-if value="{{leer}}" hint-placeholder-val="{{false}}">
+      <div style="background: #fdfbf6; border: 1px dashed #cdc3b0; border-radius: 4px; padding: 60px 20px; text-align: center; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; font-weight: 700">Für diesen Bauleiter steht nichts an</div>
+        <div style="font-size: 15px; color: #6b6154">Kein Angebot dieses Bauleiters ist zum Nachfassen fällig.</div>
+      </div>
+    </sc-if>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { bl: 'Alle' };
+  }
+  renderVals() {
+    const alle = [
+      { kunde: 'Fam. Bergmann', nr: 'A-2026-114', betrag: '4.820 €', bauleiter: 'Jonas', telefon: '06151 44 92 18', notiz: 'Will erst nach dem Urlaub entscheiden, ab 15.09. erreichbar.', zuletzt: '24.08.', faellig: 'seit 3 Tagen', ueber: true },
+      { kunde: 'Stadtwerke Griesheim', nr: 'A-2026-109', betrag: '12.400 €', bauleiter: 'Jonas', telefon: '06155 87 30 04', notiz: 'Vergabe läuft über den Bauhof, Rückruf zugesagt.', zuletzt: '22.08.', faellig: 'heute', ueber: true },
+      { kunde: 'Hotel Sonnenhof', nr: 'A-2026-121', betrag: '7.150 €', bauleiter: 'Timo', telefon: '06257 21 88 60', notiz: 'Termin für Ortsbegehung steht noch aus.', zuletzt: '29.08.', faellig: 'in 2 Tagen', ueber: false },
+      { kunde: 'Fam. Ott', nr: 'A-2026-123', betrag: '2.390 €', bauleiter: 'Timo', telefon: '06157 90 12 33', notiz: 'Noch keine Rückmeldung, erstmalig nachfassen.', zuletzt: '—', faellig: 'in 4 Tagen', ueber: false }
+    ];
+    const rows = alle
+      .filter((r) => this.state.bl === 'Alle' || r.bauleiter === this.state.bl)
+      .map((r) => ({ ...r, streifen: r.ueber ? '#a8421f' : '#cdc3b0', faelligFarbe: r.ueber ? '#a8421f' : '#6b6154' }));
+    return {
+      rows,
+      leer: rows.length === 0,
+      zeile: rows.length === 0 ? 'nichts fällig' : rows.length + ' Angebote zum Abtelefonieren · Montag, 07.09.',
+      filter: ['Alle', 'Jonas', 'Timo'].map((b) => ({
+        label: b,
+        bg: b === this.state.bl ? '#2b2620' : '#fdfbf6',
+        fg: b === this.state.bl ? '#efe9dd' : '#5b5348',
+        bd: b === this.state.bl ? '#2b2620' : '#cdc3b0',
+        pick: () => this.setState({ bl: b })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
