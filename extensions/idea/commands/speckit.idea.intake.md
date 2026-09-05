@@ -1,5 +1,5 @@
 ---
-description: Collect raw input files (spreadsheets, slides, notes, transcripts, images) into a feature directory, convert them to Markdown and build the source inventory with stable S-IDs.
+description: Collect raw input files (spreadsheets, slides, notes, transcripts, images) into a feature directory, convert them to Markdown and build the source inventory with stable S-IDs (or a module's own ID namespace via --prefix).
 ---
 
 ## User Input
@@ -8,7 +8,9 @@ description: Collect raw input files (spreadsheets, slides, notes, transcripts, 
 $ARGUMENTS
 ```
 
-Arguments: `<path to a folder or to files> [--name <2-4 word slug>] [--feature <specs/NNN-dir>] [--headless]`. The path is required unless `--feature` points at a directory that already has `inputs/raw/`.
+Arguments: `<path to a folder or to files> [--name <2-4 word slug>] [--feature <specs/NNN-dir>] [--prefix <P>] [--headless]`. The path is required unless `--feature` points at a directory that already has `inputs/raw/`.
+
+`--prefix` sets the source-ID namespace and defaults to `S`, which is what every idea uses. Pass it only when collecting the sources of a **standards module** rather than of an idea: `--feature standards/accessibility-eaa --prefix EAA` numbers them `EAA1…EAA5`, so a citation like `[EAA4 Art. 4]` can never be confused with some idea's own `S4`.
 
 ## Interactive or headless
 
@@ -30,7 +32,7 @@ Phase 1 of the idea-to-spec loop. Nothing gets lost, every source gets a stable 
 
 3. **Convert.** Run:
    ```bash
-   python3 .specify/extensions/idea/scripts/python/convert_inputs.py FEATURE_DIR --json
+   python3 .specify/extensions/idea/scripts/python/convert_inputs.py FEATURE_DIR --json [--prefix <P>]
    ```
    The script assigns S-IDs (continuing from any existing inventory, never renumbering), writes `inputs/extracted/S<n>-<basename>.md` for each raw file (spreadsheets as one table per sheet with real row numbers, slides with slide markers, documents with page markers where available, text copied, audio transcribed if a local transcriber exists) and prints a JSON list of `{id, file, kind, extracted, status}`. If `python3` or the script is missing, stop and say so.
 

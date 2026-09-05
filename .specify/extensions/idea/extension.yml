@@ -99,7 +99,7 @@ provides:
   scripts:
     - name: "convert-inputs"
       file: "scripts/python/convert_inputs.py"
-      description: "Assign S-IDs and convert raw inputs to Markdown"
+      description: "Assign source IDs (S by default, --prefix for a standards module) and convert raw inputs to Markdown; flags a conversion that returned too little text as thin"
       runtimes: ["python"]
     - name: "render-spec"
       file: "scripts/python/render_spec.py"
