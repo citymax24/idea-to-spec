@@ -68,3 +68,5 @@ The AI evaluates, the human decides. All must hold:
 ## Why this shape
 
 Spec Kit gives the skeleton (template with stable IDs, clarify, analyze, checklist) and the mechanics (workflow engine with gates and loops, presets, extensions). It does not give heterogeneous intake with citations, feedback-as-data with a confirmation step, or the trace from feedback to change. Those three are what the preset and the extension add. See `spec-kit-mapping.md`.
+
+A proposed mechanism for carrying project-wide standards (accessibility, branding) into every idea, not yet implemented, is sketched in `docs/proposals/standards-mechanism-proposal.md`.
