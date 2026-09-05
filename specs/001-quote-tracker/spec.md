@@ -2,11 +2,11 @@
 
 | Field | Value |
 |-------|-------|
-| **Version** | 0.1 |
-| **Status** | draft |
+| **Version** | 0.2 |
+| **Status** | in-review |
 | **Created** | 2026-09-05 |
 | **Sources** | S1–S4 (see `inputs/INVENTORY.md`) |
-| **Reviewed sections** | — |
+| **Reviewed sections** | §1 (v0.1, R1-07) |
 | **Approved by** | — |
 | **Approved on** | — |
 
@@ -46,7 +46,7 @@ Willingness to pay rises once a lost quote becomes visible; saving two orders a 
 
 ## 2 Target Users and Roles *(mandatory)*
 
-Target business: garden and landscaping businesses ("GaLaBau") with 5 to 50 employees; not corporations, not one-person businesses. [F-006, F-007 · S1 §2] [ASSUMPTION: C-01 and C-02 unresolved, S1 high over S4 medium; S4 slide 4 names trades in general with 3–100 employees and GaLaBau only as the entry market, see A-01, A-02]
+Target business: garden and landscaping businesses ("GaLaBau") with 5 to 50 employees; not corporations, not one-person businesses. [F-006, F-007 · S1 §2] [C-01 resolved · R1-01] [C-02 resolved · R1-02] ⟲ v0.2 · R1-01, R1-02
 
 | Role | Who they are | What they need from this | Provenance |
 |------|--------------|--------------------------|------------|
@@ -56,7 +56,7 @@ Target business: garden and landscaping businesses ("GaLaBau") with 5 to 50 empl
 
 One person can hold more than one role, for example an owner who is both boss and the person who writes quotes; field crew who only set a status on site act as site managers in this spec. [ASSUMPTION: A-17, derived from F-052, F-056 · S3 07:40, 10:45]
 
-A person is identified by a one-time join on their own device; nobody is asked to sign in repeatedly, because "Bloß kein Login-Gedöns" and "Wenn ich mich jedes Mal anmelden muss, benutz ich es nicht". [F-023 · S1 §6; F-054 · S3 09:10] [ASSUMPTION: Q-02 default, see A-04]
+There is no sign-in of any kind in version 1. A business receives one access link; everyone at the business opens the product through it, and on first use on a device the person picks their name once from the business's list of people and is never asked again, because "Bloß kein Login-Gedöns" and "Wenn ich mich jedes Mal anmelden muss, benutz ich es nicht". [F-023 · S1 §6; F-054 · S3 09:10] [Q-02 resolved · R1-03, R1-04] ⟲ v0.2 · R1-03
 
 ## 3 User Jobs *(mandatory)*
 
@@ -69,7 +69,7 @@ Jobs the product must let a user do. Ordered by importance. Each job names the r
 - **JOB-05** · Office · When I have spoken to a customer, I want to note what they said on the quote (for example "will erst nach dem Urlaub entscheiden"), so that whoever calls next knows. — [F-016 · S1 §3; F-030 · S2 row 5 (sheet Features)]
 - **JOB-06** · Boss · When I look at the business each week, I want to see all open quotes and the share of accepted quotes per month, so that I know how many quotes become orders instead of guessing. — [F-009 · S1 §2; F-033 · S2 row 8 (sheet Features); F-043 · S2 row 2 (sheet Rollen); F-048 · S3 00:40; F-073 · S4 slide 5]
 - **JOB-07** · Office · When a customer calls or I need a specific quote, I want to find it by customer or quote number, so that I do not scroll through the list. — [F-035 · S2 row 10 (sheet Features)]
-- **JOB-08** · Office · When we start using the product, I want to take over the existing open quotes from our old Excel list once, so that we do not keep two lists. — [F-042 · S2 row 31 (sheet Features); F-063 · S4 slide 2] [ASSUMPTION: Q-11 default, see A-13]
+- **JOB-08** · Office · When we start using the product, I want to take over the existing open quotes from our old Excel list once, so that we do not keep two lists. — [F-042 · S2 row 31 (sheet Features); F-063 · S4 slide 2] [Q-11 resolved · R1-05] ⟲ v0.2 · R1-05
 
 ## 4 Scope *(mandatory)*
 
@@ -90,7 +90,7 @@ Version 1 contains the feature-list priorities 1 and 2; priority 3 is out. [ASSU
 - Multiple site managers: each sees their own quotes, the boss sees all (priority 2). — [F-036 · S2 row 11 (sheet Features)]
 - Reminder as push notification to the phone, or by email (priority 2). — [F-037 · S2 row 12 (sheet Features); F-071 · S4 slide 5]
 - Quote amount per quote, so the hit rate can be shown in euros (priority 2). — [F-039 · S2 row 14 (sheet Features)]
-- One-time takeover of existing quotes from the old Excel list at the start (priority 2). — [F-042 · S2 row 31 (sheet Features)] [ASSUMPTION: Q-11 default, see A-13]
+- One-time takeover of existing quotes from the old Excel list at the start (priority 2). — [F-042 · S2 row 31 (sheet Features)] [Q-11 resolved · R1-05] ⟲ v0.2 · R1-05
 
 ### Out of scope
 
@@ -100,12 +100,12 @@ Version 1 contains the feature-list priorities 1 and 2; priority 3 is out. [ASSU
 - Rejection reason on decline (price, date, competitor, other); priority 3. — [F-038 · S2 row 13 (sheet Features)] [ASSUMPTION: Q-01 default, see A-03]
 - Offline reading of the list without network; priority 3. — [F-040 · S2 row 15 (sheet Features)] [ASSUMPTION: Q-01 default, see A-03]
 - Sign-in per user with a password; priority 3, origin unknown, rejected by Jonas and by Weber. — [F-041 · S2 row 16 (sheet Features); F-023 · S1 §6; F-054 · S3 09:10]
-- Export to Excel; the feature-list row with this title describes a one-time import, not an export. — [F-042 · S2 row 31 (sheet Features)] [ASSUMPTION: Q-11 default, see A-13]
+- Export to Excel; the feature-list row with this title describes a one-time import, not an export. — [F-042 · S2 row 31 (sheet Features)] [Q-11 resolved · R1-05] ⟲ v0.2 · R1-05
 - Configurable reminder period; the feature list only asks the question. — [F-029 · S2 row 4 (sheet Features)] [ASSUMPTION: Q-05 default, see A-07]
 - Automatic text recognition of the attached photo or PDF. — [ASSUMPTION: Q-10 default, see A-12; no source asks for it]
 - Automatic lapsing of a quote after a period without answer; "lapsed" is set by hand. — [ASSUMPTION: Q-08 default, see A-10]
 - Pricing, billing and subscriptions inside the product; the price is set only after the pilot. — [F-076 · S4 slide 6]
-- Other trades (painters, roofers, plumbing/heating) as target users of this version; GaLaBau is the entry market in both sources. — [F-067, F-069 · S4 slide 4] [ASSUMPTION: C-01 unresolved, S1 high over S4 medium, see A-01]
+- Other trades (painters, roofers, plumbing/heating) as target users of this version; GaLaBau is the entry market in both sources. — [F-067, F-069 · S4 slide 4] [C-01 resolved · R1-01] ⟲ v0.2 · R1-01
 
 ## 5 User Flows *(mandatory)*
 
@@ -135,13 +135,13 @@ SCR-01 → SCR-07 → SCR-01. The boss opens the hit rate, reads accepted quotes
 
 SCR-01 → SCR-03 → SCR-01. The office types a customer name or quote number into the search on the open list, opens the matching quote, reads or edits it and returns. Closed quotes are found too; no match shows an empty result with the search term. — [F-035 · S2 row 10 (sheet Features)] [ASSUMPTION: Q-07 default, see A-09]
 
-### FLOW-07 · Invite and join — [F-036 · S2 row 11 (sheet Features); F-023 · S1 §6; F-054 · S3 09:10]
+### FLOW-07 · Set up the people and first use — [F-036 · S2 row 11 (sheet Features); F-023 · S1 §6; F-054 · S3 09:10] ⟲ v0.2 · R1-03
 
-SCR-01 → SCR-09 → SCR-08 → SCR-01. The boss creates an invite link for a person with a role and shares it; the person opens it on their own phone or desktop, confirms their name, chooses push or email for reminders and lands in the list; from then on the device is known and nobody signs in again. An invalid or used-up link shows an error and asks for a new one. — [ASSUMPTION: Q-02 default, Q-03 default, see A-04, A-05, A-18]
+SCR-01 → SCR-09 → SCR-08 → SCR-01. The boss adds the people of the business with their roles and shares the one access link of the business; each person opens it on their own phone or desktop, picks their name from the list, chooses push or email for reminders and lands in the list; from then on the device knows who they are and nobody ever signs in. An invalid link shows an error and asks for the business's current link; a name missing from the list asks the person to have the boss add it. — [Q-02 resolved · R1-03, R1-04] [ASSUMPTION: Q-03 default, see A-05, A-18] ⟲ v0.2 · R1-03
 
 ### FLOW-08 · Take over existing quotes — [F-042 · S2 row 31 (sheet Features)]
 
-SCR-01 → SCR-10 → SCR-01. The office uploads the old Excel list once, matches its columns to customer, sent date, quote number, amount and site manager, checks the preview and confirms; the rows become open quotes with status "sent". Rows that cannot be read are listed and skipped, the rest are imported. — [F-063 · S4 slide 2] [ASSUMPTION: Q-11 default, see A-13, A-24]
+SCR-01 → SCR-10 → SCR-01. The office uploads the old Excel list once, matches its columns to customer, sent date, quote number, amount and site manager, checks the preview and confirms; the rows become open quotes with status "sent". Rows that cannot be read are listed and skipped, the rest are imported. — [F-063 · S4 slide 2] [Q-11 resolved · R1-05] [ASSUMPTION: takeover mechanics, see A-24] ⟲ v0.2 · R1-05
 
 ## 6 Screen Catalog *(mandatory)*
 
@@ -210,25 +210,25 @@ One block per screen. This section becomes the design brief.
 - **Satisfies**: FR-026, FR-027
 - **Comes from**: SCR-01 · **Leads to**: SCR-01
 
-### SCR-08 · Join (first use) — [F-023 · S1 §6; F-054 · S3 09:10] [ASSUMPTION: Q-02 default, Q-03 default, derived from F-036 · S2 row 11 (sheet Features), see A-04, A-05]
+### SCR-08 · First use (pick your name) — [F-023 · S1 §6; F-054 · S3 09:10] [Q-02 resolved · R1-03, R1-04] [ASSUMPTION: Q-03 default, see A-05] ⟲ v0.2 · R1-03
 
-- **Purpose**: Let a person join their business once on their own device, without a password.
-- **Primary action**: Confirm name and reminder channel and enter the list.
-- **Content**: Business name from the invite; name field; role as set by the inviter, shown but not editable; reminder channel: push on this device or email, with an email field; "Start" button.
-- **States**: valid invite / invalid or used-up invite (error, ask the boss for a new link) / notifications not allowed on this device (hint, email offered) / done.
+- **Purpose**: Let a person who opened the business's access link on a device say once who they are, without a password or any sign-in.
+- **Primary action**: Pick your name and reminder channel and enter the list.
+- **Content**: Business name from the link; the business's list of people to pick from, each with name and role as set by the boss, role shown but not editable; reminder channel: push on this device or email, with an email field; "Start" button.
+- **States**: valid link / invalid link (error, ask the boss for the business's current link) / name not in the list (hint, ask the boss to add you) / notifications not allowed on this device (hint, email offered) / done (this device remembers the pick).
 - **Satisfies**: FR-020, FR-029
-- **Comes from**: — (opened from the invite link) · **Leads to**: SCR-01
+- **Comes from**: — (opened from the business's access link) · **Leads to**: SCR-01
 
-### SCR-09 · People — [F-008 · S1 §2; F-036 · S2 row 11 (sheet Features)] [ASSUMPTION: derived from F-009 · S1 §2 (the boss decides); no source describes how people are added, see A-18]
+### SCR-09 · People — [F-008 · S1 §2; F-036 · S2 row 11 (sheet Features)] [Q-02 resolved · R1-03, R1-04] [ASSUMPTION: derived from F-009 · S1 §2 (the boss decides); no source describes how people are added, see A-18] ⟲ v0.2 · R1-03
 
-- **Purpose**: Let the boss see who belongs to the business, invite people and set their roles.
-- **Primary action**: Create an invite link for a person with a role.
-- **Content**: List of people with name, role (boss, site manager, office) and join date; "Invite" with role picker producing a link to share; change a role; remove a person.
-- **States**: only me / loaded / invite created (link ready to share) / error.
+- **Purpose**: Let the boss see who belongs to the business, add people with their roles and share the business's one access link.
+- **Primary action**: Add a person with a name and a role.
+- **Content**: The business's access link with a copy or share action; list of people with name, role (boss, site manager, office) and date of first use; "Add person" with name and role picker; change a role; remove a person.
+- **States**: only me / loaded / person added / error.
 - **Satisfies**: FR-010, FR-030
 - **Comes from**: SCR-01 · **Leads to**: SCR-01
 
-### SCR-10 · Take over existing quotes — [F-042 · S2 row 31 (sheet Features)] [ASSUMPTION: Q-11 default, see A-13, A-24]
+### SCR-10 · Take over existing quotes — [F-042 · S2 row 31 (sheet Features)] [Q-11 resolved · R1-05] [ASSUMPTION: takeover mechanics, see A-24] ⟲ v0.2 · R1-05
 
 - **Purpose**: Bring the open quotes from the old Excel list into the product once at the start.
 - **Primary action**: Upload the file and confirm the takeover.
@@ -272,7 +272,7 @@ Reminder
 
 - **FR-018**: When a quote has had no status change for 7 days since it was sent or last followed up, the system sends exactly one reminder. — [F-015 · S1 §3; F-028 · S2 row 4 (sheet Features); F-052 · S3 07:40]
 - **FR-019**: The reminder goes to the site manager the quote is assigned to. — [ASSUMPTION: Q-04 default, derived from F-052 · S3 07:40 and F-018 · S1 §4, see A-06]
-- **FR-020**: A reminder is delivered as a push notification on the phone, or by email when the person chose email when joining. — [F-037 · S2 row 12 (sheet Features); F-071 · S4 slide 5] [ASSUMPTION: Q-03 default, see A-05]
+- **FR-020**: A reminder is delivered as a push notification on the phone, or by email when the person chose email at first use. — [F-037 · S2 row 12 (sheet Features); F-071 · S4 slide 5] [ASSUMPTION: Q-03 default, see A-05] ⟲ v0.2 · R1-03
 - **FR-021**: The reminder names the customer and the 7 days without answer, and opens the quote so the user sees whom to call. — [F-053 · S3 07:40]
 - **FR-022**: No second reminder is sent for a quote until its status is set to "followed up", which restarts the 7-day period, or the quote leaves the open list. (no screen: background rule) — [F-052 · S3 07:40] [ASSUMPTION: Q-06 default, see A-08]
 
@@ -293,13 +293,12 @@ Hit rate
 
 People
 
-- **FR-029**: A person joins their business once through an invite link on their own device, confirms their name and is not asked to sign in again on that device. — [F-023 · S1 §6; F-054 · S3 09:10] [ASSUMPTION: Q-02 default, derived from F-036 · S2 row 11 (sheet Features), see A-04]
-  - [NEEDS CLARIFICATION: Q-02 — how does the product know who is using it without a repeated sign-in? Per-person lists and reminders need identity; the invite-link join is an assumption.]
-- **FR-030**: The boss can invite people, set their role (boss, site manager, office), change it and remove a person. — [ASSUMPTION: derived from F-008, F-009 · S1 §2 and F-036 · S2 row 11 (sheet Features); no source names who administers people, see A-18]
+- **FR-029**: A business receives one access link; opening it is the only access step. On first use on a device the person picks their name once from the business's list of people; there is no password and nobody is asked again on that device. — [F-023 · S1 §6; F-054 · S3 09:10; F-036 · S2 row 11 (sheet Features)] [Q-02 resolved · R1-03, R1-04] ⟲ v0.2 · R1-03
+- **FR-030**: The boss maintains the business's list of people: add a person by name with a role (boss, site manager, office), change a role, remove a person, and share the business's access link; there are no per-person invites. — [Q-02 resolved · R1-03, R1-04] [ASSUMPTION: derived from F-008, F-009 · S1 §2 and F-036 · S2 row 11 (sheet Features); no source names who administers people, see A-18] ⟲ v0.2 · R1-03
 
 Data
 
-- **FR-031**: The office can take over the existing open quotes from the old Excel list once at the start by uploading the file, matching its columns to customer, sent date, quote number, amount and site manager, and confirming a preview; unreadable rows are listed and skipped, imported rows become open quotes with status "sent". — [F-042 · S2 row 31 (sheet Features)] [ASSUMPTION: Q-11 default, see A-13, A-24]
+- **FR-031**: The office can take over the existing open quotes from the old Excel list once at the start by uploading the file, matching its columns to customer, sent date, quote number, amount and site manager, and confirming a preview; unreadable rows are listed and skipped, imported rows become open quotes with status "sent". — [F-042 · S2 row 31 (sheet Features)] [Q-11 resolved · R1-05] [ASSUMPTION: takeover mechanics, see A-24] ⟲ v0.2 · R1-05
 - **FR-032**: Quotes, files, notes and people of one business are visible only to that business. (no screen: background rule) — [ASSUMPTION: Q-13 default, derived from F-075 · S4 slide 6 (two pilot businesses share the product), see A-15]
 
 ## 8 Constraints
@@ -308,7 +307,7 @@ Data
 - **Language**: German user interface; all sources and both pilot businesses are German-speaking. — [ASSUMPTION: Q-12 default, see A-14]
 - **Brand / tone**: No brand assets exist in any source; the tone is plain trade language as the users speak it ("Stups", "abtelefonieren", "nachfassen"), short labels, no jargon. — [ASSUMPTION: derived from S1 §3 and S3 07:40, 10:45, see A-23]
 - **Legal / data**: Quotes, photos, PDFs and notes contain customer personal data; each business sees only its own data, the data is kept until the business deletes it, and it is hosted in the EU. — [ASSUMPTION: Q-13 default, see A-15]
-- **Identity**: No password sign-in and no repeated sign-in; a person joins once per device. — [F-023 · S1 §6; F-054 · S3 09:10; F-041 · S2 row 16 (sheet Features)] [ASSUMPTION: Q-02 default, see A-04]
+- **Identity**: No sign-in of any kind: one access link per business, and a person picks their name once per device from the business's list; no password, never asked again. — [F-023 · S1 §6; F-054 · S3 09:10; F-041 · S2 row 16 (sheet Features)] [Q-02 resolved · R1-03, R1-04] ⟲ v0.2 · R1-03
 - **Timeline and pilots**: Prototype by October 2026; pilot businesses are Grünwerk GmbH and Weber Gartenbau. — [F-074, F-075 · S4 slide 6]
 - **Price**: No pricing inside the product; the price is set after the pilot, against a stated pain threshold of 20–30 € per month for a single-purpose tool and a stated value of 30 € per month for two saved orders a year. — [F-076, F-065 · S4 slides 6, 3; F-059 · S3 13:30]
 
@@ -322,18 +321,18 @@ Measurable, technology-agnostic outcomes.
 - **SC-004**: During the pilot, every quote that ends as "lapsed" has at least one "followed up" before it; today an estimated 8 of 30 quotes lapse with no follow-up at all. — [F-005 · S1 §1; F-049 · S3 02:15]
 - **SC-005**: The boss can read the hit rate of the last full month from the product instead of guessing ("vielleicht die Hälfte"). — [F-048 · S3 00:40; F-073 · S4 slide 5]
 - **SC-006**: The office can work through the Monday list without asking anyone which quotes are open. — [F-004 · S1 §1; F-017 · S1 §3]
-- **SC-007**: A person signs in at most once per device during the whole pilot. — [F-054 · S3 09:10; F-023 · S1 §6] [ASSUMPTION: Q-02 default, see A-04]
+- **SC-007**: Nobody signs in during the pilot; the only access steps a person ever takes are opening the business's link and picking their name once per device. — [F-054 · S3 09:10; F-023 · S1 §6] [Q-02 resolved · R1-03, R1-04] ⟲ v0.2 · R1-03
 - **SC-008**: At a pilot business, at least two quotes per year that received a reminder and a follow-up end as "accepted"; that is the value Weber named for 30 € a month. — [F-059 · S3 13:30; F-066 · S4 slide 3]
 
 ## 10 Assumptions
 
 Everything the AI filled in without a source. Each item names what it was derived from and which section uses it.
 
-- **A-01**: This spec is written for GaLaBau businesses only; other trades are a later market. — C-01 unresolved, S1 high over S4 medium (F-006 · S1 §2 against F-067, F-069 · S4 slide 4); used in §2, §4 Out of scope
-- **A-02**: The target business has 5 to 50 employees. — C-02 unresolved, S1 high over S4 medium (F-006, F-007 · S1 §2 against F-068 · S4 slide 4); used in §2
+- **A-01**: This spec is written for GaLaBau businesses only; other trades are a later market. — Resolved in v0.2: C-01 settled as "GaLaBau only" by R1-01, no longer an assumption (was: C-01 unresolved, S1 high over S4 medium, F-006 · S1 §2 against F-067, F-069 · S4 slide 4); was used in §2, §4 Out of scope ⟲ v0.2 · R1-01
+- **A-02**: The target business has 5 to 50 employees. — Resolved in v0.2: C-02 settled as "5 to 50 employees" by R1-02, which sets S4 slide 4 aside as a requirement source for version 1; no longer an assumption (was: C-02 unresolved, S1 high over S4 medium, F-006, F-007 · S1 §2 against F-068 · S4 slide 4); was used in §2 ⟲ v0.2 · R1-02
 - **A-03**: Version 1 contains feature-list priorities 1 and 2; priority 3 (rejection reason, offline, login) is out. — Q-01 default, derived from S2 rows 2–16, 31 (sheet Features); used in §4
-- **A-04**: A person is identified by a one-time join per device through an invite link; there is no repeated sign-in. — Q-02 default, derived from F-036 · S2 row 11 (sheet Features), F-023 · S1 §6, F-054 · S3 09:10; used in §2, §8, FR-029, SCR-08, FLOW-07, SC-007
-- **A-05**: Reminders arrive as push on the phone, or by email if the person chose email when joining. — Q-03 default, derived from F-037 · S2 row 12 (sheet Features) and F-071 · S4 slide 5; used in FR-020, SCR-05, SCR-08
+- **A-04**: Replaced in v0.2: one access link per business, a person picks their name once per device, no sign-in of any kind; decided by R1-03 with the R1-04 answer (b), no longer an assumption (was: a person is identified by a one-time join per device through an invite link, Q-02 default, derived from F-036 · S2 row 11 (sheet Features), F-023 · S1 §6, F-054 · S3 09:10); was used in §2, §8, FR-029, SCR-08, FLOW-07, SC-007 ⟲ v0.2 · R1-03
+- **A-05**: Reminders arrive as push on the phone, or by email if the person chose email at first use. — Q-03 default, derived from F-037 · S2 row 12 (sheet Features) and F-071 · S4 slide 5; used in FR-020, SCR-05, SCR-08 ⟲ v0.2 · R1-03
 - **A-06**: The reminder goes to the site manager the quote is assigned to; the office sees the same quote in the Monday list. — Q-04 default, derived from F-052 · S3 07:40 and F-018 · S1 §4; used in FR-019, FLOW-02
 - **A-07**: The reminder period is fixed at 7 days in version 1. — Q-05 default, derived from F-015 · S1 §3 and the open question in F-029 · S2 row 4 (sheet Features); used in FR-007, §4 Out of scope
 - **A-08**: The 7-day period restarts when the status is set to "followed up"; at most one reminder per period. — Q-06 default, derived from F-052 · S3 07:40; used in FR-007, FR-018, FR-022, FLOW-02
@@ -341,12 +340,12 @@ Everything the AI filled in without a source. Each item names what it was derive
 - **A-10**: "Lapsed" is set by hand; nothing lapses automatically. — Q-08 default; used in FR-017, §4 Out of scope
 - **A-11**: Customer name and sent date are mandatory when adding a quote, the sent date preset to today; quote number and amount are optional. — Q-09 default, derived from F-013 · S1 §3, F-035, F-039 · S2 rows 10, 14 (sheet Features) against F-024 · S1 §6, F-051 · S3 04:20; used in FR-002, SCR-02, SC-002
 - **A-12**: A quote can be saved without its file and the file attached later; there is no automatic text recognition. — Q-10 default; used in FR-003, FLOW-01, §4 Out of scope
-- **A-13**: The feature-list row titled "Export nach Excel" means a one-time import of existing quotes at the start; there is no export in version 1. — Q-11 default, derived from the description in F-042 · S2 row 31 (sheet Features); used in JOB-08, §4, FR-031, SCR-10, FLOW-08
+- **A-13**: The feature-list row titled "Export nach Excel" means a one-time import of existing quotes at the start; there is no export in version 1. — Resolved in v0.2: Q-11 settled as "import only" by R1-05, no longer an assumption (was: Q-11 default, derived from the description in F-042 · S2 row 31 (sheet Features)); was used in JOB-08, §4, FR-031, SCR-10, FLOW-08 ⟲ v0.2 · R1-05
 - **A-14**: The user interface is German only. — Q-12 default, derived from the language of S1–S4; used in §8
 - **A-15**: Each business sees only its own data; data is kept until the business deletes it; hosting is in the EU. — Q-13 default, derived from F-075 · S4 slide 6; used in FR-032, §8
 - **A-16**: The office sees all quotes of its business, like the boss. — Q-14 default, derived from F-031 · S2 row 6 (sheet Features); used in FR-010
 - **A-17**: Every quote is assigned to exactly one site manager, by default the person adding it; one person can hold more than one role, and field crew who only set a status act as site managers. — derived from F-036, F-031 · S2 rows 11, 6 (sheet Features) and F-052, F-056 · S3 07:40, 10:45; used in §2, FR-005
-- **A-18**: The boss invites people and sets their roles. — derived from F-008, F-009 · S1 §2 (the boss decides); used in FR-030, SCR-09, FLOW-07
+- **A-18**: The boss maintains the business's list of people and their roles and shares the access link. — derived from F-008, F-009 · S1 §2 (the boss decides); used in FR-030, SCR-09, FLOW-07 ⟲ v0.2 · R1-03
 - **A-19**: The hit rate month is the month of the sent date; the denominator is all quotes sent in that month, including those still open. — derived from "pro Monat" in F-033 · S2 row 8 (sheet Features); used in FR-026, FLOW-05
 - **A-20**: A status can be set again to correct it, and the date of every status change is kept. — derived from F-033 · S2 row 8 (sheet Features) and Q-06 default; used in FR-016, FLOW-03
 - **A-21**: The Monday list holds the open quotes whose follow-up date is today or earlier, and shows the latest note per row. — derived from F-017 · S1 §3, F-031 · S2 row 6 (sheet Features), F-045 · S2 row 4 (sheet Rollen) and F-013 · S1 §3; used in FR-024, FR-025, SCR-06, FLOW-04
@@ -359,10 +358,10 @@ Everything the AI filled in without a source. Each item names what it was derive
 
 Questions no source answers. Each names the section that carries an assumption until answered.
 
-- **C-01**: Is this spec for GaLaBau only, or for all trades with GaLaBau as the first market? — unresolved conflict, S1 §2 against S4 slide 4; affects §2, §4 Out of scope, A-01
-- **C-02**: Which size band applies: 5–50 employees (S1) or 3–100 (S4)? — unresolved conflict, S1 §2 against S4 slide 4; affects §2, A-02
+- **C-01**: Is this spec for GaLaBau only, or for all trades with GaLaBau as the first market? — Resolved in v0.2 (R1-01): GaLaBau only; S1 §2 stands, S4 slide 4 is set aside for version 1. Affected §2, §4 Out of scope, A-01 ⟲ v0.2 · R1-01
+- **C-02**: Which size band applies: 5–50 employees (S1) or 3–100 (S4)? — Resolved in v0.2 (R1-02): 5–50 employees; S4 slide 4 is not a requirement source for version 1. Affected §2, A-02 ⟲ v0.2 · R1-02
 - **Q-01**: Which feature-list priorities are in version 1: only priority 1, or priorities 1 and 2? — affects §4, A-03; carries a clarification marker
-- **Q-02**: How does the product know who is using it, given that a login every time is rejected? — affects §2, §8, FR-029, SCR-08, SCR-09, A-04; carries a clarification marker
+- **Q-02**: How does the product know who is using it, given that a login every time is rejected? — Resolved in v0.2 (R1-03, R1-04 answer b): one access link per business, a person picks their name once per device, no sign-in of any kind. Affected §2, §8, FR-029, SCR-08, SCR-09, A-04; clarification marker removed ⟲ v0.2 · R1-03
 - **Q-03**: Reminder channel: push, email, or both? — affects FR-020, SCR-05, SCR-08, A-05
 - **Q-04**: Who receives the 7-day reminder: the person who added the quote, the office, the boss, or all of them? — affects FR-019, FLOW-02, A-06
 - **Q-05**: Is the 7-day period fixed or configurable per business? — affects FR-007, §4 Out of scope, A-07
@@ -371,7 +370,7 @@ Questions no source answers. Each names the section that carries an assumption u
 - **Q-08**: Is "lapsed" set by hand or automatically? — affects FR-017, A-10
 - **Q-09**: Which fields are mandatory when a quote is added as photo or PDF? — affects FR-002, SCR-02, SC-002, A-11; carries a clarification marker
 - **Q-10**: What happens when the photo or PDF cannot be attached? — affects FR-003, FLOW-01, A-12
-- **Q-11**: Does the feature-list row "Export nach Excel" mean import at start, export, or both? — affects JOB-08, §4, FR-031, SCR-10, A-13
+- **Q-11**: Does the feature-list row "Export nach Excel" mean import at start, export, or both? — Resolved in v0.2 (R1-05): one-time import at the start, no export in version 1. Affected JOB-08, §4, FR-031, SCR-10, A-13 ⟲ v0.2 · R1-05
 - **Q-12**: UI language: German only, or more? — affects §8, A-14
 - **Q-13**: Data protection: separation between businesses, hosting region, retention, deletion? — affects FR-032, §8, A-15
 - **Q-14**: Does the office see the quotes of all site managers, like the boss? — affects FR-010, A-16
@@ -386,4 +385,4 @@ Note from the source inventory, not a spec question: the feature list (S2, sheet
 
 Items removed after review. The ID stays reserved; the line points to the round and the decision.
 
-- None in v0.1.
+- None in v0.1 or v0.2.

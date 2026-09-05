@@ -1,0 +1,338 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Quote Tracker</title><style>
+:root{--ink:#1b2028;--muted:#5b6270;--line:#d9dcd6;--bg:#fbfbf8;--code:#f1f2ee;--accent:#0f6e6b}
+@media (prefers-color-scheme: dark){:root{--ink:#e7e9ec;--muted:#b3b9c3;--line:#2c323b;--bg:#14171c;--code:#1c2027;--accent:#4fb8b2}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,"IBM Plex Sans","Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 24px 96px}
+h1{font-size:34px;line-height:1.1;margin:0 0 20px}h2{font-size:24px;margin:44px 0 12px;padding-top:12px;border-top:1px solid var(--line)}
+h3{font-size:17px;margin:26px 0 8px}p{max-width:70ch}table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0 20px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px 8px 0;border-bottom:1px solid var(--line)}th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.9em;background:var(--code);padding:1px 5px;border-radius:3px}
+pre{background:var(--code);padding:14px 16px;overflow-x:auto;border:1px solid var(--line);border-radius:4px}pre code{background:none;padding:0}
+li{margin-bottom:6px}li[id],p[id]{scroll-margin-top:16px}.tag{color:var(--accent);font-family:ui-monospace,monospace;font-size:.85em}
+.toc{font-size:14px;color:var(--muted);columns:2;gap:24px}.toc a{color:inherit;text-decoration:none}.toc a:hover{text-decoration:underline}
+.wrap{overflow-x:auto}
+</style></head><body><main><nav class="toc"><div><a href="#1-problem-and-goal-mandatory">1 Problem and Goal *(mandatory)*</a></div><div><a href="#2-target-users-and-roles-mandatory">2 Target Users and Roles *(mandatory)*</a></div><div><a href="#3-user-jobs-mandatory">3 User Jobs *(mandatory)*</a></div><div><a href="#4-scope-mandatory">4 Scope *(mandatory)*</a></div><div><a href="#5-user-flows-mandatory">5 User Flows *(mandatory)*</a></div><div><a href="#6-screen-catalog-mandatory">6 Screen Catalog *(mandatory)*</a></div><div><a href="#7-functional-requirements-mandatory">7 Functional Requirements *(mandatory)*</a></div><div><a href="#8-constraints">8 Constraints</a></div><div><a href="#9-success-criteria">9 Success Criteria</a></div><div><a href="#10-assumptions">10 Assumptions</a></div><div><a href="#11-open-questions">11 Open Questions</a></div><div><a href="#12-clarifications">12 Clarifications</a></div><div><a href="#13-removed-tombstones">13 Removed (Tombstones)</a></div></nav><h1 id="specification-quote-tracker">Specification: Quote Tracker</h1>
+<div class="wrap"><table>
+<tr><th>Field</th><th>Value</th></tr>
+<tr><td><strong>Version</strong></td><td>0.1</td></tr>
+<tr><td><strong>Status</strong></td><td>draft</td></tr>
+<tr><td><strong>Created</strong></td><td>2026-09-05</td></tr>
+<tr><td><strong>Sources</strong></td><td>S1–S4 (see <code>inputs/INVENTORY.md</code>)</td></tr>
+<tr><td><strong>Reviewed sections</strong></td><td>—</td></tr>
+<tr><td><strong>Approved by</strong></td><td>—</td></tr>
+<tr><td><strong>Approved on</strong></td><td>—</td></tr>
+</table></div>
+<p><strong>Drafted from</strong>: Drafted on 2026-09-05 from the Grünwerk kickoff notes (S1), the feature list (S2), the Weber Gartenbau interview transcript (S3) and the sales market overview (S4), as extracted into <code>analysis/facts.md</code> (F-001–F-076); the 2 unresolved conflicts (C-01, C-02) and 14 open questions (Q-01–Q-14) are carried as tagged assumptions in §10.</p>
+<h2 id="1-problem-and-goal-mandatory">1 Problem and Goal <em>(mandatory)</em></h2>
+<p>Quotes get lost in day-to-day business: the site manager writes them in the evening at the kitchen table, emails them and forgets to follow up, and the office does not know which quotes are open unless someone asks. <span class="tag">[F-002, F-003, F-004 · S1 §1]</span></p>
+<p>In spring 2026 an estimated 8 of 30 quotes at Grünwerk simply lapsed, with neither a rejection nor a follow-up. <span class="tag">[F-005 · S1 §1]</span></p>
+<p>The problem is not writing the quote but staying on it ("das Dranbleiben"); after two weeks nobody calls any more, and an owner who writes about 120 quotes a year can only guess that about half are won. <span class="tag">[F-047, F-048, F-049 · S3 00:40, 02:15]</span></p>
+<p>With this product every sent quote lands in one shared list sorted by follow-up date, triggers exactly one reminder after 7 days without an answer, and gets its status set after the call, so that no quote lapses unnoticed and the boss sees how many quotes become orders. <span class="tag">[F-013, F-015, F-018 · S1 §3–§4; F-052 · S3 07:40; F-073 · S4 slide 5]</span></p>
+<p>Willingness to pay rises once a lost quote becomes visible; saving two orders a year is worth 30 € a month to a pilot business. <span class="tag">[F-066 · S4 slide 3; F-059 · S3 13:30]</span></p>
+<h2 id="2-target-users-and-roles-mandatory">2 Target Users and Roles <em>(mandatory)</em></h2>
+<p>Target business: garden and landscaping businesses ("GaLaBau") with 5 to 50 employees; not corporations, not one-person businesses. <span class="tag">[F-006, F-007 · S1 §2]</span> <span class="tag">[ASSUMPTION: C-01 and C-02 unresolved, S1 high over S4 medium; S4 slide 4 names trades in general with 3–100 employees and GaLaBau only as the entry market, see A-01, A-02]</span></p>
+<div class="wrap"><table>
+<tr><th>Role</th><th>Who they are</th><th>What they need from this</th><th>Provenance</th></tr>
+<tr><td>Boss ("Chef")</td><td>Owner of a GaLaBau business with 5–50 employees; decides; phone and desktop; weekly use. In a 12-person business the owner also writes the quotes himself.</td><td>Overview of all quotes of the business and the hit rate per month.</td><td><span class="tag">[F-008, F-009 · S1 §2; F-043 · S2 row 2 (sheet Rollen); F-046, F-052 · S3 para 1, 07:40]</span></td></tr>
+<tr><td>Site manager ("Bauleiter")</td><td>Writes the quotes, is out in the field, works almost only on the phone, often with dirty hands or gloves; daily use.</td><td>Their own open quotes in follow-up order, one reminder after 7 days, status in two taps.</td><td><span class="tag">[F-010, F-012 · S1 §2; F-044 · S2 row 3 (sheet Rollen); F-056, F-057 · S3 10:45, 12:10]</span></td></tr>
+<tr><td>Office ("Büro")</td><td>Maintains the data and phones customers; desktop; daily use. At Weber the owner's wife runs the office.</td><td>The Monday list to phone through, notes on quotes, sight of all quotes of the business.</td><td><span class="tag">[F-011 · S1 §2; F-045 · S2 row 4 (sheet Rollen); F-055 · S3 10:45]</span></td></tr>
+</table></div>
+<p>One person can hold more than one role, for example an owner who is both boss and the person who writes quotes; field crew who only set a status on site act as site managers in this spec. <span class="tag">[ASSUMPTION: A-17, derived from F-052, F-056 · S3 07:40, 10:45]</span></p>
+<p>A person is identified by a one-time join on their own device; nobody is asked to sign in repeatedly, because "Bloß kein Login-Gedöns" and "Wenn ich mich jedes Mal anmelden muss, benutz ich es nicht". <span class="tag">[F-023 · S1 §6; F-054 · S3 09:10]</span> <span class="tag">[ASSUMPTION: Q-02 default, see A-04]</span></p>
+<h2 id="3-user-jobs-mandatory">3 User Jobs <em>(mandatory)</em></h2>
+<p>Jobs the product must let a user do. Ordered by importance. Each job names the role.</p>
+<ul>
+<li id="JOB-01"><strong>JOB-01</strong> · Site manager · When I have sent a quote, I want it in the shared list without typing it in, so that it is not forgotten. — <span class="tag">[F-018 · S1 §4; F-032 · S2 row 7 (sheet Features); F-050, F-051 · S3 04:20; F-070 · S4 slide 5]</span></li>
+<li id="JOB-02"><strong>JOB-02</strong> · Site manager · When a quote has had no answer for 7 days, I want exactly one nudge ("einen Stups, nicht drei") and to see whom to call, so that I follow up before the customer goes cold. — <span class="tag">[F-015 · S1 §3; F-028 · S2 row 4 (sheet Features); F-052, F-053 · S3 07:40]</span></li>
+<li id="JOB-03"><strong>JOB-03</strong> · Site manager · When a customer accepts or declines on site, I want to set the status in two taps with gloves on, so that I do not have to remember it in the evening and forget. — <span class="tag">[F-027 · S2 row 3 (sheet Features); F-056, F-057, F-058 · S3 10:45, 12:10; F-072 · S4 slide 5]</span></li>
+<li id="JOB-04"><strong>JOB-04</strong> · Office · When Monday morning comes, I want a list of quotes to phone through ("abtelefonieren"), filterable by site manager, so that I can follow up in one sitting. — <span class="tag">[F-017 · S1 §3; F-031 · S2 row 6 (sheet Features); F-045 · S2 row 4 (sheet Rollen); F-055 · S3 10:45]</span></li>
+<li id="JOB-05"><strong>JOB-05</strong> · Office · When I have spoken to a customer, I want to note what they said on the quote (for example "will erst nach dem Urlaub entscheiden"), so that whoever calls next knows. — <span class="tag">[F-016 · S1 §3; F-030 · S2 row 5 (sheet Features)]</span></li>
+<li id="JOB-06"><strong>JOB-06</strong> · Boss · When I look at the business each week, I want to see all open quotes and the share of accepted quotes per month, so that I know how many quotes become orders instead of guessing. — <span class="tag">[F-009 · S1 §2; F-033 · S2 row 8 (sheet Features); F-043 · S2 row 2 (sheet Rollen); F-048 · S3 00:40; F-073 · S4 slide 5]</span></li>
+<li id="JOB-07"><strong>JOB-07</strong> · Office · When a customer calls or I need a specific quote, I want to find it by customer or quote number, so that I do not scroll through the list. — <span class="tag">[F-035 · S2 row 10 (sheet Features)]</span></li>
+<li id="JOB-08"><strong>JOB-08</strong> · Office · When we start using the product, I want to take over the existing open quotes from our old Excel list once, so that we do not keep two lists. — <span class="tag">[F-042 · S2 row 31 (sheet Features); F-063 · S4 slide 2]</span> <span class="tag">[ASSUMPTION: Q-11 default, see A-13]</span></li>
+</ul>
+<h2 id="4-scope-mandatory">4 Scope <em>(mandatory)</em></h2>
+<h3 id="in-scope">In scope</h3>
+<p>Version 1 contains the feature-list priorities 1 and 2; priority 3 is out. <span class="tag">[ASSUMPTION: Q-01 default, see A-03]</span></p>
+<ul>
+<li>[NEEDS CLARIFICATION: Q-01 — no source maps a feature-list priority to a version. Are the priority-2 features below (customer note, Monday list, hit rate, search, multiple site managers, push reminder, quote amount, Excel takeover) part of version 1, or only priority 1?]</li>
+<li>Open quotes list, sorted by follow-up date (priority 1). — <span class="tag">[F-013 · S1 §3; F-025 · S2 row 2 (sheet Features)]</span></li>
+<li>Status per quote: sent, followed up, accepted, declined, lapsed; set in at most two clicks (priority 1). — <span class="tag">[F-014 · S1 §3; F-026, F-027 · S2 row 3 (sheet Features)]</span></li>
+<li>Follow-up reminder after 7 days without answer (priority 1). — <span class="tag">[F-015 · S1 §3; F-028 · S2 row 4 (sheet Features); F-052 · S3 07:40]</span></li>
+<li>Quote attached as photo or PDF instead of typing it in (priority 1). — <span class="tag">[F-032 · S2 row 7 (sheet Features); F-050 · S3 04:20; F-070 · S4 slide 5]</span></li>
+<li>Filter the list by status (priority 1). — <span class="tag">[F-034 · S2 row 9 (sheet Features)]</span></li>
+<li>Free-text note per quote about the customer (priority 2). — <span class="tag">[F-016 · S1 §3; F-030 · S2 row 5 (sheet Features)]</span></li>
+<li>Monday list to phone through, filterable by site manager (priority 2). — <span class="tag">[F-017 · S1 §3; F-031 · S2 row 6 (sheet Features)]</span></li>
+<li>Hit rate: share of accepted quotes among all quotes, per month, for the boss (priority 2). — <span class="tag">[F-033 · S2 row 8 (sheet Features); F-073 · S4 slide 5]</span></li>
+<li>Search by customer or quote number (priority 2). — <span class="tag">[F-035 · S2 row 10 (sheet Features)]</span></li>
+<li>Multiple site managers: each sees their own quotes, the boss sees all (priority 2). — <span class="tag">[F-036 · S2 row 11 (sheet Features)]</span></li>
+<li>Reminder as push notification to the phone, or by email (priority 2). — <span class="tag">[F-037 · S2 row 12 (sheet Features); F-071 · S4 slide 5]</span></li>
+<li>Quote amount per quote, so the hit rate can be shown in euros (priority 2). — <span class="tag">[F-039 · S2 row 14 (sheet Features)]</span></li>
+<li>One-time takeover of existing quotes from the old Excel list at the start (priority 2). — <span class="tag">[F-042 · S2 row 31 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-11 default, see A-13]</span></li>
+</ul>
+<h3 id="out-of-scope">Out of scope</h3>
+<ul>
+<li>Quote creation and calculation; businesses keep doing that in their existing program. — <span class="tag">[F-020 · S1 §5]</span></li>
+<li>Connection to accounting or ERP. — <span class="tag">[F-021 · S1 §5]</span></li>
+<li>Customer management beyond what the list needs; the customer is a name on the quote, not a record of its own. — <span class="tag">[F-022 · S1 §5]</span></li>
+<li>Rejection reason on decline (price, date, competitor, other); priority 3. — <span class="tag">[F-038 · S2 row 13 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-01 default, see A-03]</span></li>
+<li>Offline reading of the list without network; priority 3. — <span class="tag">[F-040 · S2 row 15 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-01 default, see A-03]</span></li>
+<li>Sign-in per user with a password; priority 3, origin unknown, rejected by Jonas and by Weber. — <span class="tag">[F-041 · S2 row 16 (sheet Features); F-023 · S1 §6; F-054 · S3 09:10]</span></li>
+<li>Export to Excel; the feature-list row with this title describes a one-time import, not an export. — <span class="tag">[F-042 · S2 row 31 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-11 default, see A-13]</span></li>
+<li>Configurable reminder period; the feature list only asks the question. — <span class="tag">[F-029 · S2 row 4 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-05 default, see A-07]</span></li>
+<li>Automatic text recognition of the attached photo or PDF. — <span class="tag">[ASSUMPTION: Q-10 default, see A-12; no source asks for it]</span></li>
+<li>Automatic lapsing of a quote after a period without answer; "lapsed" is set by hand. — <span class="tag">[ASSUMPTION: Q-08 default, see A-10]</span></li>
+<li>Pricing, billing and subscriptions inside the product; the price is set only after the pilot. — <span class="tag">[F-076 · S4 slide 6]</span></li>
+<li>Other trades (painters, roofers, plumbing/heating) as target users of this version; GaLaBau is the entry market in both sources. — <span class="tag">[F-067, F-069 · S4 slide 4]</span> <span class="tag">[ASSUMPTION: C-01 unresolved, S1 high over S4 medium, see A-01]</span></li>
+</ul>
+<h2 id="5-user-flows-mandatory">5 User Flows <em>(mandatory)</em></h2>
+<p>Every flow starts and ends at a screen from §6.</p>
+<h3 id="FLOW-01">FLOW-01 · Add a sent quote — <span class="tag">[F-018 · S1 §4; F-050 · S3 04:20]</span></h3>
+<p>SCR-01 → SCR-02 → SCR-03 → SCR-01. The user takes a photo of the printout or hands over the PDF, types the customer name, confirms today as sent date and saves; the quote appears at the end of the open list with status "sent". If the file cannot be attached, the quote is saved without it and the file is attached later from SCR-03. — <span class="tag">[F-032 · S2 row 7 (sheet Features); F-051 · S3 04:20]</span> <span class="tag">[ASSUMPTION: Q-09 default, Q-10 default, see A-11, A-12]</span></p>
+<h3 id="FLOW-02">FLOW-02 · Follow up after a reminder — <span class="tag">[F-018 · S1 §4; F-052, F-053 · S3 07:40]</span></h3>
+<p>SCR-05 → SCR-03 → SCR-04 → SCR-03 → SCR-01. The assigned site manager gets one reminder after 7 days without answer, opens the quote, sees whom to call, calls, sets the status "followed up" (or "accepted", "declined") and optionally leaves a note. If the customer is not reached, the status "followed up" still restarts the 7-day period, so the next reminder comes a week later, not tomorrow. — <span class="tag">[F-015 · S1 §3]</span> <span class="tag">[ASSUMPTION: Q-04 default, Q-06 default, see A-06, A-08]</span></p>
+<h3 id="FLOW-03">FLOW-03 · Set the status on site — <span class="tag">[F-027 · S2 row 3 (sheet Features); F-057 · S3 12:10]</span></h3>
+<p>SCR-01 → SCR-04 → SCR-01. The site manager opens the list, taps the quote and taps the status: two taps with gloves on. On "accepted" the quote disappears from the open list. A wrong tap is corrected by setting the status again. — <span class="tag">[F-019 · S1 §4; F-056 · S3 10:45]</span> <span class="tag">[ASSUMPTION: derived from F-018 · S1 §4, see A-20]</span></p>
+<h3 id="FLOW-04">FLOW-04 · Monday phone-through — <span class="tag">[F-017 · S1 §3; F-031 · S2 row 6 (sheet Features); F-055 · S3 10:45]</span></h3>
+<p>SCR-06 → SCR-04 → SCR-06 → SCR-03 → SCR-06 → SCR-01. The office opens the Monday list, filters by site manager if needed, phones each customer whose quote is due, sets the status from the row and adds a note where the customer said something worth keeping; a quote that got a status leaves the list. If nothing is due, the list is empty and says so. — <span class="tag">[F-045 · S2 row 4 (sheet Rollen)]</span> <span class="tag">[ASSUMPTION: derived from F-013 · S1 §3 for the due rule, see A-21]</span></p>
+<h3 id="FLOW-05">FLOW-05 · Check the hit rate — <span class="tag">[F-033 · S2 row 8 (sheet Features); F-073 · S4 slide 5]</span></h3>
+<p>SCR-01 → SCR-07 → SCR-01. The boss opens the hit rate, reads accepted quotes as a share of all quotes per month, in count and, where amounts were captured, in euros. A month with no quotes shows no share rather than zero. — <span class="tag">[F-039 · S2 row 14 (sheet Features)]</span> <span class="tag">[ASSUMPTION: derived from F-033 · S2 row 8 (sheet Features), see A-19]</span></p>
+<h3 id="FLOW-06">FLOW-06 · Find a quote — <span class="tag">[F-035 · S2 row 10 (sheet Features)]</span></h3>
+<p>SCR-01 → SCR-03 → SCR-01. The office types a customer name or quote number into the search on the open list, opens the matching quote, reads or edits it and returns. Closed quotes are found too; no match shows an empty result with the search term. — <span class="tag">[F-035 · S2 row 10 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-07 default, see A-09]</span></p>
+<h3 id="FLOW-07">FLOW-07 · Invite and join — <span class="tag">[F-036 · S2 row 11 (sheet Features); F-023 · S1 §6; F-054 · S3 09:10]</span></h3>
+<p>SCR-01 → SCR-09 → SCR-08 → SCR-01. The boss creates an invite link for a person with a role and shares it; the person opens it on their own phone or desktop, confirms their name, chooses push or email for reminders and lands in the list; from then on the device is known and nobody signs in again. An invalid or used-up link shows an error and asks for a new one. — <span class="tag">[ASSUMPTION: Q-02 default, Q-03 default, see A-04, A-05, A-18]</span></p>
+<h3 id="FLOW-08">FLOW-08 · Take over existing quotes — <span class="tag">[F-042 · S2 row 31 (sheet Features)]</span></h3>
+<p>SCR-01 → SCR-10 → SCR-01. The office uploads the old Excel list once, matches its columns to customer, sent date, quote number, amount and site manager, checks the preview and confirms; the rows become open quotes with status "sent". Rows that cannot be read are listed and skipped, the rest are imported. — <span class="tag">[F-063 · S4 slide 2]</span> <span class="tag">[ASSUMPTION: Q-11 default, see A-13, A-24]</span></p>
+<h2 id="6-screen-catalog-mandatory">6 Screen Catalog <em>(mandatory)</em></h2>
+<p>One block per screen. This section becomes the design brief.</p>
+<h3 id="SCR-01">SCR-01 · Open quotes list — <span class="tag">[F-013 · S1 §3; F-025 · S2 row 2 (sheet Features)]</span></h3>
+<ul>
+<li><strong>Purpose</strong>: See every open quote (own quotes for a site manager, all quotes of the business for boss and office) in the order they need a follow-up call, and act on one directly.</li>
+<li><strong>Primary action</strong>: Set the status of a quote (tap the row, tap the status).</li>
+<li><strong>Content</strong>: List rows with customer name, quote number (if present), sent date, follow-up date with an overdue marker, status, site manager (boss and office only), latest note in one line; fixed sort by follow-up date ascending; filter by status (default: open); filter by site manager (boss and office only); search field for customer or quote number; "Add quote" button; entries to the Monday list (office), hit rate (boss), people (boss) and takeover (office).</li>
+<li><strong>States</strong>: empty (no open quotes: nothing to follow up) / loaded / loading / filtered or searched with no match / error (list cannot be loaded).</li>
+<li><strong>Satisfies</strong>: FR-004, FR-006, FR-008, FR-009, FR-010, FR-011, FR-012, FR-013, FR-015, FR-024</li>
+<li><strong>Comes from</strong>: SCR-02, SCR-03, SCR-04, SCR-06, SCR-07, SCR-08, SCR-09, SCR-10 · <strong>Leads to</strong>: SCR-02, SCR-03, SCR-04, SCR-06, SCR-07, SCR-09, SCR-10</li>
+</ul>
+<h3 id="SCR-02">SCR-02 · Add quote — <span class="tag">[F-032 · S2 row 7 (sheet Features); F-050 · S3 04:20; F-070 · S4 slide 5]</span></h3>
+<ul>
+<li><strong>Purpose</strong>: Get a quote that was just sent into the list as a photo or PDF with the least possible typing.</li>
+<li><strong>Primary action</strong>: Attach the file and save.</li>
+<li><strong>Content</strong>: File input that accepts a photo taken now, a photo from the device, or a PDF, including a PDF handed over from another app (forwarded mail); preview of the attached file; fields: customer name (required), sent date (required, preset to today), quote number (optional), amount in euros (optional), site manager (preset to the current user if they are a site manager, otherwise chosen from the business's site managers); "Save" and "Save without file".</li>
+<li><strong>States</strong>: empty form / file attached with preview / saving / saved / error (file cannot be attached: offer "Save without file").</li>
+<li><strong>Satisfies</strong>: FR-001, FR-002, FR-003, FR-005, FR-028</li>
+<li><strong>Comes from</strong>: SCR-01 · <strong>Leads to</strong>: SCR-03</li>
+</ul>
+<h3 id="SCR-03">SCR-03 · Quote detail — <span class="tag">[F-016 · S1 §3; F-053 · S3 07:40]</span></h3>
+<ul>
+<li><strong>Purpose</strong>: See everything about one quote, add a note, change its status or attach the missing file.</li>
+<li><strong>Primary action</strong>: Set the status.</li>
+<li><strong>Content</strong>: Attached photo or PDF, viewable at full size, or "No file yet" with an attach action; customer name, quote number, amount, sent date, follow-up date, site manager, all editable; current status as a large button that opens SCR-04; notes in date order with an "Add note" field; dates of the status changes so far.</li>
+<li><strong>States</strong>: loaded / no file attached / loading / error (quote cannot be loaded or saved).</li>
+<li><strong>Satisfies</strong>: FR-003, FR-014, FR-016, FR-021, FR-023, FR-028</li>
+<li><strong>Comes from</strong>: SCR-01, SCR-02, SCR-05, SCR-06 · <strong>Leads to</strong>: SCR-04, SCR-01, SCR-06</li>
+</ul>
+<h3 id="SCR-04">SCR-04 · Set status — <span class="tag">[F-027 · S2 row 3 (sheet Features); F-057 · S3 12:10; F-072 · S4 slide 5]</span></h3>
+<ul>
+<li><strong>Purpose</strong>: Change the status of one quote with one tap after the quote was picked.</li>
+<li><strong>Primary action</strong>: Tap one of the five statuses; the tap saves.</li>
+<li><strong>Content</strong>: Customer name and quote number of the quote; five large buttons: sent ("verschickt"), followed up ("nachgefasst"), accepted ("zugesagt"), declined ("abgesagt"), lapsed ("verlaufen"); the current status is marked; no further confirmation step.</li>
+<li><strong>States</strong>: open (buttons shown) / saved (short confirmation, returns to the calling screen) / error (could not save: buttons stay, error shown).</li>
+<li><strong>Satisfies</strong>: FR-014, FR-015, FR-017</li>
+<li><strong>Comes from</strong>: SCR-01, SCR-03, SCR-06 · <strong>Leads to</strong>: SCR-01, SCR-03, SCR-06 (the screen it was opened from)</li>
+</ul>
+<h3 id="SCR-05">SCR-05 · Reminder (push notification or email) — <span class="tag">[F-015 · S1 §3; F-052 · S3 07:40; F-037 · S2 row 12 (sheet Features)]</span></h3>
+<ul>
+<li><strong>Purpose</strong>: Nudge the responsible person exactly once that a quote has waited 7 days without an answer.</li>
+<li><strong>Primary action</strong>: Open the quote.</li>
+<li><strong>Content</strong>: Customer name, quote number if present, sent date, "7 days without answer", and the quote as the target of the tap or link; as email the same content with a link to the quote.</li>
+<li><strong>States</strong>: push delivered / email delivered / opened (leads to SCR-03).</li>
+<li><strong>Satisfies</strong>: FR-018, FR-019, FR-020, FR-021</li>
+<li><strong>Comes from</strong>: — (triggered by the 7-day rule) · <strong>Leads to</strong>: SCR-03</li>
+</ul>
+<h3 id="SCR-06">SCR-06 · Monday list — <span class="tag">[F-017 · S1 §3; F-031 · S2 row 6 (sheet Features); F-045 · S2 row 4 (sheet Rollen)]</span></h3>
+<ul>
+<li><strong>Purpose</strong>: Let the office work through every quote that is due for a follow-up call in one sitting at the desktop.</li>
+<li><strong>Primary action</strong>: Set the status of a row after the call.</li>
+<li><strong>Content</strong>: Table of open quotes whose follow-up date is today or earlier: customer name, quote number, sent date, days waiting, site manager, latest note, status; filter by site manager; count of rows; per row: set status (opens SCR-04), open quote to add a note (opens SCR-03); a row that got a new status leaves the table.</li>
+<li><strong>States</strong>: empty (nothing due today) / loaded / loading / filtered with no match / error.</li>
+<li><strong>Satisfies</strong>: FR-010, FR-011, FR-013, FR-024, FR-025</li>
+<li><strong>Comes from</strong>: SCR-01, SCR-03, SCR-04 · <strong>Leads to</strong>: SCR-03, SCR-04, SCR-01</li>
+</ul>
+<h3 id="SCR-07">SCR-07 · Hit rate — <span class="tag">[F-033 · S2 row 8 (sheet Features); F-073 · S4 slide 5]</span></h3>
+<ul>
+<li><strong>Purpose</strong>: Show the boss how many quotes become orders, month by month.</li>
+<li><strong>Primary action</strong>: Read the share for the current and past months.</li>
+<li><strong>Content</strong>: One row per month for the last 12 months: quotes sent, accepted, declined, lapsed, still open; hit rate as accepted divided by sent; where amounts were captured, quoted euros, accepted euros and the share in euros; months without quotes show no share.</li>
+<li><strong>States</strong>: loaded / no quotes yet (empty) / amounts missing (euro columns hidden or marked incomplete) / loading / error.</li>
+<li><strong>Satisfies</strong>: FR-026, FR-027</li>
+<li><strong>Comes from</strong>: SCR-01 · <strong>Leads to</strong>: SCR-01</li>
+</ul>
+<h3 id="SCR-08">SCR-08 · Join (first use) — <span class="tag">[F-023 · S1 §6; F-054 · S3 09:10]</span> <span class="tag">[ASSUMPTION: Q-02 default, Q-03 default, derived from F-036 · S2 row 11 (sheet Features), see A-04, A-05]</span></h3>
+<ul>
+<li><strong>Purpose</strong>: Let a person join their business once on their own device, without a password.</li>
+<li><strong>Primary action</strong>: Confirm name and reminder channel and enter the list.</li>
+<li><strong>Content</strong>: Business name from the invite; name field; role as set by the inviter, shown but not editable; reminder channel: push on this device or email, with an email field; "Start" button.</li>
+<li><strong>States</strong>: valid invite / invalid or used-up invite (error, ask the boss for a new link) / notifications not allowed on this device (hint, email offered) / done.</li>
+<li><strong>Satisfies</strong>: FR-020, FR-029</li>
+<li><strong>Comes from</strong>: — (opened from the invite link) · <strong>Leads to</strong>: SCR-01</li>
+</ul>
+<h3 id="SCR-09">SCR-09 · People — <span class="tag">[F-008 · S1 §2; F-036 · S2 row 11 (sheet Features)]</span> <span class="tag">[ASSUMPTION: derived from F-009 · S1 §2 (the boss decides); no source describes how people are added, see A-18]</span></h3>
+<ul>
+<li><strong>Purpose</strong>: Let the boss see who belongs to the business, invite people and set their roles.</li>
+<li><strong>Primary action</strong>: Create an invite link for a person with a role.</li>
+<li><strong>Content</strong>: List of people with name, role (boss, site manager, office) and join date; "Invite" with role picker producing a link to share; change a role; remove a person.</li>
+<li><strong>States</strong>: only me / loaded / invite created (link ready to share) / error.</li>
+<li><strong>Satisfies</strong>: FR-010, FR-030</li>
+<li><strong>Comes from</strong>: SCR-01 · <strong>Leads to</strong>: SCR-01</li>
+</ul>
+<h3 id="SCR-10">SCR-10 · Take over existing quotes — <span class="tag">[F-042 · S2 row 31 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-11 default, see A-13, A-24]</span></h3>
+<ul>
+<li><strong>Purpose</strong>: Bring the open quotes from the old Excel list into the product once at the start.</li>
+<li><strong>Primary action</strong>: Upload the file and confirm the takeover.</li>
+<li><strong>Content</strong>: File upload; column matching for customer, sent date, quote number, amount and site manager; preview of the rows with unreadable rows marked; "Take over" button; result summary with the number imported and skipped.</li>
+<li><strong>States</strong>: empty / file loaded (matching) / preview / done / error (file cannot be read).</li>
+<li><strong>Satisfies</strong>: FR-031</li>
+<li><strong>Comes from</strong>: SCR-01 · <strong>Leads to</strong>: SCR-01</li>
+</ul>
+<h2 id="7-functional-requirements-mandatory">7 Functional Requirements <em>(mandatory)</em></h2>
+<p>Each requirement is testable and ends with a provenance tag.</p>
+<p>Adding quotes</p>
+<ul>
+<li id="FR-001"><strong>FR-001</strong>: A site manager, office member or boss can add a quote to the list by attaching a photo of the printout or a PDF; typing the content of the quote is never required. — <span class="tag">[F-032 · S2 row 7 (sheet Features); F-050, F-051 · S3 04:20; F-070 · S4 slide 5]</span> <span class="tag">[ASSUMPTION: any role can add, see A-25]</span></li>
+<li id="FR-002"><strong>FR-002</strong>: When adding a quote the user enters the customer name and the sent date, which is preset to today; quote number and amount are optional. — <span class="tag">[ASSUMPTION: Q-09 default, derived from F-013 · S1 §3, F-035 and F-039 · S2 rows 10, 14 (sheet Features) against F-024 · S1 §6 and F-051 · S3 04:20, see A-11]</span></li>
+<li>[NEEDS CLARIFICATION: Q-09 — which fields must be typed when a quote is added as photo or PDF? Sorting, search and the hit rate need typed data, yet "Abtippen macht bei uns keiner".]</li>
+<li id="FR-003"><strong>FR-003</strong>: A quote can be saved without its file when the file cannot be attached; the file can be attached later from the quote detail. — <span class="tag">[ASSUMPTION: Q-10 default, see A-12]</span></li>
+<li id="FR-004"><strong>FR-004</strong>: A newly added quote gets the status "sent" and appears in the open list. — <span class="tag">[F-018 · S1 §4]</span></li>
+<li id="FR-005"><strong>FR-005</strong>: Every quote is assigned to exactly one site manager: the person adding it if they are a site manager, otherwise the site manager chosen while adding; boss and office can reassign it. — <span class="tag">[ASSUMPTION: derived from F-036 · S2 row 11 and F-031 · S2 row 6 (sheet Features), see A-17]</span></li>
+</ul>
+<p>Open list</p>
+<ul>
+<li id="FR-006"><strong>FR-006</strong>: The open list shows all quotes with status "sent" or "followed up", sorted ascending by follow-up date. — <span class="tag">[F-013 · S1 §3; F-025 · S2 row 2 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-07 default for which statuses count as open, see A-09]</span></li>
+<li id="FR-007"><strong>FR-007</strong>: The follow-up date of a quote is 7 days after its sent date, or 7 days after the last time its status was set to "followed up". (no screen: background rule) — <span class="tag">[F-015 · S1 §3; F-028 · S2 row 4 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-05 default (fixed period), Q-06 default (restart), see A-07, A-08]</span></li>
+<li id="FR-008"><strong>FR-008</strong>: The list can be filtered by status, including the closed statuses accepted, declined and lapsed. — <span class="tag">[F-034 · S2 row 9 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-07 default, see A-09]</span></li>
+<li id="FR-009"><strong>FR-009</strong>: The list can be searched by customer name or quote number; closed quotes are found too. — <span class="tag">[F-035 · S2 row 10 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-07 default, see A-09]</span></li>
+<li id="FR-010"><strong>FR-010</strong>: A site manager sees only the quotes assigned to them; the boss and the office see all quotes of the business. — <span class="tag">[F-036 · S2 row 11 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-14 default for the office, see A-16]</span></li>
+<li id="FR-011"><strong>FR-011</strong>: The boss and the office can filter the open list and the Monday list by site manager. — <span class="tag">[F-031 · S2 row 6 (sheet Features); F-036 · S2 row 11 (sheet Features)]</span></li>
+<li id="FR-012"><strong>FR-012</strong>: A quote whose status becomes accepted, declined or lapsed leaves the open list at once and stays reachable through search and the status filter. — <span class="tag">[F-019 · S1 §4]</span> <span class="tag">[ASSUMPTION: Q-07 default for declined and lapsed, see A-09]</span></li>
+<li id="FR-013"><strong>FR-013</strong>: The open list and the Monday list mark every quote whose follow-up date is today or in the past. — <span class="tag">[ASSUMPTION: derived from F-013 · S1 §3 (sorted by follow-up date) and F-053 · S3 07:40 (see whom to call), see A-22]</span></li>
+</ul>
+<p>Status</p>
+<ul>
+<li id="FR-014"><strong>FR-014</strong>: Each quote has exactly one status out of sent ("verschickt"), followed up ("nachgefasst"), accepted ("zugesagt"), declined ("abgesagt"), lapsed ("verlaufen"). — <span class="tag">[F-014 · S1 §3; F-026 · S2 row 3 (sheet Features)]</span></li>
+<li id="FR-015"><strong>FR-015</strong>: From the open list, setting a status takes at most two taps or clicks: one to pick the quote, one to pick the status. — <span class="tag">[F-027 · S2 row 3 (sheet Features); F-057 · S3 12:10; F-072 · S4 slide 5]</span></li>
+<li id="FR-016"><strong>FR-016</strong>: A status can be set again after it was set, and the date of every status change is kept and shown on the quote. — <span class="tag">[ASSUMPTION: derived from F-033 · S2 row 8 (sheet Features) (hit rate per month) and Q-06 default (restart on "followed up"), see A-20]</span></li>
+<li id="FR-017"><strong>FR-017</strong>: "Lapsed" is set by a person; the system never changes a status on its own. — <span class="tag">[ASSUMPTION: Q-08 default, see A-10]</span></li>
+</ul>
+<p>Reminder</p>
+<ul>
+<li id="FR-018"><strong>FR-018</strong>: When a quote has had no status change for 7 days since it was sent or last followed up, the system sends exactly one reminder. — <span class="tag">[F-015 · S1 §3; F-028 · S2 row 4 (sheet Features); F-052 · S3 07:40]</span></li>
+<li id="FR-019"><strong>FR-019</strong>: The reminder goes to the site manager the quote is assigned to. — <span class="tag">[ASSUMPTION: Q-04 default, derived from F-052 · S3 07:40 and F-018 · S1 §4, see A-06]</span></li>
+<li id="FR-020"><strong>FR-020</strong>: A reminder is delivered as a push notification on the phone, or by email when the person chose email when joining. — <span class="tag">[F-037 · S2 row 12 (sheet Features); F-071 · S4 slide 5]</span> <span class="tag">[ASSUMPTION: Q-03 default, see A-05]</span></li>
+<li id="FR-021"><strong>FR-021</strong>: The reminder names the customer and the 7 days without answer, and opens the quote so the user sees whom to call. — <span class="tag">[F-053 · S3 07:40]</span></li>
+<li id="FR-022"><strong>FR-022</strong>: No second reminder is sent for a quote until its status is set to "followed up", which restarts the 7-day period, or the quote leaves the open list. (no screen: background rule) — <span class="tag">[F-052 · S3 07:40]</span> <span class="tag">[ASSUMPTION: Q-06 default, see A-08]</span></li>
+</ul>
+<p>Notes</p>
+<ul>
+<li id="FR-023"><strong>FR-023</strong>: A user can add a free-text note to a quote about the customer, for example that they will decide only after their holiday; notes keep their date and are shown in order. — <span class="tag">[F-016 · S1 §3; F-030 · S2 row 5 (sheet Features)]</span></li>
+<li id="FR-024"><strong>FR-024</strong>: The latest note of a quote is visible in its row of the open list and the Monday list. — <span class="tag">[ASSUMPTION: derived from F-017 · S1 §3 and F-045 · S2 row 4 (sheet Rollen): the caller needs the note without opening each quote, see A-21]</span></li>
+</ul>
+<p>Monday list</p>
+<ul>
+<li id="FR-025"><strong>FR-025</strong>: The office can open a Monday list containing all open quotes of the business whose follow-up date is today or earlier, filterable by site manager, with status and note reachable from each row. — <span class="tag">[F-017 · S1 §3; F-031 · S2 row 6 (sheet Features); F-045 · S2 row 4 (sheet Rollen)]</span> <span class="tag">[ASSUMPTION: derived from F-013 · S1 §3 for the due rule, see A-21]</span></li>
+</ul>
+<p>Hit rate</p>
+<ul>
+<li id="FR-026"><strong>FR-026</strong>: The boss can see the hit rate per month: the number of accepted quotes as a share of all quotes sent in that month, for at least the last 12 months. — <span class="tag">[F-033 · S2 row 8 (sheet Features); F-073 · S4 slide 5]</span> <span class="tag">[ASSUMPTION: month of the sent date, denominator includes quotes still open, see A-19]</span></li>
+<li id="FR-027"><strong>FR-027</strong>: Where amounts are captured, the hit rate is also shown in euros: accepted amount as a share of the total quoted amount per month. — <span class="tag">[F-039 · S2 row 14 (sheet Features)]</span></li>
+<li id="FR-028"><strong>FR-028</strong>: The amount of a quote can be captured when adding it or later on the quote detail. — <span class="tag">[F-039 · S2 row 14 (sheet Features)]</span></li>
+</ul>
+<p>People</p>
+<ul>
+<li id="FR-029"><strong>FR-029</strong>: A person joins their business once through an invite link on their own device, confirms their name and is not asked to sign in again on that device. — <span class="tag">[F-023 · S1 §6; F-054 · S3 09:10]</span> <span class="tag">[ASSUMPTION: Q-02 default, derived from F-036 · S2 row 11 (sheet Features), see A-04]</span></li>
+<li>[NEEDS CLARIFICATION: Q-02 — how does the product know who is using it without a repeated sign-in? Per-person lists and reminders need identity; the invite-link join is an assumption.]</li>
+<li id="FR-030"><strong>FR-030</strong>: The boss can invite people, set their role (boss, site manager, office), change it and remove a person. — <span class="tag">[ASSUMPTION: derived from F-008, F-009 · S1 §2 and F-036 · S2 row 11 (sheet Features); no source names who administers people, see A-18]</span></li>
+</ul>
+<p>Data</p>
+<ul>
+<li id="FR-031"><strong>FR-031</strong>: The office can take over the existing open quotes from the old Excel list once at the start by uploading the file, matching its columns to customer, sent date, quote number, amount and site manager, and confirming a preview; unreadable rows are listed and skipped, imported rows become open quotes with status "sent". — <span class="tag">[F-042 · S2 row 31 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-11 default, see A-13, A-24]</span></li>
+<li id="FR-032"><strong>FR-032</strong>: Quotes, files, notes and people of one business are visible only to that business. (no screen: background rule) — <span class="tag">[ASSUMPTION: Q-13 default, derived from F-075 · S4 slide 6 (two pilot businesses share the product), see A-15]</span></li>
+</ul>
+<h2 id="8-constraints">8 Constraints</h2>
+<ul>
+<li><strong>Devices / context</strong>: The site manager uses only the phone, in the field, often with dirty hands or gloves, so the open list, add quote, quote detail, status and reminder must work one-handed on a phone with large touch targets; the office works at a desktop, so the Monday list and the takeover are desktop screens; the boss uses both, so the hit rate works on either. — <span class="tag">[F-012 · S1 §2; F-043, F-044, F-045 · S2 rows 2–4 (sheet Rollen); F-057 · S3 12:10]</span></li>
+<li><strong>Language</strong>: German user interface; all sources and both pilot businesses are German-speaking. — <span class="tag">[ASSUMPTION: Q-12 default, see A-14]</span></li>
+<li><strong>Brand / tone</strong>: No brand assets exist in any source; the tone is plain trade language as the users speak it ("Stups", "abtelefonieren", "nachfassen"), short labels, no jargon. — <span class="tag">[ASSUMPTION: derived from S1 §3 and S3 07:40, 10:45, see A-23]</span></li>
+<li><strong>Legal / data</strong>: Quotes, photos, PDFs and notes contain customer personal data; each business sees only its own data, the data is kept until the business deletes it, and it is hosted in the EU. — <span class="tag">[ASSUMPTION: Q-13 default, see A-15]</span></li>
+<li><strong>Identity</strong>: No password sign-in and no repeated sign-in; a person joins once per device. — <span class="tag">[F-023 · S1 §6; F-054 · S3 09:10; F-041 · S2 row 16 (sheet Features)]</span> <span class="tag">[ASSUMPTION: Q-02 default, see A-04]</span></li>
+<li><strong>Timeline and pilots</strong>: Prototype by October 2026; pilot businesses are Grünwerk GmbH and Weber Gartenbau. — <span class="tag">[F-074, F-075 · S4 slide 6]</span></li>
+<li><strong>Price</strong>: No pricing inside the product; the price is set after the pilot, against a stated pain threshold of 20–30 € per month for a single-purpose tool and a stated value of 30 € per month for two saved orders a year. — <span class="tag">[F-076, F-065 · S4 slides 6, 3; F-059 · S3 13:30]</span></li>
+</ul>
+<h2 id="9-success-criteria">9 Success Criteria</h2>
+<p>Measurable, technology-agnostic outcomes.</p>
+<ul>
+<li id="SC-001"><strong>SC-001</strong>: A site manager can set the status of any quote from the open list in at most two taps on a phone while wearing gloves. — <span class="tag">[F-027 · S2 row 3 (sheet Features); F-057 · S3 12:10; F-072 · S4 slide 5]</span></li>
+<li id="SC-002"><strong>SC-002</strong>: Nobody at a pilot business has to type the content of a quote to get it into the list; the only typed input is the customer name and, if not today, the sent date. — <span class="tag">[F-050, F-051 · S3 04:20; F-070 · S4 slide 5]</span> <span class="tag">[ASSUMPTION: Q-09 default, see A-11]</span></li>
+<li id="SC-003"><strong>SC-003</strong>: Every quote with 7 days without answer produces exactly one reminder, and no quote receives a second reminder before its status is set to "followed up". — <span class="tag">[F-015 · S1 §3; F-052 · S3 07:40]</span></li>
+<li id="SC-004"><strong>SC-004</strong>: During the pilot, every quote that ends as "lapsed" has at least one "followed up" before it; today an estimated 8 of 30 quotes lapse with no follow-up at all. — <span class="tag">[F-005 · S1 §1; F-049 · S3 02:15]</span></li>
+<li id="SC-005"><strong>SC-005</strong>: The boss can read the hit rate of the last full month from the product instead of guessing ("vielleicht die Hälfte"). — <span class="tag">[F-048 · S3 00:40; F-073 · S4 slide 5]</span></li>
+<li id="SC-006"><strong>SC-006</strong>: The office can work through the Monday list without asking anyone which quotes are open. — <span class="tag">[F-004 · S1 §1; F-017 · S1 §3]</span></li>
+<li id="SC-007"><strong>SC-007</strong>: A person signs in at most once per device during the whole pilot. — <span class="tag">[F-054 · S3 09:10; F-023 · S1 §6]</span> <span class="tag">[ASSUMPTION: Q-02 default, see A-04]</span></li>
+<li id="SC-008"><strong>SC-008</strong>: At a pilot business, at least two quotes per year that received a reminder and a follow-up end as "accepted"; that is the value Weber named for 30 € a month. — <span class="tag">[F-059 · S3 13:30; F-066 · S4 slide 3]</span></li>
+</ul>
+<h2 id="10-assumptions">10 Assumptions</h2>
+<p>Everything the AI filled in without a source. Each item names what it was derived from and which section uses it.</p>
+<ul>
+<li id="A-01"><strong>A-01</strong>: This spec is written for GaLaBau businesses only; other trades are a later market. — C-01 unresolved, S1 high over S4 medium (F-006 · S1 §2 against F-067, F-069 · S4 slide 4); used in §2, §4 Out of scope</li>
+<li id="A-02"><strong>A-02</strong>: The target business has 5 to 50 employees. — C-02 unresolved, S1 high over S4 medium (F-006, F-007 · S1 §2 against F-068 · S4 slide 4); used in §2</li>
+<li id="A-03"><strong>A-03</strong>: Version 1 contains feature-list priorities 1 and 2; priority 3 (rejection reason, offline, login) is out. — Q-01 default, derived from S2 rows 2–16, 31 (sheet Features); used in §4</li>
+<li id="A-04"><strong>A-04</strong>: A person is identified by a one-time join per device through an invite link; there is no repeated sign-in. — Q-02 default, derived from F-036 · S2 row 11 (sheet Features), F-023 · S1 §6, F-054 · S3 09:10; used in §2, §8, FR-029, SCR-08, FLOW-07, SC-007</li>
+<li id="A-05"><strong>A-05</strong>: Reminders arrive as push on the phone, or by email if the person chose email when joining. — Q-03 default, derived from F-037 · S2 row 12 (sheet Features) and F-071 · S4 slide 5; used in FR-020, SCR-05, SCR-08</li>
+<li id="A-06"><strong>A-06</strong>: The reminder goes to the site manager the quote is assigned to; the office sees the same quote in the Monday list. — Q-04 default, derived from F-052 · S3 07:40 and F-018 · S1 §4; used in FR-019, FLOW-02</li>
+<li id="A-07"><strong>A-07</strong>: The reminder period is fixed at 7 days in version 1. — Q-05 default, derived from F-015 · S1 §3 and the open question in F-029 · S2 row 4 (sheet Features); used in FR-007, §4 Out of scope</li>
+<li id="A-08"><strong>A-08</strong>: The 7-day period restarts when the status is set to "followed up"; at most one reminder per period. — Q-06 default, derived from F-052 · S3 07:40; used in FR-007, FR-018, FR-022, FLOW-02</li>
+<li id="A-09"><strong>A-09</strong>: "Open" means status sent or followed up; accepted, declined and lapsed quotes leave the open list but remain findable through search and the status filter. — Q-07 default, derived from F-019 · S1 §4; used in FR-006, FR-008, FR-009, FR-012, FLOW-06</li>
+<li id="A-10"><strong>A-10</strong>: "Lapsed" is set by hand; nothing lapses automatically. — Q-08 default; used in FR-017, §4 Out of scope</li>
+<li id="A-11"><strong>A-11</strong>: Customer name and sent date are mandatory when adding a quote, the sent date preset to today; quote number and amount are optional. — Q-09 default, derived from F-013 · S1 §3, F-035, F-039 · S2 rows 10, 14 (sheet Features) against F-024 · S1 §6, F-051 · S3 04:20; used in FR-002, SCR-02, SC-002</li>
+<li id="A-12"><strong>A-12</strong>: A quote can be saved without its file and the file attached later; there is no automatic text recognition. — Q-10 default; used in FR-003, FLOW-01, §4 Out of scope</li>
+<li id="A-13"><strong>A-13</strong>: The feature-list row titled "Export nach Excel" means a one-time import of existing quotes at the start; there is no export in version 1. — Q-11 default, derived from the description in F-042 · S2 row 31 (sheet Features); used in JOB-08, §4, FR-031, SCR-10, FLOW-08</li>
+<li id="A-14"><strong>A-14</strong>: The user interface is German only. — Q-12 default, derived from the language of S1–S4; used in §8</li>
+<li id="A-15"><strong>A-15</strong>: Each business sees only its own data; data is kept until the business deletes it; hosting is in the EU. — Q-13 default, derived from F-075 · S4 slide 6; used in FR-032, §8</li>
+<li id="A-16"><strong>A-16</strong>: The office sees all quotes of its business, like the boss. — Q-14 default, derived from F-031 · S2 row 6 (sheet Features); used in FR-010</li>
+<li id="A-17"><strong>A-17</strong>: Every quote is assigned to exactly one site manager, by default the person adding it; one person can hold more than one role, and field crew who only set a status act as site managers. — derived from F-036, F-031 · S2 rows 11, 6 (sheet Features) and F-052, F-056 · S3 07:40, 10:45; used in §2, FR-005</li>
+<li id="A-18"><strong>A-18</strong>: The boss invites people and sets their roles. — derived from F-008, F-009 · S1 §2 (the boss decides); used in FR-030, SCR-09, FLOW-07</li>
+<li id="A-19"><strong>A-19</strong>: The hit rate month is the month of the sent date; the denominator is all quotes sent in that month, including those still open. — derived from "pro Monat" in F-033 · S2 row 8 (sheet Features); used in FR-026, FLOW-05</li>
+<li id="A-20"><strong>A-20</strong>: A status can be set again to correct it, and the date of every status change is kept. — derived from F-033 · S2 row 8 (sheet Features) and Q-06 default; used in FR-016, FLOW-03</li>
+<li id="A-21"><strong>A-21</strong>: The Monday list holds the open quotes whose follow-up date is today or earlier, and shows the latest note per row. — derived from F-017 · S1 §3, F-031 · S2 row 6 (sheet Features), F-045 · S2 row 4 (sheet Rollen) and F-013 · S1 §3; used in FR-024, FR-025, SCR-06, FLOW-04</li>
+<li id="A-22"><strong>A-22</strong>: The lists mark quotes whose follow-up date is today or past. — derived from F-013 · S1 §3 and F-053 · S3 07:40; used in FR-013</li>
+<li id="A-23"><strong>A-23</strong>: There are no brand assets; the tone is plain trade language. — derived from the wording in S1 §3 and S3 07:40, 10:45; used in §8</li>
+<li id="A-24"><strong>A-24</strong>: The takeover works by uploading the file, matching columns, previewing and confirming; unreadable rows are skipped; imported quotes get status "sent" and their follow-up date from their sent date. — derived from F-042 · S2 row 31 (sheet Features); used in FR-031, SCR-10, FLOW-08</li>
+<li id="A-25"><strong>A-25</strong>: Any role can add a quote, not only the site manager. — derived from F-050 · S3 04:20 (the owner forwards the PDF) and F-018 · S1 §4 (office is part of the flow); used in FR-001</li>
+</ul>
+<h2 id="11-open-questions">11 Open Questions</h2>
+<p>Questions no source answers. Each names the section that carries an assumption until answered.</p>
+<ul>
+<li id="C-01"><strong>C-01</strong>: Is this spec for GaLaBau only, or for all trades with GaLaBau as the first market? — unresolved conflict, S1 §2 against S4 slide 4; affects §2, §4 Out of scope, A-01</li>
+<li id="C-02"><strong>C-02</strong>: Which size band applies: 5–50 employees (S1) or 3–100 (S4)? — unresolved conflict, S1 §2 against S4 slide 4; affects §2, A-02</li>
+<li id="Q-01"><strong>Q-01</strong>: Which feature-list priorities are in version 1: only priority 1, or priorities 1 and 2? — affects §4, A-03; carries a clarification marker</li>
+<li id="Q-02"><strong>Q-02</strong>: How does the product know who is using it, given that a login every time is rejected? — affects §2, §8, FR-029, SCR-08, SCR-09, A-04; carries a clarification marker</li>
+<li id="Q-03"><strong>Q-03</strong>: Reminder channel: push, email, or both? — affects FR-020, SCR-05, SCR-08, A-05</li>
+<li id="Q-04"><strong>Q-04</strong>: Who receives the 7-day reminder: the person who added the quote, the office, the boss, or all of them? — affects FR-019, FLOW-02, A-06</li>
+<li id="Q-05"><strong>Q-05</strong>: Is the 7-day period fixed or configurable per business? — affects FR-007, §4 Out of scope, A-07</li>
+<li id="Q-06"><strong>Q-06</strong>: Does the reminder timer restart on "followed up", and can one quote get more than one reminder? — affects FR-007, FR-018, FR-022, A-08</li>
+<li id="Q-07"><strong>Q-07</strong>: Which statuses count as "open"? — affects FR-006, FR-008, FR-009, FR-012, SCR-01, A-09</li>
+<li id="Q-08"><strong>Q-08</strong>: Is "lapsed" set by hand or automatically? — affects FR-017, A-10</li>
+<li id="Q-09"><strong>Q-09</strong>: Which fields are mandatory when a quote is added as photo or PDF? — affects FR-002, SCR-02, SC-002, A-11; carries a clarification marker</li>
+<li id="Q-10"><strong>Q-10</strong>: What happens when the photo or PDF cannot be attached? — affects FR-003, FLOW-01, A-12</li>
+<li id="Q-11"><strong>Q-11</strong>: Does the feature-list row "Export nach Excel" mean import at start, export, or both? — affects JOB-08, §4, FR-031, SCR-10, A-13</li>
+<li id="Q-12"><strong>Q-12</strong>: UI language: German only, or more? — affects §8, A-14</li>
+<li id="Q-13"><strong>Q-13</strong>: Data protection: separation between businesses, hosting region, retention, deletion? — affects FR-032, §8, A-15</li>
+<li id="Q-14"><strong>Q-14</strong>: Does the office see the quotes of all site managers, like the boss? — affects FR-010, A-16</li>
+</ul>
+<p>Note from the source inventory, not a spec question: the feature list (S2, sheet Features) jumps from Nr 15 to Nr 30; features 16–29 are either not yet written or were deleted. If they exist, they are missing from this draft. See <code>inputs/INVENTORY.md</code>, "Needs attention".</p>
+<h2 id="12-clarifications">12 Clarifications</h2>
+<h2 id="13-removed-tombstones">13 Removed (Tombstones)</h2>
+<p>Items removed after review. The ID stays reserved; the line points to the round and the decision.</p>
+<ul>
+<li>None in v0.1.</li>
+</ul></main></body></html>

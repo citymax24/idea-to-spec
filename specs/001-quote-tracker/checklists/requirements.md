@@ -1,7 +1,7 @@
 # Readiness Checklist: Quote Tracker
 
 **Purpose**: Decide whether the spec is ready for design. The AI evaluates, the human accepts.
-**Spec version**: 0.1 · **Evaluated**: 2026-09-05
+**Spec version**: 0.2 · **Evaluated**: 2026-09-05
 
 ## Provenance
 
@@ -25,9 +25,10 @@
 
 ## Notes
 
-- Evaluated with a script over `spec.md` v0.1 (pass 1 of 3, no fixes needed): 8 JOB, 8 FLOW, 10 SCR, 32 FR, 8 SC, 25 assumptions, 16 open items in §11 (C-01, C-02, Q-01–Q-14). FR-007, FR-022 and FR-032 are background rules with no screen.
-- **`[NEEDS CLARIFICATION]` remains (3 markers)**: Q-01 (which priorities are in version 1, §4), Q-02 (identity without repeated sign-in, FR-029) and Q-09 (mandatory fields when adding a quote, FR-002). These change scope and cannot be settled from the sources; the reviewer answers them in round 1. Each carries a default assumption (A-03, A-04, A-11) so the draft is complete without them.
-- **Reviewed sections**: none yet; no review round has happened. Fixed by `/speckit-idea-publish` and the first feedback round.
-- `decisions/` is empty, so the decision check passes trivially.
-- Source weights in `inputs/INVENTORY.md` are still proposals; C-01 and C-02 are resolved in the draft by the proposed weights (S1 high over S4 medium). If the reviewer lowers S1 or raises S4, A-01 and A-02 flip.
+- Evaluated with a script over `spec.md` v0.2 after applying round R1: 8 JOB, 8 FLOW, 10 SCR, 32 FR, 8 SC, 25 assumptions (4 resolved: A-01, A-02, A-04, A-13), 16 items in §11 (C-01, C-02, Q-02, Q-11 resolved; 12 open). FR-007, FR-022 and FR-032 are background rules with no screen. 29 change markers `⟲ v0.2`; no ID removed, so §13 stays empty.
+- **`[NEEDS CLARIFICATION]` remains (2 markers)**: Q-01 (which priorities are in version 1, §4) and Q-09 (mandatory fields when adding a quote, FR-002). Q-02 was resolved in R1 and its marker removed. Each remaining marker carries a default assumption (A-03, A-11); the reviewer answers them in round 2.
+- **Reviewed sections**: §1 (v0.1, R1-07). Every section except §1, §12 and §13 changed in v0.2 and none of them has been approved by a reviewer yet.
+- **Round R1 status**: all items are `applied (v0.2)` or `answered`; nothing deferred, nothing dropped. R1 was confirmed via workflow gate `dry-run-simulated-gate` with Claude as the synthetic reviewer, so no change in v0.2 is a human decision; a human still has to look at every R1 item before acceptance.
+- `decisions/` is empty (nothing removed yet), so the decision check passes trivially.
+- Source weights in `inputs/INVENTORY.md` are still proposals. C-01 and C-02 are now resolved by R1-01 and R1-02 rather than by the weights, so a later weight change no longer flips A-01 or A-02.
 - The feature list (S2) has no rows for Nr 16–29. If those features exist, the draft is missing them; noted at the end of §11.

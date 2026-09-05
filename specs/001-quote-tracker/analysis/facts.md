@@ -87,6 +87,14 @@ Source weights at extraction (all still proposed, see `inputs/INVENTORY.md`): S1
 | F-075 | Two pilot businesses: Grünwerk GmbH and Weber Gartenbau. | "Zwei Pilotbetriebe: Grünwerk GmbH, Weber Gartenbau" | S4 slide 6 | other |
 | F-076 | The price is set only after the pilot. | "Preis erst nach Pilot festlegen" | S4 slide 6 | constraint |
 
+## Set aside by feedback
+
+Claims a confirmed feedback item excludes as a requirement source. The facts stay for the record; do not rebuild them into the spec without a new source or feedback item.
+
+| Facts | Feedback item | Note |
+|-------|---------------|------|
+| F-067, F-068, F-069 | R1-02 (spec v0.2, 2026-09-05) | S4 slide 4 is not a requirement source for version 1. C-01 resolved as "GaLaBau only" (R1-01) and C-02 as "5–50 employees" (R1-02) in favour of S1 §2. Slides 2, 3, 5 and 6 of S4 remain cited. |
+
 ## Superseded by decisions
 
 Claims that a decision record excludes. Listed so they are not rebuilt into the spec.
