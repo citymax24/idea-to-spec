@@ -1,0 +1,27 @@
+schema_version: "1.0"
+
+preset:
+  id: "idea-to-spec"
+  name: "Idea to Spec"
+  version: "0.1.0"
+  description: "Design-first spec template: screen catalog, source tags on every requirement, tombstones for removed items, human acceptance header"
+  author: "Max Bollich"
+  repository: "https://github.com/citymax24/idea-to-spec"
+  license: "MIT"
+
+requires:
+  speckit_version: ">=1.0.0"
+
+provides:
+  templates:
+    - type: "template"
+      name: "spec-template"
+      file: "templates/spec-template.md"
+      description: "Specification template for the idea-to-spec loop (replaces the core spec template)"
+      replaces: "spec-template"
+
+tags:
+  - "design"
+  - "ux"
+  - "traceability"
+  - "review"

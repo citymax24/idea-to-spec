@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "extensions": {
+    "idea": {
+      "version": "0.1.0",
+      "source": "local",
+      "manifest_hash": "sha256:6711bdd7af483d11557917a461f401487fd5c8c44252172e772819cb3f02cbc3",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "claude": [
+          "speckit.idea.intake",
+          "speckit.idea.facts",
+          "speckit.idea.draft",
+          "speckit.idea.publish",
+          "speckit.idea.feedback",
+          "speckit.idea.apply",
+          "speckit.idea.accept",
+          "speckit.idea.brief"
+        ]
+      },
+      "registered_skills": [],
+      "installed_at": "2026-09-05T10:22:52.469984+00:00"
+    }
+  }
+}

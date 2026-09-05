@@ -1,0 +1,11 @@
+Synthetic reviewer feedback for the dry run (written by Claude in the reviewer role, not by Max). German on purpose: real feedback will be German too.
+
+Also, Zielgruppe: das sind nur GaLaBau-Betriebe, nicht Handwerk allgemein. Die Folie 4 im Marktüberblick ist Vertriebs-Wunschdenken, das bleibt draußen für Version 1.
+
+Login: in Version 1 gibt es keine Anmeldung. Ein Betrieb bekommt einen Link, fertig. Weber und Jonas haben das beide gesagt.
+
+Der Excel-Export muss komplett raus. Das hast du falsch verstanden, die Zeile in der Feature-Liste meint, dass wir einmalig die alte Excel-Liste von Petra einlesen, nicht dass Nutzer irgendwas exportieren.
+
+Warum steht Offline überhaupt drin? Das hat nur Jonas mal erwähnt.
+
+Problem und Ziel passt so, das kann bleiben.

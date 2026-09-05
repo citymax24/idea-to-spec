@@ -1,0 +1,127 @@
+schema_version: "1.0"
+workflow:
+  id: "idea-to-spec"
+  name: "Idea to Spec"
+  version: "0.1.0"
+  author: "Max Bollich"
+  description: "Mixed inputs → cited facts → spec draft → human review rounds → acceptance → design brief"
+
+requires:
+  speckit_version: ">=1.0.0"
+  integrations:
+    any:
+      - "claude"
+
+inputs:
+  inbox:
+    type: string
+    required: true
+    prompt: "Folder with the raw input files (spreadsheets, slides, notes, transcripts)"
+  name:
+    type: string
+    required: true
+    prompt: "Short name of the idea, 2-4 words, kebab-case"
+  reviewer:
+    type: string
+    default: "reviewer"
+    prompt: "Name of the human reviewer"
+  integration:
+    type: string
+    default: "auto"
+    prompt: "Integration to use ('auto' = the project's initialized integration)"
+
+steps:
+  - id: intake
+    command: speckit.idea.intake
+    integration: "{{ inputs.integration }}"
+    input:
+      args: "{{ inputs.inbox }} --name {{ inputs.name }}"
+
+  - id: weights
+    type: gate
+    message: "Check inputs/INVENTORY.md: are the proposed source weights right? Edit the file if not, then approve."
+    options: [approve, abort]
+    on_reject: abort
+
+  - id: facts
+    command: speckit.idea.facts
+    integration: "{{ inputs.integration }}"
+
+  - id: conflicts
+    type: gate
+    message: "Read analysis/conflicts.md and analysis/open-questions.md. Fill the Resolution column where you can, then approve to draft (unanswered rows become tagged assumptions)."
+    options: [approve, abort]
+    on_reject: abort
+
+  - id: draft
+    command: speckit.idea.draft
+    integration: "{{ inputs.integration }}"
+
+  - id: publish
+    command: speckit.idea.publish
+    integration: "{{ inputs.integration }}"
+
+  - id: review-loop
+    type: do-while
+    max_iterations: 6
+    condition: "{{ steps.review.output.choice == 'revise' }}"
+    steps:
+      - id: published-path
+        type: shell
+        run: "python3 -c \"import json;d=json.load(open('.specify/feature.json'))['feature_directory'];print(d+'/feedback/PUBLISHED.md',end='')\""
+
+      - id: review
+        type: gate
+        message: "Read the spec (link in feedback/PUBLISHED.md, or feedback/spec-review.html). Comment on the page or note your feedback. Choose 'revise' to run a feedback round, 'accept' when the spec stands."
+        show_file: "{{ steps.published-path.output.stdout }}"
+        options: [revise, accept]
+        on_reject: skip
+
+      - id: round
+        type: if
+        condition: "{{ steps.review.output.choice == 'revise' }}"
+        then:
+          - id: capture
+            command: speckit.idea.feedback
+            integration: "{{ inputs.integration }}"
+            input:
+              args: "--from-comments --reviewer {{ inputs.reviewer }}"
+
+          - id: latest-round
+            type: shell
+            run: "python3 -c \"import json,glob;d=json.load(open('.specify/feature.json'))['feature_directory'];f=sorted(glob.glob(d+'/feedback/R*.md'),key=lambda p:int(p.rsplit('/R',1)[1][:-3]));print(f[-1] if f else '',end='')\""
+
+          - id: confirm
+            type: gate
+            message: "Check the normalised feedback below. Edit the round file if a line is misunderstood (Understood as / Status), then approve. Approving confirms every 'proposed' item."
+            show_file: "{{ steps.latest-round.output.stdout }}"
+            options: [approve, abort]
+            on_reject: abort
+
+          - id: apply
+            command: speckit.idea.apply
+            integration: "{{ inputs.integration }}"
+            input:
+              args: "--gate-confirmed {{ context.run_id }}"
+
+          - id: republish
+            command: speckit.idea.publish
+            integration: "{{ inputs.integration }}"
+
+  - id: after-review
+    type: if
+    condition: "{{ steps.review.output.choice == 'accept' }}"
+    then:
+      - id: accept
+        command: speckit.idea.accept
+        integration: "{{ inputs.integration }}"
+        input:
+          args: "--approved-by {{ inputs.reviewer }}"
+
+      - id: brief
+        command: speckit.idea.brief
+        integration: "{{ inputs.integration }}"
+    else:
+      - id: not-accepted
+        type: shell
+        run: "echo 'Review loop ended without acceptance (max rounds reached). Run /speckit-idea-feedback and /speckit-idea-apply interactively, then /speckit-idea-accept.'"

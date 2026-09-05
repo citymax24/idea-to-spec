@@ -1,0 +1,96 @@
+schema_version: "1.0"
+
+extension:
+  id: "idea"
+  name: "Idea to Spec Loop"
+  version: "0.1.0"
+  description: "Turn mixed inputs (spreadsheets, slides, notes, transcripts) into a cited spec, run traceable human feedback rounds, and hand the accepted spec to Claude Design"
+  author: "Max Bollich"
+  repository: "https://github.com/citymax24/idea-to-spec"
+  license: "MIT"
+
+requires:
+  speckit_version: ">=1.0.0"
+  tools:
+    - name: python3
+      required: true
+    - name: markitdown
+      required: false
+    - name: git
+      required: false
+
+provides:
+  commands:
+    - name: "speckit.idea.intake"
+      file: "commands/speckit.idea.intake.md"
+      description: "Collect raw input files into the feature directory, convert them to Markdown and build the source inventory with stable S-IDs"
+    - name: "speckit.idea.facts"
+      file: "commands/speckit.idea.facts.md"
+      description: "Break every source into atomic cited claims; list conflicts and open questions for the human"
+    - name: "speckit.idea.draft"
+      file: "commands/speckit.idea.draft.md"
+      description: "Write spec.md v0.1 from the cited facts; every line carries a provenance tag"
+    - name: "speckit.idea.publish"
+      file: "commands/speckit.idea.publish.md"
+      description: "Publish the current spec version as a private web page for reading and commenting"
+    - name: "speckit.idea.feedback"
+      file: "commands/speckit.idea.feedback.md"
+      description: "Normalise reviewer feedback into numbered items and get confirmation before anything changes"
+    - name: "speckit.idea.apply"
+      file: "commands/speckit.idea.apply.md"
+      description: "Apply a confirmed feedback round as one new spec version with changelog, tombstones and decision records"
+    - name: "speckit.idea.accept"
+      file: "commands/speckit.idea.accept.md"
+      description: "Run the acceptance checklist and record the human's approval as v1.0"
+    - name: "speckit.idea.brief"
+      file: "commands/speckit.idea.brief.md"
+      description: "Derive the design brief from the accepted spec and hand off to Claude Design"
+
+  templates:
+    - name: "idea-inventory"
+      file: "templates/inventory-template.md"
+      description: "Source inventory (inputs/INVENTORY.md)"
+    - name: "idea-facts"
+      file: "templates/facts-template.md"
+      description: "Atomic cited claims (analysis/facts.md)"
+    - name: "idea-conflicts"
+      file: "templates/conflicts-template.md"
+      description: "Contradictions between sources (analysis/conflicts.md)"
+    - name: "idea-open-questions"
+      file: "templates/open-questions-template.md"
+      description: "Gaps no source fills (analysis/open-questions.md)"
+    - name: "idea-feedback-round"
+      file: "templates/feedback-round-template.md"
+      description: "One feedback round (feedback/R<n>.md)"
+    - name: "idea-changelog"
+      file: "templates/changelog-template.md"
+      description: "Spec changelog with triggering feedback IDs (CHANGELOG.md)"
+    - name: "idea-decision"
+      file: "templates/decision-template.md"
+      description: "Decision record for removed content (decisions/DEC-<nnn>.md)"
+    - name: "idea-readiness-checklist"
+      file: "templates/readiness-checklist-template.md"
+      description: "Acceptance checklist (checklists/requirements.md)"
+    - name: "idea-brief"
+      file: "templates/brief-template.md"
+      description: "Design brief for Claude Design (design/brief.md)"
+    - name: "idea-design-readme"
+      file: "templates/design-readme-template.md"
+      description: "Two-lane rule for mockup feedback (design/README.md)"
+
+  scripts:
+    - name: "convert-inputs"
+      file: "scripts/python/convert_inputs.py"
+      description: "Assign S-IDs and convert raw inputs to Markdown"
+      runtimes: ["python"]
+    - name: "render-spec"
+      file: "scripts/python/render_spec.py"
+      description: "Render spec.md to a self-contained HTML page with anchors per ID"
+      runtimes: ["python"]
+
+tags:
+  - "design"
+  - "ux"
+  - "review"
+  - "traceability"
+  - "intake"

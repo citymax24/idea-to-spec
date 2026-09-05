@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "presets": {
+    "idea-to-spec": {
+      "version": "0.1.0",
+      "source": "local",
+      "manifest_hash": "sha256:198f805103b46a679ecaf0d2b565d9f9ce165803870c5be3f2ed5fc67bac8fd3",
+      "enabled": true,
+      "priority": 5,
+      "registered_commands": {},
+      "registered_skills": {},
+      "installed_at": "2026-09-05T10:17:39.823148+00:00"
+    }
+  }
+}
