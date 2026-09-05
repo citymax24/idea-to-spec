@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 .specify/workflows/runs/
 specs/*/inputs/raw/.transcripts/
+.runlogs/

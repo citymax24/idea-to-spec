@@ -6,7 +6,7 @@ From a heterogeneous set of inputs about an idea to a specification a human has 
 
 ## Six rules
 
-1. **Nothing without provenance.** Every statement in the spec carries a source tag (`[S3 slide 7]`), a feedback tag (`[R1-02]`) or an explicit assumption tag (`[ASSUMPTION: derived from S3 row 30]`). What the AI added is visibly added.
+1. **Nothing without provenance.** Every JOB, FLOW, SCR, FR, SC and constraint line ends with a tag: a source (`[S3 slide 7]`), a fact (`[F-012 · S3 row 12]`), a resolved conflict or question (`[C-02 resolved]`, `[Q-03 resolved]`), a feedback item (`[R1-02]`) or an explicit assumption (`[ASSUMPTION: derived from S3 row 30]`). What the AI added is visibly added.
 2. **Feedback is understood before it is applied.** The AI rewrites each piece of feedback into a numbered item and shows it. The human confirms or corrects. The spec never changes directly from raw feedback.
 3. **IDs are stable.** Requirements, screens, sources, feedback items and decisions have IDs that are never reassigned. A removed requirement stays as a tombstone: ID, one line, pointer to the decision.
 4. **Removed stays removed.** Every removal is logged as a decision. Before proposing anything from the sources again, the AI checks the decision log.
@@ -24,7 +24,7 @@ From a heterogeneous set of inputs about an idea to a specification a human has 
 | 5 Accept | `/speckit-idea-accept` | human | header `accepted`, v1.0 tag |
 | 6 Design | `/speckit-idea-brief` → `design` skill | AI + Claude Design | `design/brief.md`, artboards named by SCR-ID |
 
-Mockup feedback that concerns content or flow (not looks) goes back into phase 4 as a new round; the spec version rises to 1.1 and the affected artboards are regenerated.
+Mockup feedback that concerns content or flow (not looks) goes back into phase 4 as a new round; the spec version rises to 1.1 (status back to in-review), is re-accepted at 1.1 through `/speckit-idea-accept`, and the affected artboards are regenerated.
 
 ## ID schemes
 
@@ -61,7 +61,7 @@ The AI evaluates, the human decides. All must hold:
 - no feedback item `proposed` or `confirmed` without being applied; deferred items are in §11;
 - every screen has purpose, primary action, content, states, at least one requirement, comes-from and leads-to;
 - every flow starts and ends at a catalogued screen; every screen is reached by a flow;
-- every requirement, job and criterion line has a provenance tag; no `[NEEDS CLARIFICATION]` remains;
+- every JOB, FLOW, SCR, FR, SC and constraint line has a provenance tag; no `[NEEDS CLARIFICATION]` remains;
 - no assumption contradicts a decision;
 - "Out of scope" is not empty.
 

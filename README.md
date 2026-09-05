@@ -7,7 +7,7 @@ From a heap of mixed inputs (spreadsheets, slides, meeting notes, call transcrip
 | Path | What it is |
 |------|------------|
 | `presets/idea-to-spec/` | Spec Kit preset: the spec template (screen catalog, provenance tags, tombstones, acceptance header) |
-| `extensions/idea/` | Spec Kit extension: eight `/speckit-idea-*` commands, artifact templates, converter and renderer scripts |
+| `extensions/idea/` | Spec Kit extension: eight `/speckit-idea-*` commands, artifact templates, converter/renderer/status-check scripts |
 | `workflows/idea-to-spec/` | Spec Kit workflow that chains the commands with human gates and the review loop |
 | `specs/<NNN>-<slug>/` | One directory per idea: inputs, analysis, `spec.md`, feedback rounds, decisions, design brief |
 | `examples/quote-tracker/` | Synthetic test inputs used for the first dry run |
@@ -19,6 +19,7 @@ From a heap of mixed inputs (spreadsheets, slides, meeting notes, call transcrip
 uv tool install specify-cli            # Spec Kit CLI (1.0.4 or newer)
 uv tool install "markitdown[all]"      # converts xlsx, pptx, docx, pdf
 cd idea-to-spec
+git init                               # versions are git tags; skip if already a repo
 specify preset add --dev ./presets/idea-to-spec --priority 5
 specify extension add --dev ./extensions/idea
 specify workflow add ./workflows/idea-to-spec

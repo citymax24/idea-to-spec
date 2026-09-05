@@ -13,7 +13,11 @@ metadata:
 $ARGUMENTS
 ```
 
-Arguments: `[--draft] [--feature <specs/NNN-dir>]`. `--draft` allows a brief from an `in-review` spec for an early look; the brief is then marked DRAFT.
+Arguments: `[--draft] [--feature <specs/NNN-dir>] [--headless]`. `--draft` allows a brief from an `in-review` spec for an early look; the brief is then marked DRAFT.
+
+## Interactive or headless
+
+Headless means: `--headless` is among the arguments, or you cannot wait for a reply (a `claude -p` run, a workflow step). Interactive means you can ask and wait. Every "ask the human" step below applies only when interactive; headless runs leave the marker or status in the file and stop.
 
 ## Goal
 

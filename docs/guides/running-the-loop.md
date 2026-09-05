@@ -78,13 +78,13 @@ Mockup feedback: looks stay in the canvas; anything about content or flow goes b
 specify workflow run idea-to-spec -i inbox=<folder> -i name=<slug> -i reviewer=<your name>
 ```
 
-The engine runs each command headless through the `claude` CLI and pauses at four kinds of gates: source weights, conflicts and open questions, the review decision (`revise` or `accept`), and the confirmation of a normalised feedback round (the round file is shown). Resume with:
+The engine runs each command headless through the `claude` CLI (every step gets `--headless`, so no command tries to ask you anything) and stops at four kinds of gates: source weights, conflicts and open questions, the review decision (`revise` or `accept`), and the confirmation of a normalised feedback round (the round file is shown). In a terminal a gate prompts inline. Started without a terminal (CI, another tool) the run pauses and must be resumed from a terminal:
 
 ```bash
 specify workflow resume <run_id>
 ```
 
-State and a step log live under `.specify/workflows/runs/<run_id>/`. Because headless runs cannot ask questions, confirmation happens by approving the gate; `speckit.idea.apply` records that as `confirmed via workflow gate <run_id>`.
+State and a step log live under `.specify/workflows/runs/<run_id>/`. Because headless runs cannot ask questions, confirmation happens by approving the gate; `speckit.idea.apply` records that as `confirmed via workflow gate <run_id>`. Feedback in a workflow run comes from two lanes: comments on the published page (when a publishing tool was available) and the file `<feature-dir>/feedback/inbox.txt`, which the review gate asks you to write. The acceptance step needs the `reviewer` input as the approver's name. After acceptance, the workflow checks `spec.md`'s status with `spec_status.py --expect accepted` before running `speckit.idea.brief`; if the checklist did not actually pass, it reports that and skips the design step instead of running it against an unready spec.
 
 ## Where things end up
 
@@ -94,7 +94,7 @@ specs/003-quote-tracker/
 ├── analysis/          facts.md · conflicts.md · open-questions.md
 ├── spec.md            always the current version
 ├── CHANGELOG.md       one block per version, trigger per change
-├── feedback/          R1.md R2.md … · spec-review.html · PUBLISHED.md
+├── feedback/          R1.md R2.md … · inbox.txt (workflow lane) · spec-review.html · spec-v0.1.html … (frozen) · PUBLISHED.md
 ├── decisions/         DEC-001.md …
 ├── checklists/        requirements.md
 └── design/            brief.md · README.md · mockups/v1.0/

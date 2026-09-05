@@ -14,14 +14,16 @@
   STATUS is one of: draft | in-review | accepted.
   Only a human sets "accepted" (via /speckit-idea-accept). The AI never does.
 
-  PROVENANCE RULE: every requirement, screen, job and flow line ends with a
-  provenance tag. Allowed tags:
+  PROVENANCE RULE: every JOB, FLOW, SCR, FR, SC and constraint line ends with
+  a provenance tag. Allowed tags:
     [S3 slide 7]          a source from inputs/INVENTORY.md with a location
                           (slide, row, page, timestamp mm:ss, section)
+    [F-012 · S3 row 12]   a fact from analysis/facts.md with its source location
+    [C-02 resolved]       a conflict the human resolved in analysis/conflicts.md
+    [Q-03 resolved]       an open question the human answered in analysis/
     [R1-02]               a confirmed feedback item from feedback/R1.md
     [ASSUMPTION: derived from S3 row 30]   the AI filled a gap; say from what
-  A line without a tag is a defect. Facts F-### from analysis/facts.md may be
-  cited in addition, e.g. [F-012 · S3 row 12].
+  A line without a tag is a defect.
 
   CHANGE MARKERS: when a line changes in a later version, append
     ⟲ v0.2 · R1-01

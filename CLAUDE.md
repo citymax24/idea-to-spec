@@ -12,11 +12,11 @@ Spec Kit 1.0 project. Turns mixed inputs into a cited spec through traceable hum
 
 ## Rules that the commands enforce (do not weaken them)
 
-1. Nothing without provenance: every JOB, FLOW, SCR, FR, SC line ends with `[S# loc]`, `[R#-##]` or `[ASSUMPTION: …]`.
+1. Nothing without provenance: every JOB, FLOW, SCR, FR, SC and constraint line ends with `[S# loc]`, `[F-### · S# loc]`, `[C-## resolved]`, `[Q-## resolved]`, `[R#-##]` or `[ASSUMPTION: …]`.
 2. Feedback is confirmed before it is applied. `/speckit-idea-feedback` never edits `spec.md`.
 3. IDs are stable and never reused. Removed items become tombstones in §13 plus a `decisions/DEC-*.md`.
-4. One round = one spec version = one commit + tag `spec-<slug>-v<x.y>`.
-5. Only a human sets `accepted`, with name and date.
+4. One round = one spec version = one commit + tag `spec-<slug>-v<x.y>` (slug = feature dir without numeric prefix; needs a git repo).
+5. Only a human sets `accepted`, with name and date. First acceptance is v1.0; later re-acceptances keep the current version.
 6. Mockup feedback has two lanes: visual stays in the canvas; content or flow goes back through a feedback round.
 
 ## Editing the preset or extension

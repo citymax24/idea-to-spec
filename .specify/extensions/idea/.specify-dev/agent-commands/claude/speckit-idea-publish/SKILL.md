@@ -13,7 +13,11 @@ metadata:
 $ARGUMENTS
 ```
 
-Optional: `--feature <specs/NNN-dir>`.
+Optional: `--feature <specs/NNN-dir>`, `--headless`.
+
+## Interactive or headless
+
+Headless means: `--headless` is among the arguments, or you cannot wait for a reply (a `claude -p` run, a workflow step). Interactive means you can ask and wait. Every "ask the human" step below applies only when interactive; headless runs leave the marker or status in the file and stop.
 
 ## Goal
 
@@ -29,7 +33,7 @@ Give the reviewer a readable page with anchors per ID, so feedback can point at 
    ```
    Also copy the result to `FEATURE_DIR/feedback/spec-v<version>.html` as a frozen snapshot. The fixed name `spec-review.html` is what gets republished, so the review URL stays the same across versions.
 
-3. **Publish.** If an Artifact publishing tool is available in this session, publish `feedback/spec-review.html` (same file path on every version so the URL is stable; on the first publish use the favicon 📐 and the description "Spec v<version> for review — comment on any ID"). If no such tool exists (headless run, other agent), skip publishing and say where the HTML is; the reviewer can open it locally or the human can publish it from an interactive session.
+3. **Publish.** Headless runs usually have no publishing tool; then the local file is the review copy. If an Artifact publishing tool is available in this session, publish `feedback/spec-review.html` (same file path on every version so the URL is stable; on the first publish use the favicon 📐 and the description "Spec v<version> for review — comment on any ID"). If no such tool exists (headless run, other agent), skip publishing and say where the HTML is; the reviewer can open it locally or the human can publish it from an interactive session.
 
 4. **Record.** Append a row to `FEATURE_DIR/feedback/PUBLISHED.md` (create it with the header `| Version | Date | URL | Git tag |` if missing): version, today, URL or `local: feedback/spec-review.html`, the git tag if one exists.
 

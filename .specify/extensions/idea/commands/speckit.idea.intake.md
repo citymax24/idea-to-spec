@@ -8,7 +8,11 @@ description: Collect raw input files (spreadsheets, slides, notes, transcripts, 
 $ARGUMENTS
 ```
 
-Arguments: `<path to a folder or to files> [--name <2-4 word slug>] [--feature <specs/NNN-dir>]`. The path is required unless `--feature` points at a directory that already has `inputs/raw/`.
+Arguments: `<path to a folder or to files> [--name <2-4 word slug>] [--feature <specs/NNN-dir>] [--headless]`. The path is required unless `--feature` points at a directory that already has `inputs/raw/`.
+
+## Interactive or headless
+
+Headless means: `--headless` is among the arguments, or you cannot wait for a reply (a `claude -p` run, a workflow step). Interactive means you can ask and wait. Every "ask the human" step below applies only when interactive; headless runs leave the marker or status in the file and stop.
 
 ## Goal
 
@@ -20,9 +24,9 @@ Phase 1 of the idea-to-spec loop. Nothing gets lost, every source gets a stable 
    - If `--feature` is given, use it.
    - Else if `.specify/feature.json` exists, its `feature_directory` has an `inputs/` folder and no `spec.md`, reuse it (a second intake into the same idea).
    - Else create a new one: read `.specify/init-options.json` for `feature_numbering`. `sequential` (or absent): next 3-digit number after scanning `specs/`. `timestamp`: `YYYYMMDD-HHMMSS`. Slug from `--name`, else from the input folder name, kebab-case, 2–4 words. Create `specs/<prefix>-<slug>/` with `inputs/raw`, `inputs/extracted`, `analysis`, `feedback`, `decisions`, `design`, `checklists`. Write `.specify/feature.json` as `{"feature_directory": "specs/<prefix>-<slug>"}`.
-   - Set `FEATURE_DIR`.
+   - Set `FEATURE_DIR`. The slug is the directory name without its numeric prefix (`specs/001-quote-tracker` → `quote-tracker`); commits and tags use it.
 
-2. **Copy the inputs.** Copy (never move) every file from the given path into `FEATURE_DIR/inputs/raw/`. Skip hidden files and `.DS_Store`. If a name already exists in `raw/`, keep both by appending `-2` before the extension. Do not rename otherwise; the inventory refers to the original names.
+2. **Copy the inputs.** Copy (never move) every file from the given path into `FEATURE_DIR/inputs/raw/`. Skip hidden files and `.DS_Store`. If a file with the same name and identical content already exists in `raw/`, skip it (a rerun of intake must not duplicate sources). If the name exists but the content differs, keep both by appending `-2` before the extension. Do not rename otherwise; the inventory refers to the original names.
 
 3. **Convert.** Run:
    ```bash
@@ -34,7 +38,7 @@ Phase 1 of the idea-to-spec loop. Nothing gets lost, every source gets a stable 
 
 5. **Write the inventory.** Create or update `FEATURE_DIR/inputs/INVENTORY.md` from `.specify/extensions/idea/templates/inventory-template.md`. One row per source: ID, file, kind, date (from the content if it states one, else from the file's modification time), from (author if the content shows one, else `—`), one-sentence summary of what the source is about (not what it says), weight. Weight is `high | medium | low` and is the human's call: propose a value and mark it `(proposed)`. Existing rows keep ID and weight. List everything that still needs attention under "Needs attention".
 
-6. **Confirm weights.** If this session is interactive, show the inventory table and ask: "Weights okay? Reply `ok`, or correct like `S3 high, S2 low`." Apply the answer and drop `(proposed)` for confirmed rows. If the session is not interactive (headless run, workflow), leave the markers and move on.
+6. **Confirm weights.** Interactive: show the inventory table and ask: "Weights okay? Reply `ok`, or correct like `S3 high, S2 low`." Apply the answer and drop `(proposed)` for confirmed rows. Headless: leave the markers, do not ask, and move on; the workflow shows the inventory at a gate.
 
 7. **Report.** Feature directory, number of sources, which still need attention, and the next command: `/speckit-idea-facts`.
 

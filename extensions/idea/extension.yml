@@ -41,7 +41,7 @@ provides:
       description: "Apply a confirmed feedback round as one new spec version with changelog, tombstones and decision records"
     - name: "speckit.idea.accept"
       file: "commands/speckit.idea.accept.md"
-      description: "Run the acceptance checklist and record the human's approval as v1.0"
+      description: "Run the acceptance checklist and record the human's approval (v1.0 on first acceptance)"
     - name: "speckit.idea.brief"
       file: "commands/speckit.idea.brief.md"
       description: "Derive the design brief from the accepted spec and hand off to Claude Design"
@@ -86,6 +86,10 @@ provides:
     - name: "render-spec"
       file: "scripts/python/render_spec.py"
       description: "Render spec.md to a self-contained HTML page with anchors per ID"
+      runtimes: ["python"]
+    - name: "spec-status"
+      file: "scripts/python/spec_status.py"
+      description: "Exit 0 when spec.md has the expected status (used by the workflow before the brief)"
       runtimes: ["python"]
 
 tags:

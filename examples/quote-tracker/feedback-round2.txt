@@ -1,0 +1,3 @@
+Synthetic reviewer feedback for the dry run, round 2 (written by Claude in the reviewer role, not by Max). Purpose: exercise the REMOVE path (tombstone + decision record).
+
+Die Trefferquote für den Chef fliegt für Version 1 komplett raus. Das ist ein Reporting-Thema, das kommt frühestens in Version 2, wenn es genug Daten gibt. Bitte auch den zugehörigen Bildschirm streichen.

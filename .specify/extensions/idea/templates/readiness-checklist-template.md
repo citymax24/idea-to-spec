@@ -5,7 +5,7 @@
 
 ## Provenance
 
-- [ ] Every JOB, FLOW, SCR, FR, SC and constraint line ends with a provenance tag (source, feedback item, or ASSUMPTION)
+- [ ] Every JOB, FLOW, SCR, FR, SC and constraint line ends with a provenance tag (source `S#`, fact `F-###`, resolved `C-##`/`Q-##`, feedback `R#-##`, or `ASSUMPTION`)
 - [ ] No `[NEEDS CLARIFICATION]` markers remain
 - [ ] No assumption contradicts a decision record in `decisions/`
 

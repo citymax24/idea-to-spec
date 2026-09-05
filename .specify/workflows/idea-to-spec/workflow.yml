@@ -23,8 +23,8 @@ inputs:
     prompt: "Short name of the idea, 2-4 words, kebab-case"
   reviewer:
     type: string
-    default: "reviewer"
-    prompt: "Name of the human reviewer"
+    required: true
+    prompt: "Name of the human reviewer (recorded on confirmations and acceptance)"
   integration:
     type: string
     default: "auto"
@@ -35,17 +35,19 @@ steps:
     command: speckit.idea.intake
     integration: "{{ inputs.integration }}"
     input:
-      args: "{{ inputs.inbox }} --name {{ inputs.name }}"
+      args: "{{ inputs.inbox }} --name {{ inputs.name }} --headless"
 
   - id: weights
     type: gate
-    message: "Check inputs/INVENTORY.md: are the proposed source weights right? Edit the file if not, then approve."
+    message: "Check inputs/INVENTORY.md: are the proposed source weights right? Edit the file if not, then approve. Approving confirms the weights."
     options: [approve, abort]
     on_reject: abort
 
   - id: facts
     command: speckit.idea.facts
     integration: "{{ inputs.integration }}"
+    input:
+      args: "--headless"
 
   - id: conflicts
     type: gate
@@ -56,10 +58,14 @@ steps:
   - id: draft
     command: speckit.idea.draft
     integration: "{{ inputs.integration }}"
+    input:
+      args: "--headless"
 
   - id: publish
     command: speckit.idea.publish
     integration: "{{ inputs.integration }}"
+    input:
+      args: "--headless"
 
   - id: review-loop
     type: do-while
@@ -72,7 +78,7 @@ steps:
 
       - id: review
         type: gate
-        message: "Read the spec (link in feedback/PUBLISHED.md, or feedback/spec-review.html). Comment on the page or note your feedback. Choose 'revise' to run a feedback round, 'accept' when the spec stands."
+        message: "Read the spec (feedback/spec-review.html, or the URL in feedback/PUBLISHED.md). Write your feedback into <feature-dir>/feedback/inbox.txt in your own words, or comment on the published page. Choose 'revise' to run a feedback round, 'accept' when the spec stands."
         show_file: "{{ steps.published-path.output.stdout }}"
         options: [revise, accept]
         on_reject: skip
@@ -85,7 +91,7 @@ steps:
             command: speckit.idea.feedback
             integration: "{{ inputs.integration }}"
             input:
-              args: "--from-comments --reviewer {{ inputs.reviewer }}"
+              args: "--from-comments --inbox --reviewer {{ inputs.reviewer }} --headless"
 
           - id: latest-round
             type: shell
@@ -102,11 +108,13 @@ steps:
             command: speckit.idea.apply
             integration: "{{ inputs.integration }}"
             input:
-              args: "--gate-confirmed {{ context.run_id }}"
+              args: "--gate-confirmed {{ context.run_id }} --headless"
 
           - id: republish
             command: speckit.idea.publish
             integration: "{{ inputs.integration }}"
+            input:
+              args: "--headless"
 
   - id: after-review
     type: if
@@ -116,11 +124,26 @@ steps:
         command: speckit.idea.accept
         integration: "{{ inputs.integration }}"
         input:
-          args: "--approved-by {{ inputs.reviewer }}"
+          args: "--approved-by {{ inputs.reviewer }} --headless"
 
-      - id: brief
-        command: speckit.idea.brief
-        integration: "{{ inputs.integration }}"
+      - id: accepted-check
+        type: shell
+        run: "python3 .specify/extensions/idea/scripts/python/spec_status.py --expect accepted"
+        continue_on_error: true
+
+      - id: brief-if-accepted
+        type: if
+        condition: "{{ steps.accepted-check.output.exit_code == 0 }}"
+        then:
+          - id: brief
+            command: speckit.idea.brief
+            integration: "{{ inputs.integration }}"
+            input:
+              args: "--headless"
+        else:
+          - id: not-ready
+            type: shell
+            run: "echo 'Acceptance checklist failed; see checklists/requirements.md. Fix via a feedback round, then run /speckit-idea-accept.'"
     else:
       - id: not-accepted
         type: shell

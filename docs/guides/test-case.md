@@ -23,6 +23,28 @@ A tool for small landscaping firms to keep track of sent quotes: which are open,
 - Round 1 (`examples/quote-tracker/feedback-round1.txt`) exercises all six item types: CHANGE (target group), ADD/CHANGE (no login in v1), REMOVE + MISREAD (export), QUESTION (offline), OK (problem and goal).
 - Apply produces v0.2 with change markers, one tombstone, one decision record and a changelog block naming R1-xx per change.
 
-## Results
+## Results (headless, `claude -p`, 2026-09-05)
 
-Filled in below after the run.
+| Step | Duration | Outcome |
+|------|----------|---------|
+| intake | ~2 min | S1–S4 assigned, all four converted, weights proposed (S1 high, S2 medium, S3 high, S4 medium), empty rows 17–30 in the spreadsheet flagged, transcript kind corrected by the agent |
+| facts | ~6 min | 76 facts with locations, C-01 (trades) and C-02 (size band) found, 14 open questions with defaults including Q-11 (export vs import), login correctly listed as "checked and not a conflict" |
+| draft | ~8 min | spec v0.1: 8 JOB, 8 FLOW, 10 SCR, 32 FR, 8 SC, 25 assumptions, 3 clarification markers; zero untagged lines; commit + tag `spec-quote-tracker-v0.1` |
+| publish | ~1 min | `feedback/spec-review.html`, frozen `spec-v0.1.html`, `PUBLISHED.md` with a local path (no publishing tool in a headless run) |
+| feedback R1 | ~3 min | `feedback/R1.md`: 7 items from 5 sentences (3 CHANGE, 1 MISREAD, 2 QUESTION of which one asked back by the AI, 1 OK); all `proposed`; spec untouched |
+| apply R1 | ~10 min | v0.2, status in-review, 29 `⟲ v0.2` markers, changelog block with a trigger per row, §1 recorded as reviewed, tag `spec-quote-tracker-v0.2`; no tombstone because the "export" turned out to be already read as an import |
+| feedback R2 | ~3 min | `feedback/R2.md`: 2 REMOVE (hit rate feature and its screen) plus 2 questions the AI asked back (what happens to the quote-amount field, and to the §1 goal sentence) |
+| apply R2 | ~7 min | v0.3, tombstones for FR-026, FR-027, FLOW-05, SC-005, SCR-07 in §13, `decisions/DEC-001.md` with the reviewer's words and how the sources are read from now on, facts file updated ("Superseded by decisions"), tag `spec-quote-tracker-v0.3` |
+| brief `--draft` | ~5 min | `design/brief.md` (DRAFT) with 9 screens in flow order, one design prompt each, "Do not show" from §4 and §13, and the gaps a designer would hit (Q-01, Q-09); `design/README.md` with the two-lane rule |
+
+Three things worth knowing from this run:
+
+- The "export" trap was already defused at draft time: the draft read the ambiguous row as an import, put the export under "Out of scope" and carried the ambiguity as Q-11. The reviewer's REMOVE therefore became a MISREAD item that resolves Q-11 rather than a tombstone. The round file documents what the spec said and where it was read from.
+- Removing the login had a consequence the reviewer had not thought about (per-person views, reminders, assignment). The feedback step raised it as a question back (R1-04) instead of guessing. The same happened in round 2 for the quote-amount field that only existed for the removed hit rate (R2-03).
+- Every gate in this run was simulated: Claude answered R1-04, R2-03 and R2-04 in the reviewer's role, and `--gate-confirmed` was passed by hand. The round files, the changelog and DEC-001 all say so. Nothing in `specs/001-quote-tracker/` is a human decision; a real reviewer must read R1 and R2 before that spec could ever be accepted.
+
+## What was fixed because of the run
+
+- Converter: real spreadsheet row numbers via openpyxl (re-executed under `uv run` when the system Python lacks it), stable S-IDs on a rerun, transcripts detected by name or timestamps.
+- Commands: an explicit "interactive or headless" rule (`--headless`), the `--inbox` lane for workflow runs, `defer` during confirmation, version rules for re-acceptance, DEC numbering, Q-ID namespace, duplicate-safe re-intake.
+- Workflow: `reviewer` is required, every step passes `--headless`, the round file is shown at the confirmation gate, the brief only runs when the spec is actually `accepted`.
