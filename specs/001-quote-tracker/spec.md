@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Version** | 0.2 |
+| **Version** | 0.3 |
 | **Status** | in-review |
 | **Created** | 2026-09-05 |
 | **Sources** | S1–S4 (see `inputs/INVENTORY.md`) |
@@ -50,7 +50,7 @@ Target business: garden and landscaping businesses ("GaLaBau") with 5 to 50 empl
 
 | Role | Who they are | What they need from this | Provenance |
 |------|--------------|--------------------------|------------|
-| Boss ("Chef") | Owner of a GaLaBau business with 5–50 employees; decides; phone and desktop; weekly use. In a 12-person business the owner also writes the quotes himself. | Overview of all quotes of the business and the hit rate per month. | [F-008, F-009 · S1 §2; F-043 · S2 row 2 (sheet Rollen); F-046, F-052 · S3 para 1, 07:40] |
+| Boss ("Chef") | Owner of a GaLaBau business with 5–50 employees; decides; phone and desktop; weekly use. In a 12-person business the owner also writes the quotes himself. | Overview of all quotes of the business. | [F-008, F-009 · S1 §2; F-043 · S2 row 2 (sheet Rollen); F-046, F-052 · S3 para 1, 07:40] [R2-01] ⟲ v0.3 · R2-01 |
 | Site manager ("Bauleiter") | Writes the quotes, is out in the field, works almost only on the phone, often with dirty hands or gloves; daily use. | Their own open quotes in follow-up order, one reminder after 7 days, status in two taps. | [F-010, F-012 · S1 §2; F-044 · S2 row 3 (sheet Rollen); F-056, F-057 · S3 10:45, 12:10] |
 | Office ("Büro") | Maintains the data and phones customers; desktop; daily use. At Weber the owner's wife runs the office. | The Monday list to phone through, notes on quotes, sight of all quotes of the business. | [F-011 · S1 §2; F-045 · S2 row 4 (sheet Rollen); F-055 · S3 10:45] |
 
@@ -67,7 +67,7 @@ Jobs the product must let a user do. Ordered by importance. Each job names the r
 - **JOB-03** · Site manager · When a customer accepts or declines on site, I want to set the status in two taps with gloves on, so that I do not have to remember it in the evening and forget. — [F-027 · S2 row 3 (sheet Features); F-056, F-057, F-058 · S3 10:45, 12:10; F-072 · S4 slide 5]
 - **JOB-04** · Office · When Monday morning comes, I want a list of quotes to phone through ("abtelefonieren"), filterable by site manager, so that I can follow up in one sitting. — [F-017 · S1 §3; F-031 · S2 row 6 (sheet Features); F-045 · S2 row 4 (sheet Rollen); F-055 · S3 10:45]
 - **JOB-05** · Office · When I have spoken to a customer, I want to note what they said on the quote (for example "will erst nach dem Urlaub entscheiden"), so that whoever calls next knows. — [F-016 · S1 §3; F-030 · S2 row 5 (sheet Features)]
-- **JOB-06** · Boss · When I look at the business each week, I want to see all open quotes and the share of accepted quotes per month, so that I know how many quotes become orders instead of guessing. — [F-009 · S1 §2; F-033 · S2 row 8 (sheet Features); F-043 · S2 row 2 (sheet Rollen); F-048 · S3 00:40; F-073 · S4 slide 5]
+- **JOB-06** · Boss · When I look at the business each week, I want to see all open quotes of the business, so that I have the overview I decide from without asking anyone. — [F-009 · S1 §2; F-043 · S2 row 2 (sheet Rollen)] [R2-01] ⟲ v0.3 · R2-01
 - **JOB-07** · Office · When a customer calls or I need a specific quote, I want to find it by customer or quote number, so that I do not scroll through the list. — [F-035 · S2 row 10 (sheet Features)]
 - **JOB-08** · Office · When we start using the product, I want to take over the existing open quotes from our old Excel list once, so that we do not keep two lists. — [F-042 · S2 row 31 (sheet Features); F-063 · S4 slide 2] [Q-11 resolved · R1-05] ⟲ v0.2 · R1-05
 
@@ -75,9 +75,9 @@ Jobs the product must let a user do. Ordered by importance. Each job names the r
 
 ### In scope
 
-Version 1 contains the feature-list priorities 1 and 2; priority 3 is out. [ASSUMPTION: Q-01 default, see A-03]
+Version 1 contains the feature-list priorities 1 and 2, except the hit rate, which the reviewer took out of version 1; priority 3 is out. [ASSUMPTION: Q-01 default, see A-03] [R2-01] ⟲ v0.3 · R2-01
 
-- [NEEDS CLARIFICATION: Q-01 — no source maps a feature-list priority to a version. Are the priority-2 features below (customer note, Monday list, hit rate, search, multiple site managers, push reminder, quote amount, Excel takeover) part of version 1, or only priority 1?]
+- [NEEDS CLARIFICATION: Q-01 — no source maps a feature-list priority to a version. Are the priority-2 features below (customer note, Monday list, search, multiple site managers, push reminder, quote amount, Excel takeover) part of version 1, or only priority 1? The hit rate, also priority 2, was taken out by R2-01.] ⟲ v0.3 · R2-01
 - Open quotes list, sorted by follow-up date (priority 1). — [F-013 · S1 §3; F-025 · S2 row 2 (sheet Features)]
 - Status per quote: sent, followed up, accepted, declined, lapsed; set in at most two clicks (priority 1). — [F-014 · S1 §3; F-026, F-027 · S2 row 3 (sheet Features)]
 - Follow-up reminder after 7 days without answer (priority 1). — [F-015 · S1 §3; F-028 · S2 row 4 (sheet Features); F-052 · S3 07:40]
@@ -85,11 +85,10 @@ Version 1 contains the feature-list priorities 1 and 2; priority 3 is out. [ASSU
 - Filter the list by status (priority 1). — [F-034 · S2 row 9 (sheet Features)]
 - Free-text note per quote about the customer (priority 2). — [F-016 · S1 §3; F-030 · S2 row 5 (sheet Features)]
 - Monday list to phone through, filterable by site manager (priority 2). — [F-017 · S1 §3; F-031 · S2 row 6 (sheet Features)]
-- Hit rate: share of accepted quotes among all quotes, per month, for the boss (priority 2). — [F-033 · S2 row 8 (sheet Features); F-073 · S4 slide 5]
 - Search by customer or quote number (priority 2). — [F-035 · S2 row 10 (sheet Features)]
 - Multiple site managers: each sees their own quotes, the boss sees all (priority 2). — [F-036 · S2 row 11 (sheet Features)]
 - Reminder as push notification to the phone, or by email (priority 2). — [F-037 · S2 row 12 (sheet Features); F-071 · S4 slide 5]
-- Quote amount per quote, so the hit rate can be shown in euros (priority 2). — [F-039 · S2 row 14 (sheet Features)]
+- Quote amount per quote, optional; captured now so the hit rate can be shown in euros when it comes in version 2 (priority 2). — [F-039 · S2 row 14 (sheet Features)] [R2-01; kept by the R2-03 answer (a)] ⟲ v0.3 · R2-01
 - One-time takeover of existing quotes from the old Excel list at the start (priority 2). — [F-042 · S2 row 31 (sheet Features)] [Q-11 resolved · R1-05] ⟲ v0.2 · R1-05
 
 ### Out of scope
@@ -106,6 +105,7 @@ Version 1 contains the feature-list priorities 1 and 2; priority 3 is out. [ASSU
 - Automatic lapsing of a quote after a period without answer; "lapsed" is set by hand. — [ASSUMPTION: Q-08 default, see A-10]
 - Pricing, billing and subscriptions inside the product; the price is set only after the pilot. — [F-076 · S4 slide 6]
 - Other trades (painters, roofers, plumbing/heating) as target users of this version; GaLaBau is the entry market in both sources. — [F-067, F-069 · S4 slide 4] [C-01 resolved · R1-01] ⟲ v0.2 · R1-01
+- Hit rate per month for the boss (share of accepted quotes among all quotes, in count and in euros); a reporting topic, version 2 at the earliest, once there is enough data. Was FR-026, FR-027, FLOW-05, SCR-07 and SC-005 in v0.2, now tombstones in §13. — [F-033 · S2 row 8 (sheet Features); F-073 · S4 slide 5; F-043 · S2 row 2 (sheet Rollen)] [R2-01 · DEC-001] ⟲ v0.3 · R2-01
 
 ## 5 User Flows *(mandatory)*
 
@@ -127,10 +127,6 @@ SCR-01 → SCR-04 → SCR-01. The site manager opens the list, taps the quote an
 
 SCR-06 → SCR-04 → SCR-06 → SCR-03 → SCR-06 → SCR-01. The office opens the Monday list, filters by site manager if needed, phones each customer whose quote is due, sets the status from the row and adds a note where the customer said something worth keeping; a quote that got a status leaves the list. If nothing is due, the list is empty and says so. — [F-045 · S2 row 4 (sheet Rollen)] [ASSUMPTION: derived from F-013 · S1 §3 for the due rule, see A-21]
 
-### FLOW-05 · Check the hit rate — [F-033 · S2 row 8 (sheet Features); F-073 · S4 slide 5]
-
-SCR-01 → SCR-07 → SCR-01. The boss opens the hit rate, reads accepted quotes as a share of all quotes per month, in count and, where amounts were captured, in euros. A month with no quotes shows no share rather than zero. — [F-039 · S2 row 14 (sheet Features)] [ASSUMPTION: derived from F-033 · S2 row 8 (sheet Features), see A-19]
-
 ### FLOW-06 · Find a quote — [F-035 · S2 row 10 (sheet Features)]
 
 SCR-01 → SCR-03 → SCR-01. The office types a customer name or quote number into the search on the open list, opens the matching quote, reads or edits it and returns. Closed quotes are found too; no match shows an empty result with the search term. — [F-035 · S2 row 10 (sheet Features)] [ASSUMPTION: Q-07 default, see A-09]
@@ -147,14 +143,14 @@ SCR-01 → SCR-10 → SCR-01. The office uploads the old Excel list once, matche
 
 One block per screen. This section becomes the design brief.
 
-### SCR-01 · Open quotes list — [F-013 · S1 §3; F-025 · S2 row 2 (sheet Features)]
+### SCR-01 · Open quotes list — [F-013 · S1 §3; F-025 · S2 row 2 (sheet Features)] ⟲ v0.3 · R2-01, R2-02
 
 - **Purpose**: See every open quote (own quotes for a site manager, all quotes of the business for boss and office) in the order they need a follow-up call, and act on one directly.
 - **Primary action**: Set the status of a quote (tap the row, tap the status).
-- **Content**: List rows with customer name, quote number (if present), sent date, follow-up date with an overdue marker, status, site manager (boss and office only), latest note in one line; fixed sort by follow-up date ascending; filter by status (default: open); filter by site manager (boss and office only); search field for customer or quote number; "Add quote" button; entries to the Monday list (office), hit rate (boss), people (boss) and takeover (office).
+- **Content**: List rows with customer name, quote number (if present), sent date, follow-up date with an overdue marker, status, site manager (boss and office only), latest note in one line; fixed sort by follow-up date ascending; filter by status (default: open); filter by site manager (boss and office only); search field for customer or quote number; "Add quote" button; entries to the Monday list (office), people (boss) and takeover (office). ⟲ v0.3 · R2-01
 - **States**: empty (no open quotes: nothing to follow up) / loaded / loading / filtered or searched with no match / error (list cannot be loaded).
 - **Satisfies**: FR-004, FR-006, FR-008, FR-009, FR-010, FR-011, FR-012, FR-013, FR-015, FR-024
-- **Comes from**: SCR-02, SCR-03, SCR-04, SCR-06, SCR-07, SCR-08, SCR-09, SCR-10 · **Leads to**: SCR-02, SCR-03, SCR-04, SCR-06, SCR-07, SCR-09, SCR-10
+- **Comes from**: SCR-02, SCR-03, SCR-04, SCR-06, SCR-08, SCR-09, SCR-10 · **Leads to**: SCR-02, SCR-03, SCR-04, SCR-06, SCR-09, SCR-10 ⟲ v0.3 · R2-02
 
 ### SCR-02 · Add quote — [F-032 · S2 row 7 (sheet Features); F-050 · S3 04:20; F-070 · S4 slide 5]
 
@@ -201,15 +197,6 @@ One block per screen. This section becomes the design brief.
 - **Satisfies**: FR-010, FR-011, FR-013, FR-024, FR-025
 - **Comes from**: SCR-01, SCR-03, SCR-04 · **Leads to**: SCR-03, SCR-04, SCR-01
 
-### SCR-07 · Hit rate — [F-033 · S2 row 8 (sheet Features); F-073 · S4 slide 5]
-
-- **Purpose**: Show the boss how many quotes become orders, month by month.
-- **Primary action**: Read the share for the current and past months.
-- **Content**: One row per month for the last 12 months: quotes sent, accepted, declined, lapsed, still open; hit rate as accepted divided by sent; where amounts were captured, quoted euros, accepted euros and the share in euros; months without quotes show no share.
-- **States**: loaded / no quotes yet (empty) / amounts missing (euro columns hidden or marked incomplete) / loading / error.
-- **Satisfies**: FR-026, FR-027
-- **Comes from**: SCR-01 · **Leads to**: SCR-01
-
 ### SCR-08 · First use (pick your name) — [F-023 · S1 §6; F-054 · S3 09:10] [Q-02 resolved · R1-03, R1-04] [ASSUMPTION: Q-03 default, see A-05] ⟲ v0.2 · R1-03
 
 - **Purpose**: Let a person who opened the business's access link on a device say once who they are, without a password or any sign-in.
@@ -245,7 +232,7 @@ Adding quotes
 
 - **FR-001**: A site manager, office member or boss can add a quote to the list by attaching a photo of the printout or a PDF; typing the content of the quote is never required. — [F-032 · S2 row 7 (sheet Features); F-050, F-051 · S3 04:20; F-070 · S4 slide 5] [ASSUMPTION: any role can add, see A-25]
 - **FR-002**: When adding a quote the user enters the customer name and the sent date, which is preset to today; quote number and amount are optional. — [ASSUMPTION: Q-09 default, derived from F-013 · S1 §3, F-035 and F-039 · S2 rows 10, 14 (sheet Features) against F-024 · S1 §6 and F-051 · S3 04:20, see A-11]
-  - [NEEDS CLARIFICATION: Q-09 — which fields must be typed when a quote is added as photo or PDF? Sorting, search and the hit rate need typed data, yet "Abtippen macht bei uns keiner".]
+  - [NEEDS CLARIFICATION: Q-09 — which fields must be typed when a quote is added as photo or PDF? Sorting, search and the amount kept for the hit rate in version 2 need typed data, yet "Abtippen macht bei uns keiner".] ⟲ v0.3 · R2-01
 - **FR-003**: A quote can be saved without its file when the file cannot be attached; the file can be attached later from the quote detail. — [ASSUMPTION: Q-10 default, see A-12]
 - **FR-004**: A newly added quote gets the status "sent" and appears in the open list. — [F-018 · S1 §4]
 - **FR-005**: Every quote is assigned to exactly one site manager: the person adding it if they are a site manager, otherwise the site manager chosen while adding; boss and office can reassign it. — [ASSUMPTION: derived from F-036 · S2 row 11 and F-031 · S2 row 6 (sheet Features), see A-17]
@@ -265,7 +252,7 @@ Status
 
 - **FR-014**: Each quote has exactly one status out of sent ("verschickt"), followed up ("nachgefasst"), accepted ("zugesagt"), declined ("abgesagt"), lapsed ("verlaufen"). — [F-014 · S1 §3; F-026 · S2 row 3 (sheet Features)]
 - **FR-015**: From the open list, setting a status takes at most two taps or clicks: one to pick the quote, one to pick the status. — [F-027 · S2 row 3 (sheet Features); F-057 · S3 12:10; F-072 · S4 slide 5]
-- **FR-016**: A status can be set again after it was set, and the date of every status change is kept and shown on the quote. — [ASSUMPTION: derived from F-033 · S2 row 8 (sheet Features) (hit rate per month) and Q-06 default (restart on "followed up"), see A-20]
+- **FR-016**: A status can be set again after it was set, and the date of every status change is kept and shown on the quote. — [ASSUMPTION: derived from Q-06 default (restart on "followed up"), see A-20] ⟲ v0.3 · R2-01
 - **FR-017**: "Lapsed" is set by a person; the system never changes a status on its own. — [ASSUMPTION: Q-08 default, see A-10]
 
 Reminder
@@ -285,10 +272,8 @@ Monday list
 
 - **FR-025**: The office can open a Monday list containing all open quotes of the business whose follow-up date is today or earlier, filterable by site manager, with status and note reachable from each row. — [F-017 · S1 §3; F-031 · S2 row 6 (sheet Features); F-045 · S2 row 4 (sheet Rollen)] [ASSUMPTION: derived from F-013 · S1 §3 for the due rule, see A-21]
 
-Hit rate
+Quote amount (FR-026 and FR-027, the hit rate, were removed in v0.3; see §13) ⟲ v0.3 · R2-01
 
-- **FR-026**: The boss can see the hit rate per month: the number of accepted quotes as a share of all quotes sent in that month, for at least the last 12 months. — [F-033 · S2 row 8 (sheet Features); F-073 · S4 slide 5] [ASSUMPTION: month of the sent date, denominator includes quotes still open, see A-19]
-- **FR-027**: Where amounts are captured, the hit rate is also shown in euros: accepted amount as a share of the total quoted amount per month. — [F-039 · S2 row 14 (sheet Features)]
 - **FR-028**: The amount of a quote can be captured when adding it or later on the quote detail. — [F-039 · S2 row 14 (sheet Features)]
 
 People
@@ -303,7 +288,7 @@ Data
 
 ## 8 Constraints
 
-- **Devices / context**: The site manager uses only the phone, in the field, often with dirty hands or gloves, so the open list, add quote, quote detail, status and reminder must work one-handed on a phone with large touch targets; the office works at a desktop, so the Monday list and the takeover are desktop screens; the boss uses both, so the hit rate works on either. — [F-012 · S1 §2; F-043, F-044, F-045 · S2 rows 2–4 (sheet Rollen); F-057 · S3 12:10]
+- **Devices / context**: The site manager uses only the phone, in the field, often with dirty hands or gloves, so the open list, add quote, quote detail, status and reminder must work one-handed on a phone with large touch targets; the office works at a desktop, so the Monday list and the takeover are desktop screens; the boss uses both phone and desktop. — [F-012 · S1 §2; F-043, F-044, F-045 · S2 rows 2–4 (sheet Rollen); F-057 · S3 12:10] [R2-01] ⟲ v0.3 · R2-01
 - **Language**: German user interface; all sources and both pilot businesses are German-speaking. — [ASSUMPTION: Q-12 default, see A-14]
 - **Brand / tone**: No brand assets exist in any source; the tone is plain trade language as the users speak it ("Stups", "abtelefonieren", "nachfassen"), short labels, no jargon. — [ASSUMPTION: derived from S1 §3 and S3 07:40, 10:45, see A-23]
 - **Legal / data**: Quotes, photos, PDFs and notes contain customer personal data; each business sees only its own data, the data is kept until the business deletes it, and it is hosted in the EU. — [ASSUMPTION: Q-13 default, see A-15]
@@ -319,7 +304,6 @@ Measurable, technology-agnostic outcomes.
 - **SC-002**: Nobody at a pilot business has to type the content of a quote to get it into the list; the only typed input is the customer name and, if not today, the sent date. — [F-050, F-051 · S3 04:20; F-070 · S4 slide 5] [ASSUMPTION: Q-09 default, see A-11]
 - **SC-003**: Every quote with 7 days without answer produces exactly one reminder, and no quote receives a second reminder before its status is set to "followed up". — [F-015 · S1 §3; F-052 · S3 07:40]
 - **SC-004**: During the pilot, every quote that ends as "lapsed" has at least one "followed up" before it; today an estimated 8 of 30 quotes lapse with no follow-up at all. — [F-005 · S1 §1; F-049 · S3 02:15]
-- **SC-005**: The boss can read the hit rate of the last full month from the product instead of guessing ("vielleicht die Hälfte"). — [F-048 · S3 00:40; F-073 · S4 slide 5]
 - **SC-006**: The office can work through the Monday list without asking anyone which quotes are open. — [F-004 · S1 §1; F-017 · S1 §3]
 - **SC-007**: Nobody signs in during the pilot; the only access steps a person ever takes are opening the business's link and picking their name once per device. — [F-054 · S3 09:10; F-023 · S1 §6] [Q-02 resolved · R1-03, R1-04] ⟲ v0.2 · R1-03
 - **SC-008**: At a pilot business, at least two quotes per year that received a reminder and a follow-up end as "accepted"; that is the value Weber named for 30 € a month. — [F-059 · S3 13:30; F-066 · S4 slide 3]
@@ -330,7 +314,7 @@ Everything the AI filled in without a source. Each item names what it was derive
 
 - **A-01**: This spec is written for GaLaBau businesses only; other trades are a later market. — Resolved in v0.2: C-01 settled as "GaLaBau only" by R1-01, no longer an assumption (was: C-01 unresolved, S1 high over S4 medium, F-006 · S1 §2 against F-067, F-069 · S4 slide 4); was used in §2, §4 Out of scope ⟲ v0.2 · R1-01
 - **A-02**: The target business has 5 to 50 employees. — Resolved in v0.2: C-02 settled as "5 to 50 employees" by R1-02, which sets S4 slide 4 aside as a requirement source for version 1; no longer an assumption (was: C-02 unresolved, S1 high over S4 medium, F-006, F-007 · S1 §2 against F-068 · S4 slide 4); was used in §2 ⟲ v0.2 · R1-02
-- **A-03**: Version 1 contains feature-list priorities 1 and 2; priority 3 (rejection reason, offline, login) is out. — Q-01 default, derived from S2 rows 2–16, 31 (sheet Features); used in §4
+- **A-03**: Version 1 contains feature-list priorities 1 and 2, except the hit rate, which R2-01 took out of version 1 (DEC-001); priority 3 (rejection reason, offline, login) is out. Q-01 stays open for the other priority-2 features. — Q-01 default, derived from S2 rows 2–16, 31 (sheet Features); used in §4 ⟲ v0.3 · R2-01
 - **A-04**: Replaced in v0.2: one access link per business, a person picks their name once per device, no sign-in of any kind; decided by R1-03 with the R1-04 answer (b), no longer an assumption (was: a person is identified by a one-time join per device through an invite link, Q-02 default, derived from F-036 · S2 row 11 (sheet Features), F-023 · S1 §6, F-054 · S3 09:10); was used in §2, §8, FR-029, SCR-08, FLOW-07, SC-007 ⟲ v0.2 · R1-03
 - **A-05**: Reminders arrive as push on the phone, or by email if the person chose email at first use. — Q-03 default, derived from F-037 · S2 row 12 (sheet Features) and F-071 · S4 slide 5; used in FR-020, SCR-05, SCR-08 ⟲ v0.2 · R1-03
 - **A-06**: The reminder goes to the site manager the quote is assigned to; the office sees the same quote in the Monday list. — Q-04 default, derived from F-052 · S3 07:40 and F-018 · S1 §4; used in FR-019, FLOW-02
@@ -346,8 +330,8 @@ Everything the AI filled in without a source. Each item names what it was derive
 - **A-16**: The office sees all quotes of its business, like the boss. — Q-14 default, derived from F-031 · S2 row 6 (sheet Features); used in FR-010
 - **A-17**: Every quote is assigned to exactly one site manager, by default the person adding it; one person can hold more than one role, and field crew who only set a status act as site managers. — derived from F-036, F-031 · S2 rows 11, 6 (sheet Features) and F-052, F-056 · S3 07:40, 10:45; used in §2, FR-005
 - **A-18**: The boss maintains the business's list of people and their roles and shares the access link. — derived from F-008, F-009 · S1 §2 (the boss decides); used in FR-030, SCR-09, FLOW-07 ⟲ v0.2 · R1-03
-- **A-19**: The hit rate month is the month of the sent date; the denominator is all quotes sent in that month, including those still open. — derived from "pro Monat" in F-033 · S2 row 8 (sheet Features); used in FR-026, FLOW-05
-- **A-20**: A status can be set again to correct it, and the date of every status change is kept. — derived from F-033 · S2 row 8 (sheet Features) and Q-06 default; used in FR-016, FLOW-03
+- **A-19**: Removed in v0.3: the hit rate left version 1 by R2-01 (DEC-001), so this assumption has nothing to apply to (was: the hit rate month is the month of the sent date; the denominator is all quotes sent in that month, including those still open, derived from "pro Monat" in F-033 · S2 row 8 (sheet Features)); was used in FR-026 and FLOW-05, both tombstones in §13 ⟲ v0.3 · R2-01
+- **A-20**: A status can be set again to correct it, and the date of every status change is kept. — derived from Q-06 default (the hit-rate reason, F-033, fell away with R2-01); used in FR-016, FLOW-03 ⟲ v0.3 · R2-01
 - **A-21**: The Monday list holds the open quotes whose follow-up date is today or earlier, and shows the latest note per row. — derived from F-017 · S1 §3, F-031 · S2 row 6 (sheet Features), F-045 · S2 row 4 (sheet Rollen) and F-013 · S1 §3; used in FR-024, FR-025, SCR-06, FLOW-04
 - **A-22**: The lists mark quotes whose follow-up date is today or past. — derived from F-013 · S1 §3 and F-053 · S3 07:40; used in FR-013
 - **A-23**: There are no brand assets; the tone is plain trade language. — derived from the wording in S1 §3 and S3 07:40, 10:45; used in §8
@@ -385,4 +369,10 @@ Note from the source inventory, not a spec question: the feature list (S2, sheet
 
 Items removed after review. The ID stays reserved; the line points to the round and the decision.
 
-- None in v0.1 or v0.2.
+- FR-026 · Hit rate per month for the boss: accepted quotes as a share of all quotes sent in that month · Removed in v0.3 · R2-01 · DEC-001
+- FR-027 · Hit rate in euros where amounts were captured · Removed in v0.3 · R2-01 · DEC-001
+- FLOW-05 · Check the hit rate (SCR-01 → SCR-07 → SCR-01) · Removed in v0.3 · R2-01 · DEC-001
+- SC-005 · The boss reads the hit rate of the last full month instead of guessing · Removed in v0.3 · R2-01 · DEC-001
+- SCR-07 · Hit rate screen: one row per month with counts, share and euros · Removed in v0.3 · R2-02 · DEC-001
+
+None were removed in v0.1 or v0.2.

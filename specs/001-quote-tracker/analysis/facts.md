@@ -101,4 +101,4 @@ Claims that a decision record excludes. Listed so they are not rebuilt into the 
 
 | Fact | Decision | Note |
 |------|----------|------|
-| — | — | No decision records exist yet (`decisions/` is empty). |
+| F-033, F-073 (and the "Trefferquote" half of F-043) | DEC-001 (R2-01, R2-02; spec v0.3, 2026-09-05) | The hit rate per month for the boss is out of version 1: a reporting topic, version 2 at the earliest, once there is enough data. FR-026, FR-027, FLOW-05, SC-005 and SCR-07 are tombstones in spec §13. F-033 and F-073 are now cited only from §4 Out of scope and, F-073, from the §1 goal sentence kept by R2-04 (a). F-039 (quote amount) is not superseded: the amount stays an optional field in version 1 (R2-03 answer a). F-048 stays a problem statement in §1. |
