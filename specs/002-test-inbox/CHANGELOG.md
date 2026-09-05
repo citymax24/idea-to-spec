@@ -2,6 +2,17 @@
 
 One block per spec version. Every change names the feedback item that triggered it. Read newest first.
 
+## v1.1 · 2026-09-05 · accepted by yana
+
+| Change | Affects | Trigger | Type |
+|--------|---------|---------|------|
+| Status in-review → accepted; version stays 1.1 (a re-acceptance keeps the current version) | header | acceptance by yana | CHANGE |
+| Approved by / Approved on now name both acceptances: v1.0 and v1.1 | header | acceptance by yana | CHANGE |
+
+Rounds since the v1.0 acceptance: R2 (recipient of the seven-day reminder) → v1.1.
+Checklist at acceptance: 11 of 12 items passed mechanically; "Reviewed sections cover the whole spec" was again closed by the reviewer accepting without full coverage.
+Accepted with these assumptions unread: A-05/FR-013/FR-030 (single recipient of the reminder — delegated to Claude, sources point both ways), A-06/FR-029 (only the Chef administers users), A-02/FR-008 ("abgesagt" and "verlaufen" also leave the open list). FR-021 stands against F-044 by the resolution of C-02.
+
 ## v1.1 · 2026-09-05 · from round R2
 
 | Change | Affects | Trigger | Type |
