@@ -1,0 +1,19 @@
+# Open Questions
+
+Feature: `specs/002-test-inbox` · 2026-09-05
+
+Gaps no source fills. Each question names the spec section that carries an assumption until it is answered.
+
+| ID | Question | Why it matters | Section affected | Suggested default | Resolution |
+|----|----------|----------------|------------------|-------------------|------------|
+| Q-01 | Is the 7-day follow-up interval fixed, or can a company change it? | S2 row 4 raises the question itself and leaves it unanswered; it decides whether the reminder is a constant or a setting. | §7 Functional Requirements, §8 Constraints | Fixed at 7 days in version 1; configurable later. | Resolved: Fixed at 7 days in version 1; not configurable (human, 2026-09-05) |
+| Q-02 | Is S2 row 31 an import of the old Excel data or an export to Excel? | The row is titled "Export nach Excel" but its description says existing data is taken over from the old Excel list, once at start. The two point in opposite directions. | §4 Scope, §7 Functional Requirements | One-time import of existing data at start, following the description rather than the title. | Resolved: Import — one-time takeover of the old Excel data at start, following the description, not the row title (human, 2026-09-05) |
+| Q-03 | Which fields does a user still have to enter by hand when an offer is filed as a photo or PDF? | S1 §6 leaves the data entry route open, and no source names the fields. Without this the core flow cannot be specified. | §5 User Flows, §7 Functional Requirements | Customer, amount and sent date entered by hand, file attached; no text recognition in version 1. | Resolved: Customer, amount and sent date entered by hand, file attached; no OCR in version 1 (human, 2026-09-05) |
+| Q-04 | When does an offer become "verlaufen" — automatically after a period, or set by hand? | "Verlaufen" is one of the five statuses (F-010) and is the very outcome the product exists to prevent, but no source says who sets it. | §7 Functional Requirements | Set by hand. | Resolved: Set by hand (human, 2026-09-05) |
+| Q-05 | What language is the interface in? | No source states it. All inputs and both pilot companies are German. | §8 Constraints | German only in version 1. | Resolved: German only in version 1 (human, 2026-09-05) |
+| Q-06 | Where is the data stored and under which data-protection terms? | Offers carry customer names, notes and amounts, so this is personal data of third parties. No source addresses hosting, retention or a processing agreement. | §8 Constraints | Hosting in the EU, processing agreement (AVV) available. | Resolved: Hosting in the EU, processing agreement (AVV) available (human, 2026-09-05) |
+| Q-07 | Does offline mean read-only, or must a status set without a network sync later? | S2 row 15 only asks for a readable list, but F-046 and F-047 put status setting on the building site, where reception is unreliable. | §7 Functional Requirements, §8 Constraints | Read-only offline in version 1; setting a status needs a connection. | Resolved: Read-only offline in version 1; setting a status needs a connection (human, 2026-09-05) |
+| Q-08 | Is each company a separate tenant with its data separated from other companies? | Two pilot companies are planned (F-064) and no source says whether they share an installation. | §8 Constraints | One tenant per company, data separated. | Resolved: Yes — one tenant per company, data separated (human, 2026-09-05) |
+| Q-09 | Does the spec name a price? | S3 and S4 give figures (30 €/month, pain threshold 20–30 €/month), but S4 slide 6 says the price is set only after the pilot. | §4 Scope | No price in the spec; the figures stay as market facts. | Resolved: No price in the spec; the figures stay as market facts (human, 2026-09-05) |
+
+Resolution values: `open` · `Resolved: <answer> (human, YYYY-MM-DD)` · `Deferred: <reason>`
