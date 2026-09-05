@@ -31,6 +31,10 @@ specify workflow add ./workflows/idea-to-spec
 
 Never edit the installed copies directly. Spec language is English; inputs may be in any language and are quoted verbatim.
 
+## Installing elsewhere
+
+A clone works as is: `.specify/` and `.claude/skills/` are committed and the registries hold no absolute paths. Only the tools below must exist. Rebuild steps and checks: `docs/guides/install.md`.
+
 ## Tools
 
 `specify` (uv tool), `markitdown` (uv tool), `python3`, `uv` (the converter re-runs itself under `uv run --with openpyxl` for spreadsheets), `git`.

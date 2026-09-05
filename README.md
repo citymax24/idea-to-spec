@@ -15,13 +15,21 @@ From a heap of mixed inputs (spreadsheets, slides, meeting notes, call transcrip
 
 ## Quick start
 
+The clone already carries its installed state (`.specify/`, `.claude/skills/`), so only the tools are needed:
+
 ```bash
 uv tool install specify-cli            # Spec Kit CLI (1.0.4 or newer)
 uv tool install "markitdown[all]"      # converts xlsx, pptx, docx, pdf
+git clone https://github.com/citymax24/idea-to-spec.git
 cd idea-to-spec
-git init                               # versions are git tags; skip if already a repo
-specify preset add --dev ./presets/idea-to-spec --priority 5
-specify extension add --dev ./extensions/idea
+specify extension list                 # should show "Idea to Spec Loop", 8 commands
+```
+
+`docs/guides/install.md` has the full list, the checks and what to do if a registry is out of step. To rebuild the installed state from the sources in this repository:
+
+```bash
+specify preset remove idea-to-spec && specify preset add --dev ./presets/idea-to-spec --priority 5
+specify extension add --dev ./extensions/idea --force
 specify workflow add ./workflows/idea-to-spec
 ```
 
@@ -40,4 +48,4 @@ Then, inside Claude Code in this directory:
 
 Or let the workflow drive it: `specify workflow run idea-to-spec -i inbox=examples/quote-tracker/inbox -i name=quote-tracker -i reviewer=Max`.
 
-See `docs/guides/running-the-loop.md` for the details and `docs/process/idea-to-spec-process.md` for the rules behind it.
+See `docs/guides/install.md` to set it up on another machine, `docs/guides/running-the-loop.md` for the details of a run, and `docs/process/idea-to-spec-process.md` for the rules behind it.
